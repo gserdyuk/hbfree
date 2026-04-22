@@ -1,0 +1,900 @@
+CALL Tree
+    0   hbl
+    1   !  (getarg)
+    1   !  len_s
+    2   !  !  lena
+    2   !  !  frequen
+    3   !  !  !  i2c
+    3   !  !  !  c2i
+    2   !  !  c2i
+    2   !  !  i2c
+    1   !  initi
+    2   !  !  sortuz
+    3   !  !  !  libmd1
+    4   !  !  !  !  lin1
+    4   !  !  !  !  poly51
+    4   !  !  !  !  junc1
+    4   !  !  !  !  mdsch1
+    4   !  !  !  !  curt1
+    4   !  !  !  !  clin1
+    4   !  !  !  !  cpoly1
+    4   !  !  !  !  cbarr1
+    4   !  !  !  !  cdiff1
+    4   !  !  !  !  icupl1
+    4   !  !  !  !  icuj1
+    4   !  !  !  !  biptr1
+    4   !  !  !  !  lin2
+    4   !  !  !  !  poly52
+    4   !  !  !  !  junc2
+    4   !  !  !  !  mdsch2
+    4   !  !  !  !  curt2
+    4   !  !  !  !  clin2
+    4   !  !  !  !  cpoly2
+    4   !  !  !  !  cbarr2
+    4   !  !  !  !  cdiff2
+    4   !  !  !  !  icupl2
+    4   !  !  !  !  icuj2
+    4   !  !  !  !  biptr2
+    4   !  !  !  !  lin3
+    4   !  !  !  !  poly53
+    4   !  !  !  !  junc3
+    4   !  !  !  !  mdsch3
+    4   !  !  !  !  curt3
+    4   !  !  !  !  clin3
+    4   !  !  !  !  cpoly3
+    4   !  !  !  !  cbarr3
+    4   !  !  !  !  cdiff3
+    4   !  !  !  !  icupl3
+    4   !  !  !  !  icuj3
+    4   !  !  !  !  biptr3
+    4   !  !  !  !  lin4
+    4   !  !  !  !  poly54
+    4   !  !  !  !  junc4
+    4   !  !  !  !  mdsch4
+    4   !  !  !  !  curt4
+    4   !  !  !  !  clin4
+    4   !  !  !  !  cpoly4
+    4   !  !  !  !  cbarr4
+    4   !  !  !  !  cdiff4
+    4   !  !  !  !  icupl4
+    4   !  !  !  !  icuj4
+    4   !  !  !  !  biptr4
+    4   !  !  !  !  lin5
+    4   !  !  !  !  poly55
+    4   !  !  !  !  junc5
+    4   !  !  !  !  mdsch5
+    4   !  !  !  !  curt5
+    4   !  !  !  !  clin5
+    4   !  !  !  !  cpoly5
+    4   !  !  !  !  cbarr5
+    4   !  !  !  !  cdiff5
+    4   !  !  !  !  icupl5
+    4   !  !  !  !  icuj5
+    4   !  !  !  !  biptr5
+    4   !  !  !  !  junc6
+    4   !  !  !  !  mdsch6
+    4   !  !  !  !  curt6
+    4   !  !  !  !  cdiff6
+    4   !  !  !  !  icuj6
+    3   !  !  !  find
+    3   !  !  !  down
+    3   !  !  !  ranger
+    2   !  !  detsyn
+    2   !  !  inkoor
+    3   !  !  !  sort
+    3   !  !  !  koord
+    3   !  !  !  krdchk
+    2   !  !  stepfr
+    3   !  !  !  ziny
+    3   !  !  !  lnform
+    4   !  !  !  !  i2c
+    4   !  !  !  !  liblin
+    5   !  !  !  !  !  line1
+    5   !  !  !  !  !  rffipn
+    5   !  !  !  !  !  emf
+    5   !  !  !  !  !  jdrive
+    5   !  !  !  !  !  ytab
+    5   !  !  !  !  !  stab
+    6   !  !  !  !  !  !  test ...
+    5   !  !  !  !  !  lang
+    6   !  !  !  !  !  !  serf
+    6   !  !  !  !  !  !  sz0
+    6   !  !  !  !  !  !  coce ...
+    6   !  !  !  !  !  !  dispz
+    6   !  !  !  !  !  !  bet1
+    6   !  !  !  !  !  !  alf1
+    5   !  !  !  !  !  smpl
+    6   !  !  !  !  !  !  serf
+    6   !  !  !  !  !  !  sz0
+    6   !  !  !  !  !  !  coce ...
+    6   !  !  !  !  !  !  dispz
+    6   !  !  !  !  !  !  bet1
+    6   !  !  !  !  !  !  alf1
+    5   !  !  !  !  !  mp
+    6   !  !  !  !  !  !  serf
+    6   !  !  !  !  !  !  sz0
+    6   !  !  !  !  !  !  z00p
+    5   !  !  !  !  !  indsv
+    4   !  !  !  !  linnp
+    4   !  !  !  !  libmd2
+    5   !  !  !  !  !  lin1
+    5   !  !  !  !  !  poly51
+    5   !  !  !  !  !  junc1
+    5   !  !  !  !  !  mdsch1
+    5   !  !  !  !  !  curt1
+    5   !  !  !  !  !  clin1
+    5   !  !  !  !  !  cpoly1
+    5   !  !  !  !  !  cbarr1
+    5   !  !  !  !  !  cdiff1
+    5   !  !  !  !  !  icupl1
+    5   !  !  !  !  !  icuj1
+    5   !  !  !  !  !  biptr1
+    5   !  !  !  !  !  lin2
+    5   !  !  !  !  !  poly52
+    5   !  !  !  !  !  junc2
+    5   !  !  !  !  !  mdsch2
+    5   !  !  !  !  !  curt2
+    5   !  !  !  !  !  clin2
+    5   !  !  !  !  !  cpoly2
+    5   !  !  !  !  !  cbarr2
+    5   !  !  !  !  !  cdiff2
+    5   !  !  !  !  !  icupl2
+    5   !  !  !  !  !  icuj2
+    5   !  !  !  !  !  biptr2
+    5   !  !  !  !  !  lin3
+    5   !  !  !  !  !  poly53
+    5   !  !  !  !  !  junc3
+    5   !  !  !  !  !  mdsch3
+    5   !  !  !  !  !  curt3
+    5   !  !  !  !  !  clin3
+    5   !  !  !  !  !  cpoly3
+    5   !  !  !  !  !  cbarr3
+    5   !  !  !  !  !  cdiff3
+    5   !  !  !  !  !  icupl3
+    5   !  !  !  !  !  icuj3
+    5   !  !  !  !  !  biptr3
+    5   !  !  !  !  !  lin4
+    5   !  !  !  !  !  poly54
+    5   !  !  !  !  !  junc4
+    5   !  !  !  !  !  mdsch4
+    5   !  !  !  !  !  curt4
+    5   !  !  !  !  !  clin4
+    5   !  !  !  !  !  cpoly4
+    5   !  !  !  !  !  cbarr4
+    5   !  !  !  !  !  cdiff4
+    5   !  !  !  !  !  icupl4
+    5   !  !  !  !  !  icuj4
+    5   !  !  !  !  !  biptr4
+    5   !  !  !  !  !  lin5
+    5   !  !  !  !  !  poly55
+    5   !  !  !  !  !  junc5
+    5   !  !  !  !  !  mdsch5
+    5   !  !  !  !  !  curt5
+    5   !  !  !  !  !  clin5
+    5   !  !  !  !  !  cpoly5
+    5   !  !  !  !  !  cbarr5
+    5   !  !  !  !  !  cdiff5
+    5   !  !  !  !  !  icupl5
+    5   !  !  !  !  !  icuj5
+    5   !  !  !  !  !  biptr5
+    5   !  !  !  !  !  junc6
+    5   !  !  !  !  !  mdsch6
+    5   !  !  !  !  !  curt6
+    5   !  !  !  !  !  cdiff6
+    5   !  !  !  !  !  icuj6
+    4   !  !  !  !  nonlin
+    4   !  !  !  !  lin2p
+    4   !  !  !  !  c2i
+    3   !  !  !  luslv
+    3   !  !  !  lufrw
+    3   !  !  !  pack1
+    4   !  !  !  !  savedata
+    4   !  !  !  !  getdata
+    3   !  !  !  dpack1
+    4   !  !  !  !  savedata
+    4   !  !  !  !  getdata
+    3   !  !  !  vlform
+    4   !  !  !  !  i2c
+    4   !  !  !  !  liblin
+    5   !  !  !  !  !  line1
+    5   !  !  !  !  !  rffipn
+    5   !  !  !  !  !  emf
+    5   !  !  !  !  !  jdrive
+    5   !  !  !  !  !  ytab
+    5   !  !  !  !  !  stab
+    6   !  !  !  !  !  !  test ...
+    5   !  !  !  !  !  lang
+    6   !  !  !  !  !  !  serf
+    6   !  !  !  !  !  !  sz0
+    6   !  !  !  !  !  !  coce ...
+    6   !  !  !  !  !  !  dispz
+    6   !  !  !  !  !  !  bet1
+    6   !  !  !  !  !  !  alf1
+    5   !  !  !  !  !  smpl
+    6   !  !  !  !  !  !  serf
+    6   !  !  !  !  !  !  sz0
+    6   !  !  !  !  !  !  coce ...
+    6   !  !  !  !  !  !  dispz
+    6   !  !  !  !  !  !  bet1
+    6   !  !  !  !  !  !  alf1
+    5   !  !  !  !  !  mp
+    6   !  !  !  !  !  !  serf
+    6   !  !  !  !  !  !  sz0
+    6   !  !  !  !  !  !  z00p
+    5   !  !  !  !  !  indsv
+    4   !  !  !  !  linnp
+    4   !  !  !  !  libmd2
+    5   !  !  !  !  !  lin1
+    5   !  !  !  !  !  poly51
+    5   !  !  !  !  !  junc1
+    5   !  !  !  !  !  mdsch1
+    5   !  !  !  !  !  curt1
+    5   !  !  !  !  !  clin1
+    5   !  !  !  !  !  cpoly1
+    5   !  !  !  !  !  cbarr1
+    5   !  !  !  !  !  cdiff1
+    5   !  !  !  !  !  icupl1
+    5   !  !  !  !  !  icuj1
+    5   !  !  !  !  !  biptr1
+    5   !  !  !  !  !  lin2
+    5   !  !  !  !  !  poly52
+    5   !  !  !  !  !  junc2
+    5   !  !  !  !  !  mdsch2
+    5   !  !  !  !  !  curt2
+    5   !  !  !  !  !  clin2
+    5   !  !  !  !  !  cpoly2
+    5   !  !  !  !  !  cbarr2
+    5   !  !  !  !  !  cdiff2
+    5   !  !  !  !  !  icupl2
+    5   !  !  !  !  !  icuj2
+    5   !  !  !  !  !  biptr2
+    5   !  !  !  !  !  lin3
+    5   !  !  !  !  !  poly53
+    5   !  !  !  !  !  junc3
+    5   !  !  !  !  !  mdsch3
+    5   !  !  !  !  !  curt3
+    5   !  !  !  !  !  clin3
+    5   !  !  !  !  !  cpoly3
+    5   !  !  !  !  !  cbarr3
+    5   !  !  !  !  !  cdiff3
+    5   !  !  !  !  !  icupl3
+    5   !  !  !  !  !  icuj3
+    5   !  !  !  !  !  biptr3
+    5   !  !  !  !  !  lin4
+    5   !  !  !  !  !  poly54
+    5   !  !  !  !  !  junc4
+    5   !  !  !  !  !  mdsch4
+    5   !  !  !  !  !  curt4
+    5   !  !  !  !  !  clin4
+    5   !  !  !  !  !  cpoly4
+    5   !  !  !  !  !  cbarr4
+    5   !  !  !  !  !  cdiff4
+    5   !  !  !  !  !  icupl4
+    5   !  !  !  !  !  icuj4
+    5   !  !  !  !  !  biptr4
+    5   !  !  !  !  !  lin5
+    5   !  !  !  !  !  poly55
+    5   !  !  !  !  !  junc5
+    5   !  !  !  !  !  mdsch5
+    5   !  !  !  !  !  curt5
+    5   !  !  !  !  !  clin5
+    5   !  !  !  !  !  cpoly5
+    5   !  !  !  !  !  cbarr5
+    5   !  !  !  !  !  cdiff5
+    5   !  !  !  !  !  icupl5
+    5   !  !  !  !  !  icuj5
+    5   !  !  !  !  !  biptr5
+    5   !  !  !  !  !  junc6
+    5   !  !  !  !  !  mdsch6
+    5   !  !  !  !  !  curt6
+    5   !  !  !  !  !  cdiff6
+    5   !  !  !  !  !  icuj6
+    4   !  !  !  !  nonlin
+    4   !  !  !  !  lin2p
+    4   !  !  !  !  c2i
+    3   !  !  !  lucan
+    3   !  !  !  pack2
+    4   !  !  !  !  savedata
+    4   !  !  !  !  getdata
+    2   !  !  topo
+    2   !  !  topoin
+    2   !  !  stback
+    3   !  !  !  ziny
+    3   !  !  !  dpack2
+    4   !  !  !  !  savedata
+    4   !  !  !  !  getdata
+    3   !  !  !  luback
+    1   !  solve
+    2   !  !  machep
+    2   !  !  neinck
+    2   !  !  nef
+    3   !  !  !  libmd5
+    4   !  !  !  !  lin1
+    4   !  !  !  !  poly51
+    4   !  !  !  !  junc1
+    4   !  !  !  !  mdsch1
+    4   !  !  !  !  curt1
+    4   !  !  !  !  clin1
+    4   !  !  !  !  cpoly1
+    4   !  !  !  !  cbarr1
+    4   !  !  !  !  cdiff1
+    4   !  !  !  !  icupl1
+    4   !  !  !  !  icuj1
+    4   !  !  !  !  biptr1
+    4   !  !  !  !  lin2
+    4   !  !  !  !  poly52
+    4   !  !  !  !  junc2
+    4   !  !  !  !  mdsch2
+    4   !  !  !  !  curt2
+    4   !  !  !  !  clin2
+    4   !  !  !  !  cpoly2
+    4   !  !  !  !  cbarr2
+    4   !  !  !  !  cdiff2
+    4   !  !  !  !  icupl2
+    4   !  !  !  !  icuj2
+    4   !  !  !  !  biptr2
+    4   !  !  !  !  lin3
+    4   !  !  !  !  poly53
+    4   !  !  !  !  junc3
+    4   !  !  !  !  mdsch3
+    4   !  !  !  !  curt3
+    4   !  !  !  !  clin3
+    4   !  !  !  !  cpoly3
+    4   !  !  !  !  cbarr3
+    4   !  !  !  !  cdiff3
+    4   !  !  !  !  icupl3
+    4   !  !  !  !  icuj3
+    4   !  !  !  !  biptr3
+    4   !  !  !  !  lin4
+    4   !  !  !  !  poly54
+    4   !  !  !  !  junc4
+    4   !  !  !  !  mdsch4
+    4   !  !  !  !  curt4
+    4   !  !  !  !  clin4
+    4   !  !  !  !  cpoly4
+    4   !  !  !  !  cbarr4
+    4   !  !  !  !  cdiff4
+    4   !  !  !  !  icupl4
+    4   !  !  !  !  icuj4
+    4   !  !  !  !  biptr4
+    4   !  !  !  !  lin5
+    4   !  !  !  !  poly55
+    4   !  !  !  !  junc5
+    4   !  !  !  !  mdsch5
+    4   !  !  !  !  curt5
+    4   !  !  !  !  clin5
+    4   !  !  !  !  cpoly5
+    4   !  !  !  !  cbarr5
+    4   !  !  !  !  cdiff5
+    4   !  !  !  !  icupl5
+    4   !  !  !  !  icuj5
+    4   !  !  !  !  biptr5
+    4   !  !  !  !  junc6
+    4   !  !  !  !  mdsch6
+    4   !  !  !  !  curt6
+    4   !  !  !  !  cdiff6
+    4   !  !  !  !  icuj6
+    3   !  !  !  ftmas2
+    4   !  !  !  !  harm
+    3   !  !  !  libmd3
+    4   !  !  !  !  lin1
+    4   !  !  !  !  poly51
+    4   !  !  !  !  junc1
+    4   !  !  !  !  mdsch1
+    4   !  !  !  !  curt1
+    4   !  !  !  !  clin1
+    4   !  !  !  !  cpoly1
+    4   !  !  !  !  cbarr1
+    4   !  !  !  !  cdiff1
+    4   !  !  !  !  icupl1
+    4   !  !  !  !  icuj1
+    4   !  !  !  !  biptr1
+    4   !  !  !  !  lin2
+    4   !  !  !  !  poly52
+    4   !  !  !  !  junc2
+    4   !  !  !  !  mdsch2
+    4   !  !  !  !  curt2
+    4   !  !  !  !  clin2
+    4   !  !  !  !  cpoly2
+    4   !  !  !  !  cbarr2
+    4   !  !  !  !  cdiff2
+    4   !  !  !  !  icupl2
+    4   !  !  !  !  icuj2
+    4   !  !  !  !  biptr2
+    4   !  !  !  !  lin3
+    4   !  !  !  !  poly53
+    4   !  !  !  !  junc3
+    4   !  !  !  !  mdsch3
+    4   !  !  !  !  curt3
+    4   !  !  !  !  clin3
+    4   !  !  !  !  cpoly3
+    4   !  !  !  !  cbarr3
+    4   !  !  !  !  cdiff3
+    4   !  !  !  !  icupl3
+    4   !  !  !  !  icuj3
+    4   !  !  !  !  biptr3
+    4   !  !  !  !  lin4
+    4   !  !  !  !  poly54
+    4   !  !  !  !  junc4
+    4   !  !  !  !  mdsch4
+    4   !  !  !  !  curt4
+    4   !  !  !  !  clin4
+    4   !  !  !  !  cpoly4
+    4   !  !  !  !  cbarr4
+    4   !  !  !  !  cdiff4
+    4   !  !  !  !  icupl4
+    4   !  !  !  !  icuj4
+    4   !  !  !  !  biptr4
+    4   !  !  !  !  lin5
+    4   !  !  !  !  poly55
+    4   !  !  !  !  junc5
+    4   !  !  !  !  mdsch5
+    4   !  !  !  !  curt5
+    4   !  !  !  !  clin5
+    4   !  !  !  !  cpoly5
+    4   !  !  !  !  cbarr5
+    4   !  !  !  !  cdiff5
+    4   !  !  !  !  icupl5
+    4   !  !  !  !  icuj5
+    4   !  !  !  !  biptr5
+    4   !  !  !  !  junc6
+    4   !  !  !  !  mdsch6
+    4   !  !  !  !  curt6
+    4   !  !  !  !  cdiff6
+    4   !  !  !  !  icuj6
+    3   !  !  !  ft2
+    4   !  !  !  !  harm
+    2   !  !  stop0
+    2   !  !  nejac
+    3   !  !  !  libmd5
+    4   !  !  !  !  lin1
+    4   !  !  !  !  poly51
+    4   !  !  !  !  junc1
+    4   !  !  !  !  mdsch1
+    4   !  !  !  !  curt1
+    4   !  !  !  !  clin1
+    4   !  !  !  !  cpoly1
+    4   !  !  !  !  cbarr1
+    4   !  !  !  !  cdiff1
+    4   !  !  !  !  icupl1
+    4   !  !  !  !  icuj1
+    4   !  !  !  !  biptr1
+    4   !  !  !  !  lin2
+    4   !  !  !  !  poly52
+    4   !  !  !  !  junc2
+    4   !  !  !  !  mdsch2
+    4   !  !  !  !  curt2
+    4   !  !  !  !  clin2
+    4   !  !  !  !  cpoly2
+    4   !  !  !  !  cbarr2
+    4   !  !  !  !  cdiff2
+    4   !  !  !  !  icupl2
+    4   !  !  !  !  icuj2
+    4   !  !  !  !  biptr2
+    4   !  !  !  !  lin3
+    4   !  !  !  !  poly53
+    4   !  !  !  !  junc3
+    4   !  !  !  !  mdsch3
+    4   !  !  !  !  curt3
+    4   !  !  !  !  clin3
+    4   !  !  !  !  cpoly3
+    4   !  !  !  !  cbarr3
+    4   !  !  !  !  cdiff3
+    4   !  !  !  !  icupl3
+    4   !  !  !  !  icuj3
+    4   !  !  !  !  biptr3
+    4   !  !  !  !  lin4
+    4   !  !  !  !  poly54
+    4   !  !  !  !  junc4
+    4   !  !  !  !  mdsch4
+    4   !  !  !  !  curt4
+    4   !  !  !  !  clin4
+    4   !  !  !  !  cpoly4
+    4   !  !  !  !  cbarr4
+    4   !  !  !  !  cdiff4
+    4   !  !  !  !  icupl4
+    4   !  !  !  !  icuj4
+    4   !  !  !  !  biptr4
+    4   !  !  !  !  lin5
+    4   !  !  !  !  poly55
+    4   !  !  !  !  junc5
+    4   !  !  !  !  mdsch5
+    4   !  !  !  !  curt5
+    4   !  !  !  !  clin5
+    4   !  !  !  !  cpoly5
+    4   !  !  !  !  cbarr5
+    4   !  !  !  !  cdiff5
+    4   !  !  !  !  icupl5
+    4   !  !  !  !  icuj5
+    4   !  !  !  !  biptr5
+    4   !  !  !  !  junc6
+    4   !  !  !  !  mdsch6
+    4   !  !  !  !  curt6
+    4   !  !  !  !  cdiff6
+    4   !  !  !  !  icuj6
+    3   !  !  !  ftmas2
+    4   !  !  !  !  harm
+    3   !  !  !  libmd4
+    4   !  !  !  !  lin1
+    4   !  !  !  !  poly51
+    4   !  !  !  !  junc1
+    4   !  !  !  !  mdsch1
+    4   !  !  !  !  curt1
+    4   !  !  !  !  clin1
+    4   !  !  !  !  cpoly1
+    4   !  !  !  !  cbarr1
+    4   !  !  !  !  cdiff1
+    4   !  !  !  !  icupl1
+    4   !  !  !  !  icuj1
+    4   !  !  !  !  biptr1
+    4   !  !  !  !  lin2
+    4   !  !  !  !  poly52
+    4   !  !  !  !  junc2
+    4   !  !  !  !  mdsch2
+    4   !  !  !  !  curt2
+    4   !  !  !  !  clin2
+    4   !  !  !  !  cpoly2
+    4   !  !  !  !  cbarr2
+    4   !  !  !  !  cdiff2
+    4   !  !  !  !  icupl2
+    4   !  !  !  !  icuj2
+    4   !  !  !  !  biptr2
+    4   !  !  !  !  lin3
+    4   !  !  !  !  poly53
+    4   !  !  !  !  junc3
+    4   !  !  !  !  mdsch3
+    4   !  !  !  !  curt3
+    4   !  !  !  !  clin3
+    4   !  !  !  !  cpoly3
+    4   !  !  !  !  cbarr3
+    4   !  !  !  !  cdiff3
+    4   !  !  !  !  icupl3
+    4   !  !  !  !  icuj3
+    4   !  !  !  !  biptr3
+    4   !  !  !  !  lin4
+    4   !  !  !  !  poly54
+    4   !  !  !  !  junc4
+    4   !  !  !  !  mdsch4
+    4   !  !  !  !  curt4
+    4   !  !  !  !  clin4
+    4   !  !  !  !  cpoly4
+    4   !  !  !  !  cbarr4
+    4   !  !  !  !  cdiff4
+    4   !  !  !  !  icupl4
+    4   !  !  !  !  icuj4
+    4   !  !  !  !  biptr4
+    4   !  !  !  !  lin5
+    4   !  !  !  !  poly55
+    4   !  !  !  !  junc5
+    4   !  !  !  !  mdsch5
+    4   !  !  !  !  curt5
+    4   !  !  !  !  clin5
+    4   !  !  !  !  cpoly5
+    4   !  !  !  !  cbarr5
+    4   !  !  !  !  cdiff5
+    4   !  !  !  !  icupl5
+    4   !  !  !  !  icuj5
+    4   !  !  !  !  biptr5
+    4   !  !  !  !  junc6
+    4   !  !  !  !  mdsch6
+    4   !  !  !  !  curt6
+    4   !  !  !  !  cdiff6
+    4   !  !  !  !  icuj6
+    3   !  !  !  ft2
+    4   !  !  !  !  harm
+    3   !  !  !  sumdif
+    2   !  !  gradie
+    2   !  !  regul
+    2   !  !  lineq1
+    2   !  !  otchm
+    2   !  !  suprim
+    3   !  !  !  libmd5
+    4   !  !  !  !  lin1
+    4   !  !  !  !  poly51
+    4   !  !  !  !  junc1
+    4   !  !  !  !  mdsch1
+    4   !  !  !  !  curt1
+    4   !  !  !  !  clin1
+    4   !  !  !  !  cpoly1
+    4   !  !  !  !  cbarr1
+    4   !  !  !  !  cdiff1
+    4   !  !  !  !  icupl1
+    4   !  !  !  !  icuj1
+    4   !  !  !  !  biptr1
+    4   !  !  !  !  lin2
+    4   !  !  !  !  poly52
+    4   !  !  !  !  junc2
+    4   !  !  !  !  mdsch2
+    4   !  !  !  !  curt2
+    4   !  !  !  !  clin2
+    4   !  !  !  !  cpoly2
+    4   !  !  !  !  cbarr2
+    4   !  !  !  !  cdiff2
+    4   !  !  !  !  icupl2
+    4   !  !  !  !  icuj2
+    4   !  !  !  !  biptr2
+    4   !  !  !  !  lin3
+    4   !  !  !  !  poly53
+    4   !  !  !  !  junc3
+    4   !  !  !  !  mdsch3
+    4   !  !  !  !  curt3
+    4   !  !  !  !  clin3
+    4   !  !  !  !  cpoly3
+    4   !  !  !  !  cbarr3
+    4   !  !  !  !  cdiff3
+    4   !  !  !  !  icupl3
+    4   !  !  !  !  icuj3
+    4   !  !  !  !  biptr3
+    4   !  !  !  !  lin4
+    4   !  !  !  !  poly54
+    4   !  !  !  !  junc4
+    4   !  !  !  !  mdsch4
+    4   !  !  !  !  curt4
+    4   !  !  !  !  clin4
+    4   !  !  !  !  cpoly4
+    4   !  !  !  !  cbarr4
+    4   !  !  !  !  cdiff4
+    4   !  !  !  !  icupl4
+    4   !  !  !  !  icuj4
+    4   !  !  !  !  biptr4
+    4   !  !  !  !  lin5
+    4   !  !  !  !  poly55
+    4   !  !  !  !  junc5
+    4   !  !  !  !  mdsch5
+    4   !  !  !  !  curt5
+    4   !  !  !  !  clin5
+    4   !  !  !  !  cpoly5
+    4   !  !  !  !  cbarr5
+    4   !  !  !  !  cdiff5
+    4   !  !  !  !  icupl5
+    4   !  !  !  !  icuj5
+    4   !  !  !  !  biptr5
+    4   !  !  !  !  junc6
+    4   !  !  !  !  mdsch6
+    4   !  !  !  !  curt6
+    4   !  !  !  !  cdiff6
+    4   !  !  !  !  icuj6
+    3   !  !  !  libmd6
+    4   !  !  !  !  lin1
+    4   !  !  !  !  poly51
+    4   !  !  !  !  junc1
+    4   !  !  !  !  mdsch1
+    4   !  !  !  !  curt1
+    4   !  !  !  !  clin1
+    4   !  !  !  !  cpoly1
+    4   !  !  !  !  cbarr1
+    4   !  !  !  !  cdiff1
+    4   !  !  !  !  icupl1
+    4   !  !  !  !  icuj1
+    4   !  !  !  !  biptr1
+    4   !  !  !  !  lin2
+    4   !  !  !  !  poly52
+    4   !  !  !  !  junc2
+    4   !  !  !  !  mdsch2
+    4   !  !  !  !  curt2
+    4   !  !  !  !  clin2
+    4   !  !  !  !  cpoly2
+    4   !  !  !  !  cbarr2
+    4   !  !  !  !  cdiff2
+    4   !  !  !  !  icupl2
+    4   !  !  !  !  icuj2
+    4   !  !  !  !  biptr2
+    4   !  !  !  !  lin3
+    4   !  !  !  !  poly53
+    4   !  !  !  !  junc3
+    4   !  !  !  !  mdsch3
+    4   !  !  !  !  curt3
+    4   !  !  !  !  clin3
+    4   !  !  !  !  cpoly3
+    4   !  !  !  !  cbarr3
+    4   !  !  !  !  cdiff3
+    4   !  !  !  !  icupl3
+    4   !  !  !  !  icuj3
+    4   !  !  !  !  biptr3
+    4   !  !  !  !  lin4
+    4   !  !  !  !  poly54
+    4   !  !  !  !  junc4
+    4   !  !  !  !  mdsch4
+    4   !  !  !  !  curt4
+    4   !  !  !  !  clin4
+    4   !  !  !  !  cpoly4
+    4   !  !  !  !  cbarr4
+    4   !  !  !  !  cdiff4
+    4   !  !  !  !  icupl4
+    4   !  !  !  !  icuj4
+    4   !  !  !  !  biptr4
+    4   !  !  !  !  lin5
+    4   !  !  !  !  poly55
+    4   !  !  !  !  junc5
+    4   !  !  !  !  mdsch5
+    4   !  !  !  !  curt5
+    4   !  !  !  !  clin5
+    4   !  !  !  !  cpoly5
+    4   !  !  !  !  cbarr5
+    4   !  !  !  !  cdiff5
+    4   !  !  !  !  icupl5
+    4   !  !  !  !  icuj5
+    4   !  !  !  !  biptr5
+    4   !  !  !  !  junc6
+    4   !  !  !  !  mdsch6
+    4   !  !  !  !  curt6
+    4   !  !  !  !  cdiff6
+    4   !  !  !  !  icuj6
+    2   !  !  lserch
+    3   !  !  !  nef
+    4   !  !  !  !  libmd5
+    5   !  !  !  !  !  lin1
+    5   !  !  !  !  !  poly51
+    5   !  !  !  !  !  junc1
+    5   !  !  !  !  !  mdsch1
+    5   !  !  !  !  !  curt1
+    5   !  !  !  !  !  clin1
+    5   !  !  !  !  !  cpoly1
+    5   !  !  !  !  !  cbarr1
+    5   !  !  !  !  !  cdiff1
+    5   !  !  !  !  !  icupl1
+    5   !  !  !  !  !  icuj1
+    5   !  !  !  !  !  biptr1
+    5   !  !  !  !  !  lin2
+    5   !  !  !  !  !  poly52
+    5   !  !  !  !  !  junc2
+    5   !  !  !  !  !  mdsch2
+    5   !  !  !  !  !  curt2
+    5   !  !  !  !  !  clin2
+    5   !  !  !  !  !  cpoly2
+    5   !  !  !  !  !  cbarr2
+    5   !  !  !  !  !  cdiff2
+    5   !  !  !  !  !  icupl2
+    5   !  !  !  !  !  icuj2
+    5   !  !  !  !  !  biptr2
+    5   !  !  !  !  !  lin3
+    5   !  !  !  !  !  poly53
+    5   !  !  !  !  !  junc3
+    5   !  !  !  !  !  mdsch3
+    5   !  !  !  !  !  curt3
+    5   !  !  !  !  !  clin3
+    5   !  !  !  !  !  cpoly3
+    5   !  !  !  !  !  cbarr3
+    5   !  !  !  !  !  cdiff3
+    5   !  !  !  !  !  icupl3
+    5   !  !  !  !  !  icuj3
+    5   !  !  !  !  !  biptr3
+    5   !  !  !  !  !  lin4
+    5   !  !  !  !  !  poly54
+    5   !  !  !  !  !  junc4
+    5   !  !  !  !  !  mdsch4
+    5   !  !  !  !  !  curt4
+    5   !  !  !  !  !  clin4
+    5   !  !  !  !  !  cpoly4
+    5   !  !  !  !  !  cbarr4
+    5   !  !  !  !  !  cdiff4
+    5   !  !  !  !  !  icupl4
+    5   !  !  !  !  !  icuj4
+    5   !  !  !  !  !  biptr4
+    5   !  !  !  !  !  lin5
+    5   !  !  !  !  !  poly55
+    5   !  !  !  !  !  junc5
+    5   !  !  !  !  !  mdsch5
+    5   !  !  !  !  !  curt5
+    5   !  !  !  !  !  clin5
+    5   !  !  !  !  !  cpoly5
+    5   !  !  !  !  !  cbarr5
+    5   !  !  !  !  !  cdiff5
+    5   !  !  !  !  !  icupl5
+    5   !  !  !  !  !  icuj5
+    5   !  !  !  !  !  biptr5
+    5   !  !  !  !  !  junc6
+    5   !  !  !  !  !  mdsch6
+    5   !  !  !  !  !  curt6
+    5   !  !  !  !  !  cdiff6
+    5   !  !  !  !  !  icuj6
+    4   !  !  !  !  ftmas2
+    5   !  !  !  !  !  harm
+    4   !  !  !  !  libmd3
+    5   !  !  !  !  !  lin1
+    5   !  !  !  !  !  poly51
+    5   !  !  !  !  !  junc1
+    5   !  !  !  !  !  mdsch1
+    5   !  !  !  !  !  curt1
+    5   !  !  !  !  !  clin1
+    5   !  !  !  !  !  cpoly1
+    5   !  !  !  !  !  cbarr1
+    5   !  !  !  !  !  cdiff1
+    5   !  !  !  !  !  icupl1
+    5   !  !  !  !  !  icuj1
+    5   !  !  !  !  !  biptr1
+    5   !  !  !  !  !  lin2
+    5   !  !  !  !  !  poly52
+    5   !  !  !  !  !  junc2
+    5   !  !  !  !  !  mdsch2
+    5   !  !  !  !  !  curt2
+    5   !  !  !  !  !  clin2
+    5   !  !  !  !  !  cpoly2
+    5   !  !  !  !  !  cbarr2
+    5   !  !  !  !  !  cdiff2
+    5   !  !  !  !  !  icupl2
+    5   !  !  !  !  !  icuj2
+    5   !  !  !  !  !  biptr2
+    5   !  !  !  !  !  lin3
+    5   !  !  !  !  !  poly53
+    5   !  !  !  !  !  junc3
+    5   !  !  !  !  !  mdsch3
+    5   !  !  !  !  !  curt3
+    5   !  !  !  !  !  clin3
+    5   !  !  !  !  !  cpoly3
+    5   !  !  !  !  !  cbarr3
+    5   !  !  !  !  !  cdiff3
+    5   !  !  !  !  !  icupl3
+    5   !  !  !  !  !  icuj3
+    5   !  !  !  !  !  biptr3
+    5   !  !  !  !  !  lin4
+    5   !  !  !  !  !  poly54
+    5   !  !  !  !  !  junc4
+    5   !  !  !  !  !  mdsch4
+    5   !  !  !  !  !  curt4
+    5   !  !  !  !  !  clin4
+    5   !  !  !  !  !  cpoly4
+    5   !  !  !  !  !  cbarr4
+    5   !  !  !  !  !  cdiff4
+    5   !  !  !  !  !  icupl4
+    5   !  !  !  !  !  icuj4
+    5   !  !  !  !  !  biptr4
+    5   !  !  !  !  !  lin5
+    5   !  !  !  !  !  poly55
+    5   !  !  !  !  !  junc5
+    5   !  !  !  !  !  mdsch5
+    5   !  !  !  !  !  curt5
+    5   !  !  !  !  !  clin5
+    5   !  !  !  !  !  cpoly5
+    5   !  !  !  !  !  cbarr5
+    5   !  !  !  !  !  cdiff5
+    5   !  !  !  !  !  icupl5
+    5   !  !  !  !  !  icuj5
+    5   !  !  !  !  !  biptr5
+    5   !  !  !  !  !  junc6
+    5   !  !  !  !  !  mdsch6
+    5   !  !  !  !  !  curt6
+    5   !  !  !  !  !  cdiff6
+    5   !  !  !  !  !  icuj6
+    4   !  !  !  !  ft2
+    5   !  !  !  !  !  harm
+    2   !  !  stop
+    1   !  restor
+    2   !  !  topo
+    2   !  !  stback
+    3   !  !  !  ziny
+    3   !  !  !  dpack2
+    4   !  !  !  !  savedata
+    4   !  !  !  !  getdata
+    3   !  !  !  luback
+    2   !  !  decode
+    1   !  wrtraw
+
+ELEMENT TYPE "R"        SUBROUTINE LIN2P         (file FORMER)  RESISTOR
+ELEMENT TYPE "L"        SUBROUTINE LIN2P         (file FORMER)  INDUCTOR
+ELEMENT TYPE "C"        SUBROUTINE LIN2P         (file FORMER)  CAPACITOR
+ELEMENT TYPE "E"        SUBROUTINE EMF           (file LIBLIN)
+ELEMENT TYPE "J"        SUBROUTINE JDRFE         (file LIBLIN)
+ELEMENT TYPE "P2"       SUBROUTINE RFFIPN        (file LIBLIN)
+ELEMENT TYPE "VD SCHT"  SUBROUTINE MDSCH1-MDSCH6 (file MDSCH)   SCHOTTKY DIODE WITH NONLINEAR CAPACITANCE
+ELEMENT TYPE "GN LLIN"  SUBROUTINE LIN1-LIN5     (file LIN)
+ELEMENT TYPE "GN POLY"  SUBROUTINE POLY51-POLY55 (file POLY5)
+ELEMENT TYPE "GN JUNC"  SUBROUTINE JUNC1-JUNC6   (file JUNC)    DIODE WITHOUT NONLINEAR CAPACITANCE
+ELEMENT TYPE "FET CURT" SUBROUTINE CURT1-CURT6   (file CURT)    CURTICE FET MODEL
+ELEMENT TYPE "ICU JUNC" SUBROUTINE ICUJ1-ICUJ6   (file ICUJUNC) MODEL OF A BIPOLAR TRANSISTOR ITUN
+ELEMENT TYPE "ICU POLY" SUBROUTINE ICUPL1-ICUPL5 (file ICUPOLY) POLYNOM RESISTANCE
+ELEMENT TYPE "CN DIFF"  SUBROUTINE CDIFF1-CDIFF6 (file CDIFF)   MODEL OF DIFFUSION CAPACITANCE
+ELEMENT TYPE "CN BARR"  SUBROUTINE CBARR1-CBARR5 (file CBARR)   MODEL OF BARRIER CAPACITANCE
+ELEMENT TYPE "CN LIN"   SUBROUTINE CLIN1-CLIN5   (file CLIN)    MODEL OF CONSTANT CAPACITANCE
+ELEMENT TYPE "CN POLY"  SUBROUTINE CPOLY1-CPOLY5 (file CPOLY)   MODEL OF POLYNOMIAL CAPACITANCE
+ELEMENT TYPE "LIB0 LL0" SUBROUTINE LINE1,LINE2   (file LIB0)    LINE MODEL
+ELEMENT TYPE "YTAB"     SUBROUTINE YTAB          (file YTAB)    GENERATE Y MATRIX FROM PARAMETER
+ELEMENT TYPE "STAB"     SUBROUTINE STAB          (file STAB)    GENERATE S MATRIX FROM PARAMETER
+ELEMENT TYPE "LIB MPL"  SUBROUTINE MP            (file MPL)     MODEL OF MICROSTRIP LINES
+ELEMENT TYPE "LIB LANG" SUBROUTINE LANG          (file LANGE)   MODEL OF COUPLED MICROSTRIP LINES
+ELEMENT TYPE "LIB SMPL" SUBROUTINE SMPL          (file SMPL)    MODEL OF COUPLED MICROSTRIP LINES
+ELEMENT TYPE "BIP TR"   SUBROUTINE BIPTR1-BIPTR5 (file BIPTR)   BIPOLAR JUNCTION TRANSISTOR
+ELEMENT TYPE "SHL KZ"   SUBROUTINE SHLEIF        (file SHLEIF)  SHORT-CIRCUITED LINE
+ELEMENT TYPE "SHL XX"   SUBROUTINE SHLEIF        (file SHLEIF)  SHORT-CIRCUITED LINE
+ELEMENT TYPE "DISC"     SUBROUTINE DISCONT       (file DISCONT) STRIPLINE WITH STEP WIDTH JUNCTION DISCONTINUITIES
+ELEMENT TYPE "INDS"     SUBROUTINE INDSV         (file INDSV)   MODEL OF THREE MUTUALLY INDUCTIVELY COUPLED TWO-PORT NETWORKS (LINEAR)
