@@ -26,7 +26,10 @@ else
 			-O2 \
 			-malign-double \
 			-fdec-char-conversions \
-			-fallow-argument-mismatch
+			-fallow-argument-mismatch \
+			-fdefault-real-8 \
+			-fdefault-double-8 \
+			-freal-4-real-8
 #			-std=legacy \
 #		-g
 endif
