@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -11,8 +11,8 @@ c
       SUBROUTINE NEJAC(NTOT,U,DFDX,FLAG,FLGFFT)
 C******************************************************************
 C                                                                 *
-C     נ/נ Bש‏יCלסET HA I-ך יTEPAדיי                               *
-C              סKOגיAH  DFDX                                      *
+C     SUBROUTINE COMPUTES THE JACOBIAN DFDX                       *
+C     AT THE I-TH ITERATION                                       *
 C                                                                 *
 C******************************************************************
 C                                                                 *
@@ -20,16 +20,12 @@ C                                                                 *
       EQUIVALENCE      (K3,KOL(3))
       include 'circuit.i'
       include 'funcsize.i'
-C      COMMON/POINTR/   NMPNT,NNODE,NPARAM,LENNOD,LENPAR,NNETPR,LENNTP
       COMMON/KOLNAL/   KOL(4),NAL(4)
-C      COMMON/POINT/    MPOINT(1)
-C      COMMON/NODEL/    NODEEL(1)
-C      COMMON/PARAMS/   PARAM(1)
 
       COMMON/MATY/     BUFFER (6000),BUFLEN
       DOUBLE COMPLEX          BUFFER
       INTEGER*4        BUFLEN
-
+      INTEGER          FLGFFT
 
       LOGICAL          NAL
       COMMON/BLK1/     KR,KR1,KC,KC1,NNR,NNR1,MN,MN1
@@ -40,7 +36,7 @@ C      COMMON/PARAMS/   PARAM(1)
       INTEGER          KR(20),KC(10),NNR(10),MN(2,20)
       INTEGER          KR1(200),KC1(20),NNR1(20),MN1(2,200)
       INTEGER          WR(20,20),WS(20,20)
-C  פינ הבממשט NAME י ‏בףפי‏מן MPOINT הןלצומ גשפר CHARACTER*4
+C  DATA TYPE OF NAME AND PARTIALLY MPOINT MUST BE CHARACTER*4
       INTEGER          NAME(4),NOI(5,2),NOU(5,2),NU1(5,2),NU2(5,2)
       INTEGER          KOUV(5),KOPV(5),KOI,NR1V(5),NB1V(5),NG,INDEP
       DOUBLE COMPLEX  U(1),DFDX(NTOT,2,1)
@@ -48,78 +44,78 @@ C  פינ הבממשט NAME י ‏בףפי‏מן MPOINT הןלצומ גשפר CHARACTER*4
       DOUBLE COMPLEX  UNEL(MAXU_MD*MAXKN1),DUNDT(MAXD_MD*MAXKN1)
       DOUBLE COMPLEX  ZNN1((MAXU_MD+MAXD_MD)*MAXKN1)
 
-C..............PAתMEPHOCTי -ץTO‏HיTר!!!.....
+C ..............DIMENSIONS - TO BE SPECIFIED!!!.....
       DOUBLE COMPLEX          EW,G,GI
       DOUBLE COMPLEX          SUM1,SUM2,DIFF1,DIFF2
       DOUBLE COMPLEX          IM/(0.0D0,1.0D0)/,ZERO/(0.0D0,0.0D0)/
       DOUBLE COMPLEX          U1,U2
       LOGICAL          FLAG,EXS(5,2),EXIST(5,2)
       INTEGER          LENF/30/
-C..............BHיMAHיE! MAX P-HOCTר F(600=20*30).....
+C ..............ATTENTION! MAX DIMENSION F(600=20*30).....
 
-C  יתםומומיו ןפ 30.01.91    יתםומיל ףועהאכ ח.ק.   ףם. MAIN
-C     קףפעןוממשו זץמכדיי הלס ימהוכףבדיי:
-      IFIND1(I,M,NU)=(I+(M-1)*NU)
+C  CHANGE FROM 30.01.91    MODIFIED BY SERDYUK G.V.   SEE MAIN
+C     BUILT-IN FUNCTIONS FOR INDEXING:
+c      IFIND1(I,M,NU)=(I+(M-1)*NU)
       IFIND2(I,J,M,NU,MF)=NU*MF+I+(J-1)*NU+(M-1)*NU*NU
 
 
       N1=NNETPR
       L1=LENNTP
-C  KOל-BO ץPABHEHיך = KOל-BO ‏ACTOT + KOל-BO ץתלOB
+C  NUMBER OF EQUATIONS = NUMBER OF FREQUENCIES + NUMBER OF NODES
       KUR=KN*K3
-C  OגHץלEHיE סKOגיAHA ( DFDX )
+C  ZEROING THE JACOBIAN (DFDX)
       KUR1=KUR+1
       DO 75 I=1,KUR
       DO 75 J=1,KUR
       DFDX(J,1,I)=ZERO
    75 DFDX(J,2,I)=ZERO
-C  ECלי ץPABHEHיך גOלרûE,‏EM PAתMEPHOCTר CיCTEMש
-C  נEPEXOה HA METKץ ..600..
+C  IF THE NUMBER OF EQUATIONS IS GREATER THAN THE SYSTEM DIMENSION
+C  GO TO LABEL ..600..
       IF(KUR.GT.NTOT) GO TO 600
-C  ECלי KOל-BO HEHץלEBשX CTPOK גOלרûE 10, נEPEXOה
-C  HA METKץ ..500..
+C  IF THE NUMBER OF NON-ZERO ROWS IS GREATER THAN 10,
+C           GO TO LABEL ..500..
       IF(KNR.GT.10) GO TO 500
 
-C  OנPEהEלEHיE KPATHOCTי 2-KE KNC. KNC-PAתMEPHOCTר נPEOגPA-
-C  תOBAHיס זץPרE.
+C  DETERMINATION OF MULTIPLICITY 2-KE KNC.
+C  KNC - DIMENSION OF FOURIER TRANSFORMATION.
       K=8
       DO 20 I=3,7
       IF(KNC.LE.K) GO TO 25
    20 K=K+K
       GO TO 500
-C............üTO OגץCלOBלEHO /נO-MOEMץ/ PAתMEPHOCTרא B1...
+C ............THIS IS DUE /IN MY OPINION/ TO THE DIMENSION OF B1...
    25 KNC=K
       M1=I
       KNC2=KNC+KNC
-C  דיKל נOיCKA HEליHEךHשX üל-TOB
-C  Bש‏יCלEHיE ûAחA הלס נOיCKA HEליHEךHשX üלEMEHTOB.
-C  NMPNT-KOלי‏ECTBO TינOB üלEMEHTOB.
+C  LOOP FOR SEARCHING NONLINEAR ELEMENTS
+C  CALCULATION OF STEP SIZE FOR SEARCHING NONLINEAR ELEMENTS.
+C  NMPNT - NUMBER OF TYPES OF ELEMENTS.
       I1END=20*NMPNT
       DO 100 I1=1,I1END,20
       IF(MPOINT(I1+5).NE.3) GO TO 100
-C  ECלי HAךהEH ליHEךHשך üלEMEHT, נEPEXOה HA METKץ ..100..
+C  IF A NONLINEAR ELEMENT IS FOUND, GO TO LABEL ..100..
       I2E=MPOINT(I1+4)
-C  I2E-KOלי‏ECTBO üלEMEHTOB הAHHOחO TינA.
+C  I2E - NUMBER OF ELEMENTS OF THE GIVEN TYPE.
       IF(I2E.EQ.0)GO TO 100
       NF=MPOINT(I1+9)
       LE=MPOINT(I1+6)
       N2=MPOINT(I1+11)
-C  L2-KOלי‏ECTBO נAPAMETPOB הAHHOחO TינA üלEMEHTOB.
+C  L2 - NUMBER OF PARAMETERS OF THE GIVEN TYPE OF ELEMENTS.
       L2=MPOINT(I1+10)
-C  OנPEהEלEHיE HAתBAHיס TינA üלEMEHTA
+C  DETERMINATION OF THE DESIGNATION OF THE ELEMENT TYPE
       NAME(1)=MPOINT(I1)
       NAME(2)=MPOINT(I1+1)
       NAME(3)=MPOINT(I1+2)
       NAME(4)=MPOINT(I1+3)
       CALL LIBMD5(NAME,NOI,NOU,EXIST,KOI,KOUV,KOPV,NR1V,NB1V)
-C  דיKל נO üל-TAM B TינE
+C  CYCLE OVER ELEMENTS OF THE TYPE
       DO 110 I2=1,I2E
       L3=MPOINT(I1+12)
-C  N3=MPOINT(I1+13)+(I2-1)*L3 -TAK הEלATר HEלרתס !!! הEלATר HץצHO TAK:
+C  N3=MPOINT(I1+13)+(I2-1)*L3 - THIS CANNOT BE DONE!!! IT MUST BE DONE LIKE THIS:
       KNODES=MPOINT(I1+7)
       NA=NF+(I2-1)*LE
       N3=NODEEL(NA+KNODES+3)
-C  דיKל נO HEתABיCיMשM (MEצהץ COגOך) יCTO‏HיKAM TOKA
+C  CYCLE OVER INDEPENDENT (INTERRELATED) CURRENT SOURCES
       NADRU=1
       DO 110 INDEP=1,KOI
       NG=INDEP
@@ -130,10 +126,10 @@ C  דיKל נO HEתABיCיMשM (MEצהץ COגOך) יCTO‏HיKAM TOKA
       NB=1
       NR1=NR1V(NG)
       NB1=NB1V(NG)
-C  OנPEהEלEHיE HOMEPA ץתלA נPילOצEHיס ץנPABלסא‎EחO HAנPס-
-C  צEHיס (NU1) י TOKA (NU2)
-C   י נEPECשלKA נPיתHAKOB ית EXIST B EXS ,OTHOCס‎יXCס K TEKץ‎Eך
-C   חPץננE
+C  DETERMINATION OF THE NODE OF THE APPLICATION CONTROLLING
+C  THE STRESS (NU1) AND THE POINT (NU2)
+C  AND TRANSFER OF FLAGS FROM EXIST TO EXS, CORRESPONDING TO THE CURRENT
+C  GROUP
       DO 22 I=1,KOU
       NU1(I,1)=NODEEL(NA+NOU(NADRU,1))
       NU1(I,2)=NODEEL(NA+NOU(NADRU,2))
@@ -144,8 +140,8 @@ C   חPץננE
       NU2(1,2)=NODEEL(NA+NOI(INDEP,2))
 
 C     PRINT 6543,IM
-C  תAנOלHEHיE ZNN,UNEL,DUNDT
-C        BCEחO: UNEL(KN*KOU)
+C  FILLING OF ZNN, UNEL, DUNDT
+C       ENTIRE: UNEL(KN*KOU)
 C               DUNDT(KN*KOP)
 C               ZNN(KN*(KOU+KOP))
 C     MPOINT(I1+17)=KOU+KOP
@@ -159,8 +155,8 @@ C     KZNN=(KOU+KOP)*KN
       DO 35 I=1,KDUN
    35 DUNDT(I)=ZERO
    37 CONTINUE
-C  תAנOלHEHיE UNEL,DUNDT,ZNN
-C  תAנOלHסETCס KOU 'גלOKOB' ...
+C  FILLING OF UNEL, DUNDT, ZNN
+C  KOU 'BLOCKS' ARE FILLED ...
       IDU=0
       DO 40 IU=1,KOU
       IUBEG=(IU-1)*KN
@@ -181,14 +177,14 @@ C  נO KN üל-TOB
    47 CONTINUE
    40 CONTINUE
 
-C    נOCTPOEHיE UNEL  י DUNDT HA PACûיPEHHOך CETKE
-C    !! BEלי‏יHA NR1 נPEהנOלAחAETCס PABHOך KOU+KOP
+C  CALCULATION OF UNEL AND DUNDT ON THE DESIRED GRID
+C  !! THE VALUE NR1 ASSUMES THE ROLE OF KOU+KOP
       KZNN1=NR1*KN1
       DO 60 J=1,KZNN1
    60 ZNN1(J)=ZERO
-C  הליHHA TOך ‏ACTי ZNN1 ,B KOTOPOך COהEPצATCס HAנPסצEHיס UNEL
+C  LENGTH OF THE ZNN1 SECTION, WHERE THE UNEL STRESSES ARE CONTAINED
       KUNEL1=KN1*KOU
-C  COגCTBEHHO PACCשלKA UNEL י DUNDT B ZNN1
+C  COMPLETE REFERENCE OF UNEL AND DUNDT IN ZNN1
       JJ=0
       DO 65 J=1,KOU
       IF(EXS(J,2))JJ=JJ+1
@@ -203,29 +199,29 @@ C  COגCTBEHHO PACCשלKA UNEL י DUNDT B ZNN1
    64 CONTINUE
    65 CONTINUE
 
-C     נPEOגPAתOBAHיE זץPרE - Bש‏יCלEHיE DI/DU
+C     TRANSFORMATION OF THE FUNCTION - CALCULATION OF DI/DU
 
       IF=0
-      CALL FTMAS2(ZNN1,KR1,KC1,NNR1,KNR1,KNC,KN1,NR1,NB1,M1,B1,B2,IF,   
+      CALL FTMAS2(ZNN1,KR1,KC1,NNR1,KNR1,KNC,KN1,NR1,NB1,M1,B1,B2,IF,
      +                                            FLGFFT,*70)
    70 CALL LIBMD4(NAME,NG,N1,L1,N2,L2,N3,L3,B1,KNC2,NR1,*300)
-      CALL FT2(ZNN1,KR1,KC1,NNR1,KNR1,KNC,KN1,NR1,NB1,B1,B2,IF,         
+      CALL FT2(ZNN1,KR1,KC1,NNR1,KNR1,KNC,KN1,NR1,NB1,B1,B2,IF,
      +                                      FLGFFT,*70)
-C !    CM. נPEהץנPEצהEHיס B נEPBOM BשתOBE
+C !    SEE WARNINGS IN THE FIRST LIST
 
-C  תAנOלHEHיE DF/DX
+C  FILLING OF DF/DX
       N0=KN1*KOU
-C  $-  הליHHA ‏ACTי ZNN1 ,COהEPצA‎Aס DI/DU
-C  OCTABûAסCס ‏ACTר COהEPציT DI/D(DU/DT)
+C  $-  LENGTH OF THE ZNN1 SECTION, CONTAINING DI/DU
+C  THE NEXT PART CONTAINS DI/D(DU/DT)
       N01=0
       N02=0
       KKI=1
-C     INDEP,NG     -üKBיBAלEHTHשE BEלי‏יHש.
+C     INDEP, NG     - SELECTED VARIABLES.
 C
       DO 200 KKU=1,KOU
       N01=N01+1
       IF(EXS(KKU,2))N02=N02+1
-C T.E.ECלי גלOK ית KN1 üלEMEHTOB נPOךהEH-נEPEXOהיM K CלEהץא‎EMץ
+C THAT IS, IF A BLOCK OF KN1 ELEMENTS PASSES - PROCEED TO THE NEXT.
       ISB=0
       DO 250 IS=1,KN
       EW=IM*W(IS)
@@ -245,11 +241,11 @@ C T.E.ECלי גלOK ית KN1 üלEMEHTOB נPOךהEH-נEPEXOהיM K CלEהץא‎EMץ
    90 CONTINUE
 C      WRITE(6, 120) SUM1,EW,DIFF2,G,
 C     *              IM,DIFF1,IS,W(IS),SUM2,GI
-C  120 FORMAT(2X,'ZNEJAC: SUM1=',E12.6,',',E12.6,' EW=',E12.6,',',E12.6/
-C     *       2X,'        DIFF2=',E12.6,',',E12.6,' G=',E12.6,',',E12.6/
-C     *       2X,'       IM=',E12.6,',',E12.6,' DIFF1=',E12.6,',',E12.6/
-C     *       2X,'       W(',I5,')=',E12.6,' SUM2=',E12.6,',',E12.6/
-C     *       2X,'       GI=',E12.6,',',E12.6)
+C  120 FORMAT(2X,'ZNEJAC: SUM1=',E13.6,',',E13.6,' EW=',E13.6,',',E13.6/
+C     *       2X,'        DIFF2=',E13.6,',',E13.6,' G=',E13.6,',',E13.6/
+C     *       2X,'       IM=',E13.6,',',E13.6,' DIFF1=',E13.6,',',E13.6/
+C     *       2X,'       W(',I5,')=',E13.6,' SUM2=',E13.6,',',E13.6/
+C     *       2X,'       GI=',E13.6,',',E13.6)
       G=SUM1+EW*DIFF2
       GI=IM*DIFF1-W(IS)*SUM2
       IB1=IRB+NU2(KKI,1)
@@ -257,7 +253,7 @@ C     *       2X,'       GI=',E12.6,',',E12.6)
       IS1=ISB+NU1(KKU,1)
       IS2=ISB+NU1(KKU,2)
 C
-C  תAנOלHEHיE MATPידש Y. ECלי ץתEל נOהKלא‏EHיס - HEHץלEBOך.
+C  FILLING OF Y-MATRIX. IF THE NODE IS ALREADY CONNECTED - NONZERO.
       IF(NU1(KKU,1).NE.0.AND.NU2(KKI,1).NE.0)       DFDX(IB1,1,IS1)=DFDX
      +(IB1,1,IS1)+G
       IF(NU1(KKU,2).NE.0.AND.NU2(KKI,2).NE.0)       DFDX(IB2,1,IS2)=DFDX
@@ -283,7 +279,7 @@ C  תAנOלHEHיE MATPידש Y. ECלי ץתEל נOהKלא‏EHיס - HEHץלEBOך.
   110 CONTINUE
   100 CONTINUE
 
-C  תAHECEHיE Y-MATPידש
+C  DESIGNATION OF Y-MATRIX
       IDIAG=0
       DO 140 IBL=1,KN
       DO 150 ITR=1,K3
@@ -291,7 +287,7 @@ C  תAHECEHיE Y-MATPידש
       DO 150 ITS=1,K3
       IDS=IDIAG+ITS
 
-C  יתםומומיו ןפ 30.01.91    יתםומיל ףועהאכ ח.ק.
+C  CHANGE FROM 30.01.91    MODIFIED BY SERDYUK G.V.
       DFDX(IDS,1,IDR)=DFDX(IDS,1,IDR)+ BUFFER(IFIND2(ITS,ITR,IBL,K3,KN))
       IF(IDIAG.NE.0) DFDX(IDS,2,IDR)=DFDX(IDS,2,IDR)+ IM*BUFFER(IFIND2(I
      +TS,ITR,IBL,K3,KN))
@@ -303,20 +299,20 @@ C  יתםומומיו ןפ 30.01.91    יתםומיל ףועהאכ ח.ק.
       DO 160 I160=1,K3
   160 DFDX(I160,2,I160)=IM
 
-C  F & DFDX CזOPMיPOBAHש
+C  F & DFDX FORMATION
       FLAG=.TRUE.
       RETURN
 C     DEBUG SUBTRACE,INIT(I160,IB1,IB2,IS1,IS2,IDS,IDR)
-C  BשXOה B תAנPE‎EHHץא OגלACT
+C  EXIT TO A RESTRICTED AREA
   300 FLAG=.FALSE.
       STOP
 
-C  OûיגKA KN י/ילי KNC
+C  ERROR IN KN AND/OR KNC
   500 WRITE(6, 49) KNR,KNC
       PRINT    49, KNR,KNC
       STOP
 
-C  MAלA P-HOCTר DFDX
+C  SMALL DIMENSION OF DFDX
   600 WRITE(6, 48) K3,KN,NTOT
       PRINT    48, K3,KN,NTOT
       STOP
@@ -324,9 +320,9 @@ C
 C***********************************************************************
    49 FORMAT (/3X,'INPUT DATA ERROR:'        /3X,'KNR=',I5,5X,'KNC=',I5)
 
-   48 FORMAT (//9X,' CIRCUIT CAN NOT BE ANALYSED:'         /3X,' NUMBER 
-     +OF EQUATIONS EXCEEDS MAXIMUM.'         /3X,' NUMBER OF NODES=',I5 
-     +        /3X,' NUMBER OF FREQNCYS=',I5         /3X,' MAX SIZE=',I5 
+   48 FORMAT (//9X,' CIRCUIT CAN NOT BE ANALYSED:'         /3X,' NUMBER
+     +OF EQUATIONS EXCEEDS MAXIMUM.'         /3X,' NUMBER OF NODES=',I5
+     +       /3X,' NUMBER OF FREQUENCIES=',I5       /3X,' MAX SIZE=',I5
      +  )
 C     DEBUG SUBTRACE,INIT(IB1,IB2,IS1,IS2,IRB,ISB,NU1,NU2)
 C     DEBUG SUBTRACE,SUBCHK

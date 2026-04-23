@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -33,11 +33,11 @@ C
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       COMMON/SUBC/      Y(15,15),J(15)
       DOUBLE PRECISION              P1(L1),P2(L2),P3(L3)
-      DOUBLE COMPLEX           Y,J,                  CR,CI,GB,GK,GE,    
+      DOUBLE COMPLEX           Y,J,                  CR,CI,GB,GK,GE,
      +              ZERO
 
 
-      CR(X) = DCMPLX(X,   0.0D0)
+c      CR(X) = DCMPLX(X,   0.0D0)
       CI(X) = DCMPLX(0.0D0,OM*X)
 
       ZERO = DCMPLX(0.0D0,0.0D0)
@@ -100,7 +100,7 @@ C
 C
 C
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
-      DOUBLE PRECISION              P1(L1),P2(L2),P3(L3),               
+      DOUBLE PRECISION              P1(L1),P2(L2),P3(L3),
      +   B1(KNC2,NR),                  IE0,IK0,NE,NK,ARGMAX
       DATA              ARGMAX/40.0D0/
 C
@@ -136,8 +136,8 @@ C
       ALFN =P3(22)
       ALFI =P3(23)
 
-C -------- NG=1 (ץנעבקלסא‎וו מבנעסצומיו UBE)
-C -------- NG=2 (ץנעבקלסא‎וו מבנעסצומיו UBK)
+C -------- NG=1 (CONTROL VOLTAGE UBE)
+C -------- NG=2 (CONTROL VOLTAGE UBC)
 
       IF(NG.NE.1) GOTO 100
 
@@ -192,7 +192,7 @@ C
 C
 C
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
-      DOUBLE PRECISION              P1(L1),P2(L2),P3(L3),               
+      DOUBLE PRECISION              P1(L1),P2(L2),P3(L3),
      +   B1(KNC2,NR),                  IE0,IK0,NE,NK,ARGMAX,ARGMIN
       DATA              ARGMAX/40.0D0/,ARGMIN/-120.0D0/
 C
@@ -236,8 +236,8 @@ C
       ALFN = P3(22)
       ALFI = P3(23)
 C
-C -------- NG=1 (ץנעבקלסא‎וו מבנעסצומיו UBE)
-C -------- NG=2 (ץנעבקלסא‎וו מבנעסצומיו UBK)
+C -------- NG=1 (CONTROL VOLTAGE UBE)
+C -------- NG=2 (CONTROL VOLTAGE UBC)
 
       IF(NG.NE.1) GOTO 100
 
@@ -247,12 +247,12 @@ C -------- NG=2 (ץנעבקלסא‎וו מבנעסצומיו UBK)
       IF(U.GE.0.0D0) GOTO 5
       IF(U*TETE.LT.ARGMIN) GOTO 3
 C
-C -------- ןגש‏משך ףלץ‏בך
+C -------- NORMAL CASE
       B1(K,1) =DUN1(U)+DUN3(U)*B1(K,2)+DUN5(U)*B1(K,2)+DUN9(U)
       B1(K,2) =UN3(U)+UN5(U)
       GOTO 8
 C
-C -------- U ףליûכ
+C -------- U TOO HIGH
     3 CONTINUE
       B1(K,1) =DUN3(U)*B1(K,2)+DUN5(U)*B1(K,2)+DUN9(U)
       B1(K,2) =UN3(U)+UN5(U)
@@ -261,12 +261,12 @@ C -------- U ףליûכ
     5 CONTINUE
       IF(U*TETE.LT.ARGMIN) GOTO 7
 C
-C -------- ןגש‏משך ףלץ‏בך
+C -------- NORMAL CASE
       B1(K,1) =DUN1(U)+DUN4(U)*B1(K,2)+DUN5(U)*B1(K,2)+DUN9(U)
       B1(K,2) =UN4(U)+UN5(U)
       GOTO 8
 C
-C -------- U ףליûכ
+C -------- U TOO HIGH
     7 CONTINUE
       B1(K,1) =DUN4(U)*B1(K,2)+DUN5(U)*B1(K,2)+DUN9(U)
       B1(K,2) =UN4(U)+UN5(U)
@@ -284,12 +284,12 @@ C -------- U ףליûכ
       IF(U.GE.0.0D0) GOTO 25
       IF(U*TETK.LT.ARGMIN) GOTO 23
 C
-C -------- ןגש‏משך ףלץ‏בך
+C -------- NORMAL CASE
       B1(K,1) =DUN2(U)+DUN6(U)*B1(K,2)+DUN8(U)*B1(K,2)+DUN10(U)
       B1(K,2) =UN6(U)+UN8(U)
       GOTO 28
 C
-C -------- U ףליûכ
+C -------- U TOO HIGH
    23 CONTINUE
       B1(K,1) =DUN6(U)*B1(K,2)+DUN8(U)*B1(K,2)+DUN10(U)
       B1(K,2) =UN6(U)+UN8(U)
@@ -298,12 +298,12 @@ C -------- U ףליûכ
    25 CONTINUE
       IF(U*TETK.LT.ARGMIN) GOTO 27
 C
-C -------- ןגש‏משך ףלץ‏בך
+C -------- NORMAL CASE
       B1(K,1) =DUN2(U)+DUN7(U)*B1(K,2)+DUN8(U)*B1(K,2)+DUN10(U)
       B1(K,2) =UN7(U)+UN8(U)
       GOTO 28
 C
-C -------- U ףליûכ
+C -------- U TOO HIGH
    27 CONTINUE
       B1(K,1) =DUN7(U)*B1(K,2)+DUN8(U)*B1(K,2)+DUN10(U)
       B1(K,2) =UN7(U)+UN8(U)

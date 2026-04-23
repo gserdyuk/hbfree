@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -11,9 +11,9 @@ c
       SUBROUTINE SHLEIF(OM,P1,L1,P2,L2,P3,L3,N,NAME)
 C     7.02.91
 C
-C  גשקûבס נ/נ  SM61(FREQ,OUT)
+C  FORMER SUBROUTINE SM61(FREQ,OUT)
 C
-C  ûלEךז כת, XX
+C  SHORT-CIRCUITED LINE, XX
 C
 C
 C
@@ -21,7 +21,7 @@ C
       DIMENSION P1(L1),P2(L2),P3(L3)
 
       DOUBLE PRECISION      OM,P1,P2,P3
-      DOUBLE PRECISION      L
+      DOUBLE PRECISION      L,MU
 
       COMMON /SUBC/  YY(15,15),YJ(15)
       COMMON /SUBS/  SV(15,15)
@@ -32,36 +32,36 @@ C
 
       LOGICAL*4  OUT
 
-      CHARACTER  NAME, NKZ, NXX
+      CHARACTER*4  NAME, NKZ, NXX
 
       DOUBLE COMPLEX    CCEXP
       CCEXP(Z) = DEXP(DREAL(Z))*DCMPLX(DCOS(DIMAG(Z)),DSIN(DIMAG(Z)))
 C
 C
-      DATA       NKZ/4HKZ  /,   NXX/4HXX  /
+      DATA       NKZ/'KZ  '/,   NXX/'XX  '/
 
 C
-C     נבעבםופעש םןהולי : W1,W2,T,H,EPS,TGD,SIGMA,L
-C               W1   -   ûיעימב לימיי (ם)
-C               W2   -   ûיעימב ûלוךזב (ם)
-C               T    -   פןל‎ימב נןלןףכי םנל (ם)
-C               H    -   פןל‎ימב נןהלןצכי םנל (ם)
-C               EPS  -   ןפמ. היüלוכפעי‏. נעןמידבוםןף
-C               TGD  -   פבמחומף ץחלב היüלוכפעי‏וףכיט נןפוע
-C               SIGM -   ץהולרמבס נעןקןהיםןףפר נןלןףכי (ףים/ם)
-C               L    -   הלימב ûלוךזב (ם)
+C     MODEL PARAMETERS: W1, W2, T, H, EPS, TGD, SIGMA, L
+C               W1   -   LINE WIDTH (M)
+C               W2   -   LINE WIDTH (M)
+C               T    -   STRIP THICKNESS OF MICROSTRIP LINE (M)
+C               H    -   SUBSTRATE THICKNESS OF MICROSTRIP LINE (M)
+C               EPS  -   RELATIVE DIELECTRIC PERMITTIVITY
+C               TGD  -   TANGENT OF DIELECTRIC LOSS ANGLE
+C               SIGM -   SPECIFIC CONDUCTIVITY OF THE STRIP (S/M)
+C               L    -   LINE LENGTH (M)
 C
-C     נבעבםופעש, ןג‎יו מב ףטוםץ
+C     PARAMETERS COMMON TO THE ENTIRE CIRCUIT
       EPS = P1(1)
       TGD = P1(2)
       MU  = P1(3)
       SIGM = P1(4)/1.D+03
 C
-C     נבעבםופעש, ןג‎יו הלס הבממןחן פינב üלוםומ
+C     PARAMETERS COMMON TO THIS TYPE OF ELEMENT
       H   = P2(1)*1.D+03
       T   = P2(2)*1.D+03
 C
-C     נבעבםופעש ימהיקיהץבלרמש
+C     INDIVIDUAL PARAMETERS
       W1  = P3(1)*1.D+03
       W2  = P3(2)*1.D+03
       L   = P3(3)*1.D+03
@@ -72,13 +72,13 @@ C
 
 
       WRITE (6,5) W1,W2,T,H,EPS,TGD,SIGM,L,N
-5     FORMAT(2X,' ûלEךז. יCXOהHשE הAHHשE:'/2X,'W OCH=',E12.5,'  W ûל=',E
+5     FORMAT(2X,' LINE. INITIAL DATA:'/2X,'W OCH=',E12.5,'  W SCHL=',E
      +12.5,2X,'T=',E12.5,3X,'H=',E12.5/2X,'EPS=',E12.5,3X,'TANG.DELTA=',
      +E14.6,/,3X,'SIGM=',E14.6,3X,'L ûל =',E12.5,1X,'N=',I5)
 C     IF(IFR.GT.1) GOTO 1
 C
 C
-C     MיKPOנOלOCKOBAס ליHיס
+C     MICROWAVE TRANSMISSION LINE
 C
       EP = EPS
 
@@ -94,7 +94,7 @@ C
       D1=SM63(Z1,EPS1,H)
       D2=SM63(Z2,EPS2,H)
       F=149.89623D0/DMAX1(EPS1*D1,EPS2*D2)
-C   S - םבפעידב הלס עוציםב נןףפןסממןחן פןכ
+C   S - MATRIX FOR DC MODE
       IF(OM.NE.0.0D0) GOTO 7
       SV(1,1)=DCMPLX(0.0D0,0.0D0)
       SV(1,2)=DCMPLX(0.99997D0,0.0D0)
@@ -113,9 +113,9 @@ C   S - םבפעידב הלס עוציםב נןףפןסממןחן פןכ
       WN2=WN*DSQRT(FEP2)
       CALL SM36(WN1,D1,D2,XA,XB,XC,XD,NOL)
 C
-C     נOחOHHשE נAPAMETPש OTBETBלEHיס
+C     PER UNIT LENGTH REFLECTION PARAMETERS
 C
-C     הלס MיKPOנOלOCKOBOך ליHיי
+C     FOR MICROWAVE TRANSMISSION LINE
 C
       CALL SM84(WN,W2,T,H,EP,TEP,EPE2,Z2,ZS2,B,SIGM,AS,GAM)
       IF(NAME.EQ.NXX) CALL SM35(W2,H,FEP2,Z2,WN2,R)
@@ -126,20 +126,20 @@ C
       X4=DCMPLX(0.D0,XD)
       Z=Z*Z2/Z1
       Z=(Z+X4)*X3/(Z+X3+X4)+X2
-C   מןעםיעןקבמיו Z-קןלמןק
+C   NORMALIZATION OF Z-WAVES
       Z=Z*50.D0
 
       WRITE(6,999) X2,X3,X4,Z
   999 FORMAT(2X,'X2=',2(1X,E12.5)/,'  X3=',2(1X,E12.5)/        '  X4=',2
      +(1X,E12.5)/ '   Z=',2(1X,E12.5))
 
-C     נAPAMETPש üלEMEHTOB T-CXEMש
+C     PARAMETERS OF ELEMENTS OF THE CIRCUIT
 C
       X1=DCMPLX(0.D0,XA)
       X1=X1*50.D0
       Y=U/Z
 C
-C     S-נAPAMETPש
+C     S-PARAMETER
 C
 C
 C   ===============================
@@ -148,7 +148,7 @@ C   ===============================
       DO 18 J=1,3
   18  PARAM(J)=PAR(J)
 C
-C    זןעיםעןקבמיו S - םבפעידש
+C    FORMATION OF THE S-MATRIX
 C      L=1
 C      DO 20 I=1,2
 C      DO 20 J=1,2
@@ -173,7 +173,7 @@ C
      +.5,1X,E12.5)
 
 C
-C    נועוקןה ית S -םבפעידש ק ץ - םבפעידץ
+C    CONVERSION FROM S-MATRIX TO Y-MATRIX
 
       CALL TEST(N)
 C
@@ -186,9 +186,9 @@ C
 
 
 C      SUBROUTINE MSL(W,T,H,ER,WE,EE,Z)
-C   KOCTאKEBי‏ A.B.,הEK.1979ח.
-C  PROCEEDINGS_OF_THE_IEEE,1977,V.65,N11,MTT-25
-C  BAHL I.J.,GARG R. ABTOPש CTATרי.
+C   KOSTYUKOVICH A.B., DEK. 1979
+C  PROCEEDINGS OF THE IEEE, 1977, V.65, N11, MTT-25
+C  BAHL I.J., GARG R. AUTHORS OF THE ARTICLE.
 C     DATA A1,A2,A3,A4/376.9911,.3978873,12.56637,.1591549/
 C      WE=W
 C      WH=W/H
@@ -201,11 +201,11 @@ C      EF=.5*H/T
 C      IF(WH.GT.A4)EF=A3*W/T
 C      WE=WE+A2/H*T*(1.+ALOG(EF))
 C    2 IF(WH.GT.1.) GO TO 1
-CC  ץתKAס נOלOCKA
+CC  NARROW STRIP
 C      EE=EA-C+EB*(EC+.04*(1.-WH)**2)
 C      Z=60./SQRT(EE)*ALOG(8./WE*H+.25/H*WE)
 C      RETURN
-CC  ûיPOKAס נOלOCKA.
+CC  WIDE STRIP
 C    1 EE=EA-C+EB*EC
 C      Z=A1/(SQRT(EE)*(WE/H+1.393+.667*ALOG(WE/H+1.444)))
 C      RETURN
@@ -371,12 +371,12 @@ C
 C      SUBROUTINE SM10(AK1,E,F)
 C      T=AK1**2
 CC
-CC     üללינTי‏ECKיך יHTEחPAל נEPBOחO POהA
+CC     ELLIPTIC INTEGRAL OF THE SECOND KIND
 CC
 C      F=((.032024666*T+.054544409)*T+.097932891)*T+1.3862944-
 C     *(((.010944912*T+.060118519)*T+.12475074)*T+.5)*ALOG(T)
 CC
-CC     üלינTי‏ECKיך יHTEחPAל BTOPOחO POהA
+CC     ELLIPTIC INTEGRAL OF THE FIRST KIND
 CC
 C      E=((.040905094*T+.085099193)*T+.44479204)*T+1.-
 C     *(((.01382999*T+.08150224)*T+.24969795)*T)*ALOG(T)
@@ -397,7 +397,7 @@ C      END
 
 
 C      FUNCTION SM63(Z,SEP,H)
-CC       קמוףומש יתםומומיס 7.02.91 מ.כ.
+CC       CHANGES MADE ON 7.02.91 BY N.K.
 CC     LOGICAL*4 SYML
 C      P=.25
 CC     IF(SYML)P=1.

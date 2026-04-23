@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -9,8 +9,8 @@ c
 
       SUBROUTINE LUCAN(ALU,NTOT,N,NF,FLAG)
 C**************************************************************
-C         נOהנPOחPAMMA נPיBEהEHיס MATPידש A K Bיהץ,           *
-C     KAHOHי‏ECKOMץ הלס Y-MATPידש.                            *
+C        SUBROUTINE FOR BRINGING MATRIX A TO A FORM           *
+C     CANONICAL FOR THE Y-MATRIX.                             *
 C**************************************************************
 C
 C$LARGE: ALU
@@ -18,20 +18,20 @@ C$LARGE: ALU
       DOUBLE COMPLEX ALU(NTOT,NTOT)
       DOUBLE COMPLEX SUM
       INTEGER FLAG
-C  נPOBEPKA BXOהHשX הAHHשX
+C  CHECKING INPUT DATA
       FLAG=0
       IF(NF.GT.N) FLAG=5
-C  BHECEHש KOPPEKTיBש נO CPABHEHיא C LUSLV
+C  CORRECTIONS INTRODUCED COMPARED TO LUSLV
       IF((NF.GT.NTOT).OR.(N.GT.NTOT)) FLAG=3
       IF((NF.LT.1).OR.(N.LT.1)) FLAG=2
       IF(NTOT.LT.1) FLAG=1
 C      IF(FLAG.NE.0) WRITE(6, 95)  FLAG
       IF(FLAG.NE.0) RETURN
-C  ECלי N=1,TO KAHOHיתAדיא MOצHO C‏יTATר OKOH‏EHHOך -
-C  MATPידA COהEPציT 1 üלEMEHT - ALU(1,1).
+C  IF N=1, CANONICALIZATION IS CONSIDERED COMPLETE -
+C  THE MATRIX CONTAINS ONLY 1 ELEMENT - ALU(1,1).
       IF(N.EQ.1) RETURN
-C  נPיBEהEHיE AKTיBHOך ‏ACTי MATPידש A K KAHOHי‏ECKOMץ
-C  Bיהץ. היAחOHAלרHשE üלEMEHTש CPAתץ תAHOCסTCס B A.
+C  TRANSFER THE ACTIVE PART OF MATRIX A TO THE CANONICAL FORM.
+C  DIAGONAL ELEMENTS WILL BE TRANSFERRED TO A.
       DO 85 IROW=NF,N
       SUM=2.D0*ALU(IROW,IROW)
       DO 90 JCOL=NF,N

@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -10,7 +10,7 @@ c
 
       SUBROUTINE MP(OM,P1,L1,P2,L2,P3,L3,N)
 C
-C     MOδEμψ νιλςοπομοσλοχωθ μιξικ 
+C     MODEL OF MICROSTRIP LINES
 C
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       DIMENSION     P1(L1),P2(L2),P3(L3)
@@ -57,8 +57,8 @@ C
       GOTO 918
  917  CONTINUE
 C
-C               ςασώετ ώαστοτξοκ δισπεςσιι
-C  δισπεςσιρ χομξοχοηο σοπςοτιχμεξιρ ι διόμελτςιώεσλοκ ποστορξξοκ
+C               CALCULATION OF FREQUENCY DISPERSION
+C  DISPERSION OF WAVE IMPEDANCE AND DIELECTRIC CONSTANT
 C
        F=OM/6.2831852D0
        G=DSQRT((ZO-5.D0)/60.D0)+0.004D0*ZO
@@ -66,33 +66,34 @@ C
        G1=1.D0+G*(F*1.D-09/FR)**2.D0
        CALL Z00P(W,H,T,ER,ZOP)
        ZO=ZOP-(ZOP-ZO)/G1
-       EER=ER-(ER-EER)/G1    
-C       
+       EER=ER-(ER-EER)/G1
+C
  918  CONTINUE
       IF(SKL2.EQ.1.D0) GOTO 120
       GOTO 121
  120  WRITE(6,100)EER,ZO,F
- 100  FORMAT(8X,'EER=',F5.2,4X,'Zo=',F6.2,' OM',4X,'F=',E10.4,' ηΓ')
+ 100  FORMAT(8X,'EER=',F5.2,4X,'Zo=',F6.2,' OHM',4X,'F=',E11.4,' HZ')
  121  CONTINUE
-C 
+C
 C
       BETT=OM*DSQRT(EER)/CC
       OLAM=6.2831852D0/BETT
-C 
+C
       DGR=360.D0*FL/OLAM
       IF(SKL2.EQ.1.D0)GOTO 130
       GOTO 131
   130 WRITE(6,102)DGR,F
-  102 FORMAT(8X,'ζαϊοχωκ σδχιη μιξιι=',F6.2,' ηςαδ',4X,'F=',E10.4,' ηΓ')
+  102 FORMAT(8X,'PHASE SHIFT OF THE LINE=',F6.2,' DEG',4X,'F=',E11.4,
+     +' HZ')
  131  CONTINUE
 C
 
       IF(ALFA.GT.0.D0)GOTO 34
-C 
-C      PACώετ ποτεςψ
-C  ποτεςι χ νιλςοπομοσλοχοκ μιξιι  (ξΠ/Ν)
 C
-    
+C      CALCULATION OF LOSSES
+C  LOSSES IN A MICROSTRIP LINE (Np/m)
+C
+
       IF(T.EQ.0.D0) T=0.1D-08
       RO=5.8D-07
       F=OM/6.2831852D0
@@ -118,7 +119,7 @@ C
       IF(SKL2.EQ.1.D0)GOTO 125
       GOTO 126
  125  WRITE(6,101)ALFA,F
- 101  FORMAT(8X,'ALFA=',E10.4,' ξΠ/Ν',4X,'F=',E10.4,' ηΓ')
+ 101  FORMAT(8X,'ALFA=',E11.4,' Np/m',4X,'F=',E11.4,' HZ')
  126  CONTINUE
 C
 C
@@ -158,7 +159,7 @@ C
        GOTO 479
 C
 C+++++++++++++++++++++++++++++++++++++++++++
-C ςασώετ Y-νατςιγω δμρ ποστορξξοηο τολα    |
+C  CALCULATION OF THE Y-MATRIX FOR DC
 C+++++++++++++++++++++++++++++++++++++++++++
   478 CONTINUE
       DO 70 I=1,4
@@ -181,20 +182,20 @@ C
  134  WRITE(6,103)F,YY(1,1),YY(1,2),YY(1,3),YY(1,4),YY(2,1),YY(2,2),YY(2
      +,3),YY(2,4),YY(3,1),YY(3,2),YY(3,3),YY(3,4),YY(4,1),YY(4,2),YY(4,3
      +),YY(4,4)
- 103  FORMAT(24X,'F=',E10.4,' ηΓ',/(E10.4,E10.4),'i',1X,(E10.4,E10.4),'i
-     +',1X,(E10.4,E10.4),'i',1X,(E10.4,E10.4),'i',/(E10.4,E10.4),'i',1X,
-     +(E10.4,E10.4),'i',1X,(E10.4,E10.4),'i',1X,(E10.4,E10.4),'i',/(E10.
-     +4,E10.4),'i',1X,(E10.4,E10.4),'i',1X,(E10.4,E10.4),'i',1X,(E10.4,E
-     +10.4),'i',/(E10.4,E10.4),'i',1X,(E10.4,E10.4),'i',1X,(E10.4,E10.4)
-     +,'i',1X,(E10.4,E10.4),'i')
+ 103  FORMAT(24X,'F=',E11.4,' HZ',/(E11.4,E11.4),'i',1X,(E11.4,E11.4),'i
+     +',1X,(E11.4,E11.4),'i',1X,(E11.4,E11.4),'i',/(E11.4,E11.4),'i',1X,
+     +(E11.4,E11.4),'i',1X,(E11.4,E11.4),'i',1X,(E11.4,E11.4),'i',/(E11.
+     +4,E11.4),'i',1X,(E11.4,E11.4),'i',1X,(E11.4,E11.4),'i',1X,(E11.4,E
+     +11.4),'i',/(E11.4,E11.4),'i',1X,(E11.4,E11.4),'i',1X,(E11.4,E11.4)
+     +,'i',1X,(E11.4,E11.4),'i')
  135  CONTINUE
       RETURN
       END
              SUBROUTINE Z00P(W,H,T,ER,ZOP)
 C
-C  ςασώετ   χομξοχοηο σοπςοτιχμεξιε πομοσλοχοκ μιξιι
-C  δμρ δισπεςσιι διόμελτςιώεσλοκ ποστορξξοκ ι 
-C  χομξοχοηο σοπςοτιχμεξιρ νπμ
+C  CALCULATION OF THE WAVE IMPEDANCE OF A STRIPLINE
+C  FOR THE DISPERSION OF THE DIELECTRIC CONSTANT AND
+C  WAVE IMPEDANCE OF THE STRIPLINE.
 C
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       B=2.D0*H
@@ -220,10 +221,10 @@ C
       ENDIF
       RETURN
       END
- 
+
           SUBROUTINE SMPL(OM,P1,L1,P2,L2,P3,L3,N)
 C
-C     MOδEμψ  CBρϊAHHωX νιλςοπομοσλοχωθ μιξικ
+C     MODEL OF COUPLED MICROSTRIP LINES
 C
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       DIMENSION     P1(L1),P2(L2),P3(L3)
@@ -278,7 +279,7 @@ C
 C
       EREE=CE/CEB
       EREO=CO/COB
-C 
+C
       ZOE=1.D0/(CC*DSQRT(CE*CEB))
       ZOO=1.D0/(CC*DSQRT(CO*COB))
 C
@@ -303,8 +304,8 @@ C
       IF(SKL2.EQ.1.0D0)GOTO 1001
       GOTO 1010
  1001 WRITE(6,1020)EREE,EREO,ZOE,ZOO,Z0,F
- 1020 FORMAT(/,4X,'EREE=',F5.2,2X,'EREO=',F5.2,4X,'ZOE=',F6.2,' OM',' ZO
-     +O=',F6.2,' OM',4X,'Z0=',F6.2,' OM   F=',E10.4,' ηΓ',/)
+ 1020 FORMAT(/,4X,'EREE=',F5.2,2X,'EREO=',F5.2,4X,'ZOE=',F6.2,'OHM',' ZO
+     +O=',F6.2,'OHM',4X,'Z0=',F6.2,'OHM   F=',E11.4,' HZ',/)
  1010 CONTINUE
 C
       CALL BET1(OM,CC,EREE,EREO,BETT,BETTE,BETTO,PI)
@@ -313,8 +314,8 @@ C
       GOTO 1510
  1500 FL4=2.D0*PI/BETT/4.D0
       WRITE(6,1520)FL4,F
- 1520 FORMAT(/,4X,'δμιξα LAMDA/4.=',E10.4,        '(Ν)   ώαστοτA F=',E10
-     +.4,' ηΓ',/)
+ 1520 FORMAT(/,4X,'WAVELENGTH LAMBDA/4.=',E11.4,
+     + '(m)   FREQUENCY F=',E11.4,' HZ',/)
  1510 CONTINUE
 C
       IF(ALFE.GT.0.0D0.AND.ALFO.GT.0.0D0) GOTO 472
@@ -326,26 +327,26 @@ C
       IF(SKL2.EQ.1.0D0)GOTO 105
       GOTO 106
  105  WRITE(6,107)ALFE,ALFO,F
- 107  FORMAT(/,8X,'ALFE=',E10.4,' ξΠ/Ν',4X,'ALFO=',E10.4,' ξΠ/Ν',4X,'F='
-     +,E10.4,' ηΓ',/)
+ 107  FORMAT(/,8X,'ALFE=',E11.4,' Np/m',4X,'ALFO=',E11.4,' Np/m',4X,'F='
+     +,E11.4,' HZ',/)
  106  CONTINUE
 C
       IF(SKL1.GT.1.01D0)GOTO 4140
       GOTO 4141
  4140 CONTINUE
       Cend=W*ER/(120.D0*PI*CC)*(1.35D0/DLOG10(4.D0*H/T)+W*1.333313D0/(3.
-     +D0*H*DSQRT(ER)))
+     +0D0*H*DSQRT(ER)))
       DFLE=0.92D0*DATAN(OM*Cend*ZOE)/BETTE
       DFLO=0.95D0*DATAN(OM*Cend*ZOO)/BETTO
       IF(SKL2.EQ.1.0D0)GOTO 4152
       GOTO 4155
  4152 WRITE(6,4151)Cend,DFLE,DFLO
- 4151 FORMAT(/,1X,'(δμρ θομοστοηο θοδα ξα λοξγε μιξιι) λςαεχαρ ενλοστψ σ
-     +Λ=',E10.4,/10X,'πςιςούεξιε δμιξω DFLE=',E10.4,1X,'πςιςούεξιε δμιξω
-     + DFLO=',E10.4)
+ 4151 FORMAT(/,1X,'(FOR OPEN CIRCUIT AT END OF THE LINE) EDGE CAPACITANC
+     +E CK=',E11.4,/10X,'INCREASE IN LENGTH DFLE=',E11.4,1X,'INCREASE IN
+     + LENGTH DFLO=',E11.4)
  4155 CONTINUE
-      GOTO 4156    
- 4141 CONTINUE     
+      GOTO 4156
+ 4141 CONTINUE
       DFLE=0.0D0
       DFLO=0.0D0
  4156 CONTINUE
@@ -405,12 +406,12 @@ C
  134  WRITE(6,103)F,YY(1,1),YY(1,2),YY(1,3),YY(1,4),YY(2,1),YY(2,2),YY(2
      +,3),YY(2,4),YY(3,1),YY(3,2),YY(3,3),YY(3,4),YY(4,1),YY(4,2),YY(4,3
      +),YY(4,4)
- 103  FORMAT(24X,'F=',E10.4,' ηΓ',/(E10.4,1X,E10.4),'i',2X,(E10.4,1X,E10
-     +.4),'i',2X,(E10.4,1X,E10.4),'i',2X,(E10.4,1X,E10.4),'i',/(E10.4,1X
-     +,E10.4),'i',2X,(E10.4,1X,E10.4),'i',2X,(E10.4,1X,E10.4),'i',2X,(E1
-     +0.4,1X,E10.4),'i',/(E10.4,1X,E10.4),'i',2X,(E10.4,1X,E10.4),'i',2X
-     +,(E10.4,1X,E10.4),'i',2X,(E10.4,1X,E10.4),'i',/(E10.4,1X,E10.4),'i
-     +',2X,(E10.4,1X,E10.4),'i',2X,(E10.4,1X,E10.4),'i',2X,(E10.4,1X,E10
+ 103  FORMAT(24X,'F=',E11.4,' HZ',/(E11.4,1X,E11.4),'i',2X,(E11.4,1X,E11
+     +.4),'i',2X,(E11.4,1X,E11.4),'i',2X,(E11.4,1X,E11.4),'i',/(E11.4,1X
+     +,E11.4),'i',2X,(E11.4,1X,E11.4),'i',2X,(E11.4,1X,E11.4),'i',2X,(E1
+     +1.4,1X,E11.4),'i',/(E11.4,1X,E11.4),'i',2X,(E11.4,1X,E11.4),'i',2X
+     +,(E11.4,1X,E11.4),'i',2X,(E11.4,1X,E11.4),'i',/(E11.4,1X,E11.4),'i
+     +',2X,(E11.4,1X,E11.4),'i',2X,(E11.4,1X,E11.4),'i',2X,(E11.4,1X,E11
      +.4),'i')
  135  CONTINUE
 C
@@ -491,6 +492,7 @@ C
 
       SUBROUTINE DISPZ(OM,ZOE,ZOO,ER,EREE,EREO,H,W,S,PI)
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
+      DOUBLE PRECISION KPKE,KPKO
       FR1=OM/(2.D0*PI)*1.D-09
       FRO=0.7952D0*ZOO/(H*1.D+03)
       FRE=0.1988D0*ZOE/(H*1.D+03)
@@ -558,8 +560,8 @@ C
       END
       SUBROUTINE LANG(OM,P1,L1,P2,L2,P3,L3,N)
 C
-C     MOδEμψ  CBρϊAHHωX νιλςοπομοσλοχωθ μιξικ
-C         ( σοεδιξεξιε μεξφ )
+C     MODEL OF COUPLED MICROSTRIP LINES
+C         ( CONNECTION OF LINES )
 C
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       DIMENSION     P1(L1),P2(L2),P3(L3)
@@ -642,8 +644,8 @@ C
       IF(SKL2.EQ.1.D0)GOTO 1001
       GOTO 1010
  1001 WRITE(6,1020)EREE,EREO,ZOE,ZOO,Z0,F
- 1020 FORMAT(4X,'EREE=',F5.2,2X,'EREO=',F5.2,4X,'ZOE=',F6.2,' OM',' ZOO=
-     +',F6.2,' OM',4X,'Z0=',F6.2,' OM   F=',E10.4,' ηΓ')
+ 1020 FORMAT(4X,'EREE=',F5.2,2X,'EREO=',F5.2,4X,'ZOE=',F6.2,'OHM',' ZOO=
+     +',F6.2,'OHM',4X,'Z0=',F6.2,'OHM   F=',E11.4,' HZ')
  1010 CONTINUE
 C
 C
@@ -653,7 +655,8 @@ C
       GOTO 1510
  1500 FL4=2.D0*PI/BETT/4.D0
       WRITE(6,1520)FL4,F
- 1520 FORMAT(4X,'δμιξα LAMDA/4.=',E10.4,'(Ν)   ώαστοτA F=',E10.4,' ηΓ')
+ 1520 FORMAT(4X,'WAVELENGTH LAMBDA/4.=',E11.4,'(M)   FREQUENCY F=',E11.4
+     +,' HZ')
  1510 CONTINUE
 C
       IF(ALFE.GT.0.D0.AND.ALFO.GT.0.D0) GOTO 472
@@ -665,8 +668,8 @@ C
       IF(SKL2.EQ.1.D0)GOTO 105
       GOTO 106
  105  WRITE(6,107)ALFE,ALFO,F
- 107  FORMAT(8X,'ALFE=',E10.4,' ξΠ/Ν',4X,'ALFO=',E10.4,' ξΠ/Ν',4X,'F=',E
-     +10.4,' ηΓ')
+ 107  FORMAT(8X,'ALFE=',E11.4,' Np/m',4X,'ALFO=',E11.4,' Np/m',4X,'F=',E
+     +11.4,' HZ')
  106  CONTINUE
 C
       QE=BETTE*FL-jj*ALFE*FL
@@ -730,12 +733,12 @@ C
  134  WRITE(6,103)F,YY(1,1),YY(1,2),YY(1,3),YY(1,4),YY(2,1),YY(2,2),YY(2
      +,3),YY(2,4),YY(3,1),YY(3,2),YY(3,3),YY(3,4),YY(4,1),YY(4,2),YY(4,3
      +),YY(4,4)
- 103  FORMAT(24X,'F=',E10.4,' ηΓ',/(E10.4,1X,E10.4),'i',2X,(E10.4,1X,E10
-     +.4),'i',2X,(E10.4,1X,E10.4),'i',2X,(E10.4,1X,E10.4),'i',/(E10.4,1X
-     +,E10.4),'i',2X,(E10.4,1X,E10.4),'i',2X,(E10.4,1X,E10.4),'i',2X,(E1
-     +0.4,1X,E10.4),'i',/(E10.4,1X,E10.4),'i',2X,(E10.4,1X,E10.4),'i',2X
-     +,(E10.4,1X,E10.4),'i',2X,(E10.4,1X,E10.4),'i',/(E10.4,1X,E10.4),'i
-     +',2X,(E10.4,1X,E10.4),'i',2X,(E10.4,1X,E10.4),'i',2X,(E10.4,1X,E10
+ 103  FORMAT(24X,'F=',E11.4,' HZ',/(E11.4,1X,E11.4),'i',2X,(E11.4,1X,E11
+     +.4),'i',2X,(E11.4,1X,E11.4),'i',2X,(E11.4,1X,E11.4),'i',/(E11.4,1X
+     +,E11.4),'i',2X,(E11.4,1X,E11.4),'i',2X,(E11.4,1X,E11.4),'i',2X,(E1
+     +1.4,1X,E11.4),'i',/(E11.4,1X,E11.4),'i',2X,(E11.4,1X,E11.4),'i',2X
+     +,(E11.4,1X,E11.4),'i',2X,(E11.4,1X,E11.4),'i',/(E11.4,1X,E11.4),'i
+     +',2X,(E11.4,1X,E11.4),'i',2X,(E11.4,1X,E11.4),'i',2X,(E11.4,1X,E11
      +.4),'i')
  135  CONTINUE
 C

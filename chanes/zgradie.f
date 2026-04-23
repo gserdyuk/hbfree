@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -21,8 +21,8 @@ c$LARGE: DJ
       DO 10 J=1,N
       GR(I)=GR(I)+DJ(J,I)*F(J)*SF((J+1)/2)**2
    10 CONTINUE
-C  הלס הBץX COCEהHיX üלEMEHTOB נPיMEHסETCס OהיH י TOT צE SCALE,
-C  T.K.CץTר RE י IM OהHOחO ‏יCלA.
+C  THE SAME SCALE IS APPLIED TO TWO ADJACENT ELEMENTS,
+C  SINCE RE AND IM ARE PARTS OF THE SAME NUMBER.
       RETURN
 
 C     DEBUG SUBTRACE,INIT(GR)

@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -9,9 +9,9 @@ c
 
       SUBROUTINE DISCONT(OM,P1,L1,P2,L2,P3,L3,N)
 C
-C  αξαμοη  π/π  SM38 (FREQ,NOL)
+C  ANALOG OF SUBROUTINE SM38 (FREQ, NOL)
 C
-C  σλαώολ
+C  Stripline with Step Width Junction discontinuities (STEP)
 C
 C
 C
@@ -31,23 +31,23 @@ C
 
       SYML=.TRUE.
 
-C     παςανετςω νοδεμι : W1,W2,T,H,EPS
-C               W1   -   ϋιςιξα πομοσλι δο σλαώλα (ν)
-C               W2   -   ϋιςιξα πομοσλι ποσμε σλαώλα (ν)
-C               T    -   τομύιξα πομοσλι νπμ (ν)
-C               H    -   τομύιξα ποδμοφλι νπμ (ν)
-C               EPS  -   οτξ. διόμελτςιώ. πςοξιγαενοσ
+C     MODEL PARAMETERS: W1, W2, T, H, EPS
+C               W1   -   WIDTH OF THE STRIP BEFORE THE STEP (m)
+C               W2   -   WIDTH OF THE STRIP AFTER THE STEP (m)
+C               T    -   THICKNESS OF THE MPL STRIP (m)
+C               H    -   THICKNESS OF THE MPL SUBSTRATE (m)
+C               EPS  -   RELATIVE DIELECTRIC PERMITTIVITY
 C
-C     παςανετςω, οβύιε ξα σθενυ
+C     PARAMETERS COMMON FOR THE SCHEME
       EPS = P1(1)
 C
-C     παςανετςω, οβύιε δμρ δαξξοηο τιπα όμενεξ
+C     PARAMETERS COMMON FOR THIS TYPE OF ELEMENT
       H   = P2(1)*1.D+03
       T   = P2(2)*1.D+03
 C
-C     παςανετςω ιξδιχιδυαμψξω
-C    ECμι FL=1, το σλαώολ ξεσιννετςιώξωκ,
-C    εσμι FL=-1, σλαώολ σιννετςιώξωκ
+C     INDIVIDUAL PARAMETERS
+C     IF FL=1, THE STEP IS ASYMMETRIC,
+C     IF FL=-1, THE STEP IS SYMMETRIC
       FL  = P3(1)
       W1  = P3(2)*1.D+03
       W2  = P3(3)*1.D+03
@@ -57,21 +57,21 @@ C    εσμι FL=-1, σλαώολ σιννετςιώξωκ
 
 
       WRITE (6,5) W1,W2,T,H,EPS
-5     FORMAT(2X,' σλαώολ. ιCXOδHωE δAHHωE:'/2X,'W1=',E12.5,'  W2=',E12.5
+5     FORMAT(2X,' STEP. INITIAL DATA:'/2X,'W1=',E12.5,'  W2=',E12.5
      +,2X,'T=',E12.5,3X,'H=',E12.5/2X,'EPS=',E12.5)
 C     IF(IFR.GT.1) GOTO 1
 C
 C
-C     MιKPOπOμOCKOBAρ μιHιρ
+C     MICROSTRIP LINE
 C
       EP = EPS
 
       CALL MSL(W1,T,H,EP,WEF1,EPE1,Z1)
       CALL MSL(W2,T,H,EP,WEF2,EPE2,Z2)
       WRITE (6,6) Z1,Z2,EPE1,EPE2,WEF1,WEF2
-   6  FORMAT(2X,' σλαώολ: Z1=',E12.5,'  Z2=',E12.5/2X,' EPE1=',E12.5,'  
+   6  FORMAT(2X,' STEP: Z1=',E12.5,'  Z2=',E12.5/2X,' EPE1=',E12.5,'
      +EPE2=',E12.5,'  WEF1=',E12.5,'  WEF2=',E12.5)
-C   S - νατςιγα δμρ ςεφινα ποστορξξοηο τολ
+C   S-MATRIX FOR STEADY-STATE CURRENT MODE
       IF(OM.NE.0.0D0) GOTO 7
       SV(1,1)=DCMPLX(0.0D0,0.0D0)
       SV(1,2)=DCMPLX(0.99997D0,0.0D0)
@@ -86,8 +86,8 @@ C   S - νατςιγα δμρ ςεφινα ποστορξξοηο τολ
        D2=SM63(Z2,EPS2,H)
       F=149.89623D0/DMAX1(EPS1*D1,EPS2*D2)
 
-C    χξιναξιε - πςοχεςιτψ ξαϊξαώεξιε σμεδυΰύεηο οπεςατοςα.
-C    ρ ποδςαϊυνεχαΰ ςασώετ σιννετςιώξοηο σλαώλα.
+C    WARNING - CHECK THE ASSIGNMENT OF THE NEXT OPERATOR.
+C    I MEAN THE CALCULATION OF THE SYMMETRIC STEP.
 
           IF(.NOT.SYMS) F=2.D0*F
 
@@ -98,7 +98,7 @@ C       IF(SYML) GO TO 70
    80 CALL SM32(WN1,D1,D2,SYMS,X,NOL)
       IF(.NOT.NOL) GO TO 12
       WRITE(6,11) F
-   11 FORMAT(10X,'σλαώολ:','F  MAX =',E12.5)
+   11 FORMAT(10X,'STEP:','F  MAX =',E12.5)
       RETURN
    12 ZP=DCMPLX(0.D0,X)
    13 CALL SM01(ZP,R,1,PAR)
@@ -107,7 +107,7 @@ C
       PARAM(2)=PAR(2)
       PARAM(3)=PAR(3)
 
-C   ζοςνιςοχαξιε S-νατςιγω
+C     FORMATION OF THE S-MATRIX
       SV(1,1)=PARAM(1)
       SV(1,2)=PARAM(2)
       SV(2,1)=PARAM(2)
@@ -118,7 +118,7 @@ C   ζοςνιςοχαξιε S-νατςιγω
      +E12.5/       2X,'SV(2,1)=',E12.5,1X,E12.5/       2X,'SV(2,2)=',E12
      +.5,1X,E12.5)
 C
-C   ζοςνιςοχαξιε Y-νατςιγω
+C     FORMATION OF THE Y-MATRIX
       CALL TEST(N)
 C
 
@@ -192,9 +192,9 @@ C
 
 
       SUBROUTINE MSL(W,T,H,ER,WE,EE,Z)
-C  KOCTΰKEBιώ A.B.,δEK.1979η.
-C  PROCEEDINGS_OF_THE_IEEE,1977,V.65,N11,MTT-25
-C  BAHL I.J.,GARG R. ABTOPω CTATψι.
+C  KOCTYKEBICH A.B., DEC. 1979
+C  PROCEEDINGS OF THE IEEE, 1977, V.65, N11, MTT-25
+C  BAHL I.J., GARG R. AUTHORS OF THE ARTICLE.
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       DATA A1,A2,A3,A4/376.9911D0,.3978873D0,12.56637D0,.1591549D0/
       WE=W
@@ -208,11 +208,11 @@ C  BAHL I.J.,GARG R. ABTOPω CTATψι.
       IF(WH.GT.A4)EF=A3*W/T
       WE=WE+A2/H*T*(1.D0+DLOG(EF))
     2 IF(WH.GT.1.D0) GO TO 1
-C  υϊKAρ πOμOCKA
+C     NARROW STRIP
       EE=EA-C+EB*(EC+.04D0*(1.D0-WH)**2)
       Z=60.D0/DSQRT(EE)*DLOG(8.D0/WE*H+.25D0/H*WE)
       RETURN
-C  ϋιPOKAρ πOμOCKA.
+C     WIDE STRIP
     1 EE=EA-C+EB*EC
       Z=A1/(DSQRT(EE)*(WE/H+1.393D0+.667D0*DLOG(WE/H+1.444D0)))
       RETURN
@@ -252,12 +252,12 @@ C
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       T=AK1**2
 C
-C     όμμιπTιώECKικ ιHTEηPAμ πEPBOηO POδA
+C     ELLIPTIC INTEGRAL OF THE SECOND KIND
 C
       F=((.032024666D0*T+.054544409D0)*T+.097932891D0)*T+1.3862944D0-(((
      +.010944912D0*T+.060118519D0)*T+.12475074D0)*T+.5D0)*DLOG(T)
 C
-C     όμιπTιώECKικ ιHTEηPAμ BTOPOηO POδA
+C     ELLIPTIC INTEGRAL OF THE FIRST KIND
 C
       E=((.040905094D0*T+.085099193D0)*T+.44479204D0)*T+1.D0-(((.0138299
      +9D0*T+.08150224D0)*T+.24969795D0)*T)*DLOG(T)
@@ -267,8 +267,8 @@ C
 
 
 
-      REALFUNCTION SM63(Z,SEP,H)
-C       χξεσεξω ιϊνεξεξιρ 7.02.91 ξ.λ.
+      DOUBLE PRECISION FUNCTION SM63(Z,SEP,H)
+C       CHANGES MADE ON 7.02.91 BY N.K.
 C     LOGICAL*4 SYML
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       P=.25D0

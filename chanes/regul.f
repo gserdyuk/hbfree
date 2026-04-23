@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -9,7 +9,7 @@ c
 
 
       SUBROUTINE REGUL(NK,DFDX,F,N)
-C   ð/ð PEçõìñPéúAãéé MATPéãù ñKOâéAHA. 
+C   Subroutine for regulation of the Jacobian matrix.
 C$LARGE:DFDX,F
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       DOUBLE PRECISION  DFDX         , F
@@ -30,8 +30,8 @@ C$LARGE:DFDX,F
 C      n1=n+1
 C      do 20 i=1,n
 C      print 10, F(I),I,(dfdx(i,j),j=1,n1)
-C   10 format(2x,'REGUL : F=',E12.6,' DFDX(',I3,', J)=',(/3X,6(E12.6)))
+C   10 format(2x,'REGUL : F=',E13.6,' DFDX(',I3,', J)=',(/3X,6(E13.6)))
 C   20 continue
-      
+
       RETURN
       END

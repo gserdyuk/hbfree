@@ -1,5 +1,7 @@
-# include <stdio.h>
-allprint(c)
+#include <stdio.h>
+int printable(int);
+
+void allprint(c)
   char c; {
 	extern FILE *yyout;
 	switch(c){
@@ -24,13 +26,13 @@ allprint(c)
 		}
 	return;
 	}
-sprint(s)
+void sprint(s)
   char *s; {
 	while(*s)
 		allprint(*s++);
 	return;
 	}
-printable(c)
+int printable(c)
   int c;
 	{
 	return((040 < c && c < 0177) || (c&0300)==0300 );

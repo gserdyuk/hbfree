@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -9,21 +9,21 @@ c
 
 
       SUBROUTINE YTAB(OM,P1,L1,P2,L2,P3,L3,N)
-C *** נOהנPOחPAMMA זOPMיPOBAHיס Y-MATPידש ית תAPAHEE
-C     תAהAHHשX תHA‏EHיך
+C *** SUBROUTINE FOR THE FORMATION OF THE Y-MATRIX FROM GIVEN
+C     TASK PARAMETERS
 C
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       COMMON/SUBC/Y(15,15),J(15)
       DOUBLE COMPLEX Y,J
       DOUBLE PRECISION P1,P2,P3
       DIMENSION P1(L1),P2(L2),P3(L3)
-C  OנPEהEלEHיE ‏יCלA BBEהEHHשX ‏ACTOTHשX TO‏EK
+C  DETERMINATION OF THE NUMBERS OF THE GIVEN DISCRETE POINTS
       M=L3/(2*N**2+1)
       DO 10 I10=1,N
       DO 10 J10=1,N
    10 Y(I10,J10)=DCMPLX(0.D0,0.D0)
-C  HAXOהיM I TAKOE,‏TO FI גליצE BCEחO K F0
-C  ית BCEX FJ נPי J=1,M
+C  WE ASSUME THAT FI IS CLOSER TO F0
+C  THAN ANY FJ FOR J = 1, M
       PI=3.14159D0
       F0=OM/(2*PI)
       DF=F0
@@ -36,20 +36,20 @@ C  ית BCEX FJ נPי J=1,M
        KFR=I
    20  CONTINUE
 C
-C  Bש‏יCלEHיE IB (I-גAתOBOE)
+C  CALCULATION OF IB (I - BASE)
 C
        IB=(KFR-1)*(2*N**2+1)+1
 C
        DO 40 I40=1,N
        DO 50 I50=1,N
 
-C  נOיCK נOתידיך
+C  SEARCH FOR POSITIONS
        IPR=IB+(2*I50-1)+(I40-1)*2*N
        IPI=IPR+1
-C  תAנOלHEHיE Y-MATPידש
+C  FILLING OF THE Y-MATRIX
        Y(I50,I40)=DCMPLX(P3(IPR),P3(IPI))
 C      PRINT 25,I50,I40,Y(I50,I40)
-C  25 FORMAT(2X,'Y(',I4,',',I4,')=',E12.6,2X,E12.6)
+C  25 FORMAT(2X,'Y(',I4,',',I4,')=',E13.6,2X,E13.6)
    50  CONTINUE
    40  CONTINUE
        RETURN

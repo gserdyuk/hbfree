@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -17,7 +17,7 @@ c
       EQUIVALENCE     (A(1,1),B(1)),(B(433),Y(1))
 
 C     PRINT 678
-C678  FORMAT(2X,' ####### TEST ðOûEì ######## ')
+C678  FORMAT(2X,' ####### TEST START ######## ')
       MM1=   M*M
       MM4=MM1/4
       W=(1.D0,0.D0)
@@ -27,18 +27,18 @@ C678  FORMAT(2X,' ####### TEST ðOûEì ######## ')
    10 A(I,J)=(0.D0,0.D0)
       DO 15 I=1,576
    15 B(I)=(0.D0,0.D0)
-C  úAðOìHEHéE MATPéãù A KOMðìEKCHùMé þéCìAMé
+C  FILLING OF THE MATRIX WITH COMPLEX NUMBERS
       DO 17 I=1,M
       DO 17 J=1,M
       A(I,J)=S(I,J)
    17 CONTINUE
 C     PRINT 224
-C 224 FORMAT(' ======    A éCXOäH.  =======')
+C 224 FORMAT(' ======    A OUTPUT.  =======')
 C     PRINT 225,((A(I,J),J=1,M),I=1,M)
 C 225 FORMAT(1X,4(1X,E13.6,1X,E13.6))
 C
 C     PRINT 226
-C 226 FORMAT(/' ========  B éCXOäH. =======')
+C 226 FORMAT(/' ========  B OUTPUT. =======')
 C     PRINT 23,(B(I23),I23=1,MM1)
 C
       DO 1 J=1,M
@@ -54,7 +54,7 @@ C    *2X,'B(K)=4/4B',2E13.6)
 C
 C     PRINT 242,I,L,K,B(K)
 C 242 FORMAT(/,2X,'I=',I3,2X,'L=',I3,2X,'K=',I3,
-C    *2X,'B(K) ðO äéAçOH. +1=',2E13.6)
+C    *2X,'B(K) ALONG THE DIAGONAL. +1=',2E13.6)
 C
       K=288+L+I
       B(K)=-A(I,J)
@@ -62,7 +62,7 @@ C
 C
 C     PRINT 243,I,L,K,B(K)
 C 243 FORMAT(/,2X,'I=',I3,2X,'L=',I3,2X,'K=',I3,
-C    *2X,'3/4 B(K) MEHñET úHAK=',2E13.6)
+C    *2X,'3/4 B(K) MEASURES THE VALUE=',2E13.6)
 C
     1 CONTINUE
 C     PRINT 22
@@ -72,7 +72,7 @@ C     PRINT 23,(B(I23),I23=1,MM1)
 C  23 FORMAT(2X,2(2X,E12.5,1X,E12.5))
 
 C     PRINT 230
-C 230 FORMAT('     =======   Y äO BùúOBA YSMINV  =======')
+C 230 FORMAT('     =======   Y BEFORE THE INCREMENT OF YSMINV  =======')
 C     PRINT 23,(Y(I23),I23=1,MM4)
 C
 C ***********************************
@@ -80,7 +80,7 @@ C ***********************************
 C ********************************
 C
 C     PRINT 221
-C 221 FORMAT(4X,'   =======  Y   ðOCìE BùúOBA YSMINV =====')
+C 221 FORMAT(4X,'   =======  Y AFTER THE INCREMENT OF YSMINV =====')
 C     PRINT 23,(Y(I221),I221=1,MM4)
 C
 C
@@ -109,15 +109,15 @@ C     PRINT 23,(B(I23),I23=1,MM)
     5 A(I,J)=B(288+(J-1)*M+I)
 C
 C     PRINT 270
-C 270 FORMAT(2X,'==========   A PEúõìøTéP.   ========')
+C 270 FORMAT(2X,'==========   A RESULT.   ========')
 C     PRINT 225,((A(I,J),J=1,M),I=1,M)
       GO TO 500
 
   444 PRINT 445
-  445 FORMAT(2X,'    ABAPéêHùê OCTAHOB B ðPOçPAMME TEST   ')
+  445 FORMAT(2X,'    ABORTION OF THE OPERATION IN THE TEST PROGRAM   ')
 C
   500 CONTINUE
-C     ðEPEúAðéCø MATPéãù A B MATPéãõ YY
+C     OVERWRITE MATRIX A WITH MATRIX YY
       DO 460 I=1,M
       DO 460 J=1,M
       YY(I,J)=A(I,J)*Y0
@@ -128,7 +128,7 @@ C 9875 FORMAT(2X, ' #######  YY B TEST''E  ######  ')
 C       DO 465 II=1,M
 C       DO 465 JJJ=1,M
 C       WRITE(6, 9876) II,JJJ,YY(II,JJJ)
-C 9876 FORMAT(2X,' YY(',I3,',',I3,')=',2(2X,E12.6 ))
+C 9876 FORMAT(2X,' YY(',I3,',',I3,')=',2(2X,E13.6 ))
 C  465 CONTINUE
 C
 

@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -41,8 +41,8 @@ C     DEBUG SUBTRACE
 
       SUBROUTINE CBARR3(NG,P1,L1,P2,L2,P3,L3,B1,KNC2,NR,*)
 C
-C      ð/ð MAT. MOäEìé âAPøEPHOê EMKOCTé
-C          =úABéCéMOCTø I(U)
+C      SEMICONDUCTOR MATERIAL MODEL OF BARRIER CAPACITANCE
+C          =DEPENDENCE I(U)
 C
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       DOUBLE PRECISION P1,P2,P3
@@ -74,7 +74,7 @@ C     DEBUG SUBTRACE,INIT(C0,FI0,AN,UG,U,B1  )
       SUBROUTINE CBARR4(NG,P1,L1,P2,L2,P3,L3,B1,KNC2,NR,*)
 
 C
-C      CM. ð/ð CBARR3
+C      SEE SEMICONDUCTOR CBARR3
 C
 
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)

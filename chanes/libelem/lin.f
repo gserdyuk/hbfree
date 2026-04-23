@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -55,8 +55,8 @@ C
    10 B1(K+1,1)=0.0D0
 C     PRINT 20,(B1(I,1),I=1,K)
 C     PRINT 22,(B1(J,1),J=1,K+1)
-C  20 FORMAT(2X,'MATPÈ„A B1(K,1):'/2X,E12.5)
-C  22 FORMAT(2X,'MATPÈ„A B1(K+1,1):'/2X,E12.5)
+C  20 FORMAT(2X,'MATRIX B1(K,1):'/2X,E12.5)
+C  22 FORMAT(2X,'MATRIX B1(K+1,1):'/2X,E12.5)
       RETURN
 C     DEBUG SUBTRACE,INIT(U)
       END

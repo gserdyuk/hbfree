@@ -1,41 +1,41 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
 
 
 
-      SUBROUTINE FTMAS2(ZNN,KR,KC,NNR,KNR,KNC,KN,                  
-     +                  NR,NB,M1,B1,B2,IS,FLGFFT,*)
+      SUBROUTINE FTMAS2(ZNN,KR,KC,NNR,KNR,KNC,KN,                  NR,NB
+     +,M1,B1,B2,IS,FLGFFT,*)
 C
 C-----------------------------------------------------------------------
 C
-C     נOהנPOחPAMMA PEAליתץET הBץMEPHOE OגPATHOE גנז ,
-C  BשXOה HA נPOMEצץTO‏HOE HEליHEךHOE נPEOגPAתOBAHיE
-C  י הBץMEPHOE נPסMOE גנז הBץMEPHשX PAתPEצEHHשX BEKTOPOB.
+C     THE SUBROUTINE IMPLEMENTS A TWO-DIMENSIONAL INVERSE FFT,
+C     OUTPUT TO AN INTERMEDIATE NONLINEAR TRANSFORMATION,
+C     AND A TWO-DIMENSIONAL DIRECT FFT OF TWO-DIMENSIONAL
+C     SPARSE VECTORS.
 C
-C     יהEHTיזיKATOPש נEPEMEHHשX י MACCיBOB :
+C     IDENTIFIERS OF VARIABLES AND ARRAYS:
 C
-C          ZNN - ץנAKOBAHHשך MACCיB AMנליTץה;
-C          KNC - הליHA OהHOMEPHOחO גנז;
-C          NNR - MACCיB HOMEPOB HEHץלEBשX CTPOK;
-C          KNR - KOלי‏ECTBO HEHץלEBשX CTPOK;
-C          KR  - MACCיB HOMEPOB CTOלגדOB HEHץלEBשX
-C                üלEMEHTOB B KAצהOך HEHץלEBOך CTPOKE;
-C          KC  - MACCיB, COהEPצA‎יך KOלי‏ECTBO
-C                HEHץלEBשX üלEMEHTOB B KAצהOך CTPOKE;
-C          B1  - PAגO‏יך MACCיB הלס XPAHEHיס
-C                PEתץלרTATOB OהHOMEPHOחO גנז;
-C          B2  - גץזEP הלס XPAHEHיס נPEOגPAתOBAHHשX
-C                CTPOK;
-C          NR  - KOלי‏ECTBO OהHOBPEMEHHO נPEOגPAתץEMשX
-C                AMנליTץה ZNN נPי OגPATHOM גנז;
-C          NB  - KOלי‏ECTBO OהHOBPEMEHHO נPEOגPAתץEMשX
-C                BEKTOPOB BPEMEHHשX OTC‏ETOB
-C                נPי נPסMOM גנז.
+C          ZNN - PACKED ARRAY OF AMPLITUDES;
+C          KNC - LENGTH OF THE ONE-DIMENSIONAL FFT;
+C          NNR - ARRAY OF INDICES OF NONZERO ROWS;
+C          KNR - NUMBER OF NONZERO ROWS;
+C          KR  - ARRAY OF INDICES OF COLUMNS OF NONZERO
+C                ELEMENTS IN EACH NONZERO ROW;
+C          KC  - ARRAY CONTAINING THE NUMBER OF
+C                NONZERO ELEMENTS IN EACH ROW;
+C          B1  - WORKING ARRAY FOR STORING THE RESULTS
+C                OF THE ONE-DIMENSIONAL FFT;
+C          B2  - BUFFER FOR STORING TRANSFORMED ROWS;
+C          NR  - NUMBER OF SIMULTANEOUSLY TRANSFORMED
+C                AMPLITUDES IN ZNN DURING THE INVERSE FFT;
+C          NB  - NUMBER OF SIMULTANEOUSLY TRANSFORMED
+C                VECTORS OF TEMPORARY SAMPLES
+C                DURING THE DIRECT FFT.
 C
 C-----------------------------------------------------------------------
 C
@@ -49,7 +49,7 @@ C     INTEGER  INV(32),S(32),M(3)/0,0,0/
       DIMENSION INV(32),S(32)
       INTEGER M(3)/0,0,0/
       SAVE INV,S
-C  MACCיBש    INV(32),S(32),M(3) - PAגO‏יE הלס נ/נ HARM
+C  ARRAYS    INV(32), S(32), M(3) - WORKING ARRAYS FOR SUBROUTINE HARM
 C     PRINT 976
 C 976 FORMAT('    ZNN:')
 C     PRINT 975,((ZNN(I,J),         J=1,NR), I=1,KN)
@@ -63,32 +63,32 @@ C 977 FORMAT('    B1:')
     5 KNC1=KNC/2
       KNC2=KNC+2
 C
-C  זOPMיPOBAHיE MACCיBA CTPOK
+C  FORMATION OF THE ROW ARRAY
 C
       DO 30 L=1,NR
       N1=1
       N2=0
       DO 30 K=1,KNR
-        DO 10 I=1,KNC
-   10   B1(I,L)=ZERO
+      DO 10 I=1,KNC
+   10 B1(I,L)=ZERO
       N2=N2+KC(K)
-        DO 20 N=N1,N2
-        I=KR(N)
-   20   B1(I,L)=ZNN(N,L)
+      DO 20 N=N1,N2
+      I=KR(N)
+   20 B1(I,L)=ZNN(N,L)
       N1=N2+1
       IF (MEPHF.EQ.0) GO TO 30
       IF (NNR(K).NE.1) GO TO 25
-        DO 22 I=2,KNC1
-        K1=KNC2-I
-   22   B1(K1,L)=DCONJG(B1(I,L))
-C  נPEOגPAתOBAHיE זץPרE (נPסMOE) CTPOKי
+      DO 22 I=2,KNC1
+      K1=KNC2-I
+   22 B1(K1,L)=DCONJG(B1(I,L))
+C  FOURIER TRANSFORMATION (DIRECT) OF A ROW
    25 CALL HARM(B1(1,L),M,INV,S,2,IFERR)
       IF (MEPHF.EQ.1) GO TO 30
       DO 27 I=1,KNC
    27 B2(I,K,L)=B1(I,L)
    30 CONTINUE
 C
-C  OגPAגOTKA CTOלגדOB ית MACCיBA CTPOK
+C  PROCESSING OF COLUMNS FROM THE ROW ARRAY
 C
       IS=KNC
       IF (MEPHF.NE.2) GO TO 1056
@@ -102,19 +102,19 @@ C
       DO 55 J=2,KNC1
       K1=KNC2-J
    55 B1(K1,L)=DCONJG(B1(J,L))
-C  נPEOגPAתOBAHיE זץPרE (נPסMOE) CTOלגדA
+C  FOURIER TRANSFORMATION (DIRECT) OF A COLUMN
    56 CALL HARM(B1(1,L),M,INV,S,2,IFERR)
  1056 RETURN 1
 C-----------------------------------------------------------------------
-      ENTRY FT2(ZNN,KR,KC,NNR,KNR,KNC,KN,          
-     +          NR,NB,B1,B2,IS,FLGFFT,*)
+      ENTRY FT2(ZNN,KR,KC,NNR,KNR,KNC,KN,           NR,NB,B1,B2,IS,FLGFF
+     +T,*)
 C
       IF (NB.GT.0) GO TO 1057
       IS=IS+1
       IF (IS.GT.KNC) GO TO 95
       GO TO 34
  1057 IF (MEPHF.NE.2) GO TO 65
-C  נPEOגPAתOBAHיE זץPרE (OגPATHOE) CTOלגדA
+C  FOURIER TRANSFORMATION (INVERSE) OF A COLUMN
    57 DO 60 LP=1,NB
    58 CALL HARM(B1(1,LP),M,INV,S,-2,IFERR)
       DO 60 K=1,KNR
@@ -123,7 +123,7 @@ C  נPEOגPAתOBAHיE זץPרE (OגPATHOE) CTOלגדA
       IS=IS+1
       IF(IS.LE.KNC) GO TO 34
 C
-C  OגPAגOTKA CTPOK ית MACCיBA CTOלגדOB
+C  PROCESSING OF ROWS FROM THE COLUMN ARRAY
    65 DO 90 LP=1,NB
       N1=1
       N2=0
@@ -132,7 +132,7 @@ C  OגPAגOTKA CTPOK ית MACCיBA CTOלגדOB
       IF (MEPHF.EQ.1) GO TO 75
       DO 70 I=1,KNC
    70 B1(I,LP)=B2(I,K,LP)
-C  נPEOגPAתOBAHיE זץPרE (OגPATHOE) CTPOKי
+C  FOURIER TRANSFORMATION (INVERSE) OF ROWS
    75 CONTINUE
 C     PRINT 977
 C     PRINT 975,(B1(II,LP),II=1,KNC)

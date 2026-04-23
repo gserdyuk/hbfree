@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SIMUL=hbfree
+SIMUL=./hbfree
 
 echo di1.ckt
 $SIMUL di1.ckt
@@ -11,6 +11,8 @@ $SIMUL di2.ckt
 echo di3.ckt
 $SIMUL di3.ckt 
 
+echo di4.ckt
+$SIMUL di4.ckt 
 
 echo di5.ckt
 $SIMUL di5.ckt

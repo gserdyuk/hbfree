@@ -8,7 +8,13 @@ extern char yyextra[];
 extern char yytext[];
 extern int yyleng;
 
-yyreject ()
+extern int yyback( int *, int );
+extern int yyinput( void );
+extern int yyoutput( int );
+extern int yyunput( int );
+int yyracc( int );
+
+int yyreject ()
 {
 	for( ; yylsp < yyolsp; yylsp++)
 		yytext[yyleng++] = yyinput();
@@ -27,7 +33,7 @@ yyreject ()
 	return(-1);
 }
 
-yyracc(m)
+int yyracc(int m)
 {
 	yyolsp = yylsp;
 	if (yyextra[m]) {

@@ -1,16 +1,16 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
 
 
 
-      INTEGERfunction krdchk(MN,KR,KC,NNR,KNR,KN,KNC,IR1,IR2)
+      INTEGER function krdchk(MN,KR,KC,NNR,KNR,KN,KNC,IR1,IR2)
 C
-C     מבניףבמב 12.05.91    ףÅÒÄÀË ח.ק.
+C     WRITTEN ON 12.05.91    Serdyuk G.V.
 C
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       INTEGER    KR(IR2),KC(IR1),NNR(IR1)
@@ -18,28 +18,28 @@ C
 
       integer err,sum1,sum2,sum3
 
-C     נעןקועכב נעוהףפבקלומיס עבתעוצוממשט םבפעיד הלס
-C     טעבמומיס עותץלרפבפןק ה
+C     CHECKING THE REPRESENTATION OF SPARSE MATRICES FOR
+C     STORING RESULTS
 C
-C     ףניףןכ זןעםבלרמשט נבעבםופעןק - כבכ ק   KOORD
+C     LIST OF FORMAL PARAMETERS - SAME AS IN KOORD
 C
-C     יהEHTיזיKATOPש נEPEMEHHשX י MACCיBOB :
+C     IDENTIFIERS OF VARIABLES AND ARRAYS:
 C
-C          KNC - הליHA OהHOMEPHOחO גנז;
-C          NNR - MACCיB HOMEPOB HEHץלEBשX CTPOK;
-C          KNR - KOלי‏ECTBO HEHץלEBשX CTPOK;
-C          KR  - MACCיB HOMEPOB CTOלגדOB HEHץלEBשX
-C                üלEMEHTOB B KAצהOך HEHץלEBOך CTPOKE;
-C          KC  - MACCיB, COהEPצA‎יך KOלי‏ECTBO
-C                HEHץלEBשX üלEMEHTOB B KAצהOך CTPOKE;
+C          KNC - LENGTH OF ONE-DIMENSIONAL FFT;
+C          NNR - ARRAY OF ROW NUMBERS OF NONZERO ELEMENTS;
+C          KNR - NUMBER OF NONZERO ROWS;
+C          KR  - ARRAY OF COLUMN NUMBERS OF NONZERO
+C                ELEMENTS IN EACH NONZERO ROW;
+C          KC  - ARRAY CONTAINING THE NUMBER OF
+C                NONZERO ELEMENTS IN EACH ROW;
 
       err=0
 
 
-c    ÐÒÏ×ÅÒËÁ ÞÉÓÌÁ ÓÔÒÏË:
+C    CHECKING THE NUMBER OF ROWS:
 c           /                  \
 c   i=IR1  |  1 if NNR(i) != 0  |
-c    SUM  <                      >  == KNR     ÅÓÌÉ ÎÅÔ, ÔÏ err=err+1
+C    SUM  <                      >  == KNR  IF NOT, THEN err = err + 1
 c    i=1   |  0 if NNR(i) == 0  |
 c           \                  /
       sum1=0
@@ -48,10 +48,10 @@ c           \                  /
 
       if (sum1.ne.KNR) err=err+1
 
-c     ÏÂÝÁÑ ÐÒÏ×ÅÒËÁ ÜÌÅÍÅÎÔÏ× × ÓÔÒÏËÁÈ
+C     GENERAL CHECK OF ELEMENTS IN ROWS
 c                        /                 \
 c    i=IR1       i=IR2  |  1 if KR(i) != 0  |
-c    SUM KC(i) ==SUM   <                     > ÅÓÌÉ ÎÅÔ, ÔÏ err=err+2
+C    SUM KC(i) == SUM   <                     >  IF NOT, THEN err = err + 2
 c    i=1         i=1    |  0 if KR(i) == 0  |
 c                        \                 /
       sum2=0
@@ -65,15 +65,15 @@ c                        \                 /
       if (sum2.ne.sum3) err=err+2
 
 
-c     ÐÒÏ×ÅÒËÁ ÕÐÏÒÑÄÏÞÅÎÉÑ × ÓÔÒÏËÁÈ ( ÍÏÖÅÔ ÎÅ ×ÙÐÏÌÎÑÔØÓÑ !!!)
+C     CHECKING ORDERING IN ROWS (MAY NOT BE ENFORCED !!!)
 c   for j=1 to KNR
 c
-c  1 + SUM {1}   =  KC(j)                       ÅÓÌÉ ÎÅÔ, ÔÏ err=err+4
+C  1 + SUM {1}   =  KC(j)     IF NOT, THEN err = err + 4
 c  KR(i+1) > KR(i)
 c   KR(i) > 0
 c
 c  end_for
-c                -------- !!!  ק מבףפןס‎וו קעוםס מו עובליתןקבמב !!!
+C                -------- !!!  NOT IMPLEMENTED AT THE MOMENT !!!
 
       krdchk=err
       return

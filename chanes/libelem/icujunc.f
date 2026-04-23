@@ -1,16 +1,16 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
 
 
 
-C******** יTץH C BAX I=I0*ALPHA*(EXP(AL*U)-1.0) ******************
-C    יCנOלרתץETCס הלס MOהEליPOBAHיס יTץH'OB B
-C     גינOלסPHM TP-PE.
+C******** ITUN ON VAX I=I0*ALPHA*(EXP(AL*U)-1.0) ******************
+C    USED FOR MODELING ITUNs IN
+C    BIPOLAR TRANSISTORS.
       SUBROUTINE ICUJ1(IVAR)
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       INTEGER*4 KLC,KLV,KNL,IVAR
@@ -47,9 +47,9 @@ C     DEBUG SUBTRACE
 
       SUBROUTINE ICUJ3(NG,P1,L1,P2,L2,P3,L3,B1,KNC2,NR,*)
 C
-C      נ/נ MAT. MOהEלי   יTץH'A גינ.TP-PA.
-C          BEPOסTHO נPיהETCס BBECTי AננPOKCיMAדיא
-C          HA גOלרûיX TOKAX.
+C      SUBROUTINE FOR THE MATHEMATICAL MODEL OF A BIPOLAR TRANSISTOR ITUN.
+C          PROBABLY NEEDS AN APPROXIMATION
+C          AT HIGH CURRENTS.
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       DOUBLE PRECISION P1,P2,P3
       DIMENSION P1(L1),P2(L2),P3(L3)
@@ -75,7 +75,7 @@ C     DEBUG SUBTRACE,INIT(P1,L1,P2,L2,P3,L3,KNC2,NR,I0,AL,ALPHA,U)
       SUBROUTINE ICUJ4(NG,P1,L1,P2,L2,P3,L3,B1,KNC2,NR,*)
 
 C
-C      CM. נ/נ ICUJ3
+C      SEE SUBROUTINE ICUJ3
 C
 
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
@@ -84,7 +84,7 @@ C
       DOUBLE PRECISION B1
       DIMENSION  B1(KNC2,NR)
       DOUBLE PRECISION I0,AL,ALPHA,ARGMIN/-120.0D0/,ARGMAX/40.0D0/
-C                      $=MIN BEלי‏יHA APחץMEHTA ז-דיי EXP.
+C                      $=MIN VALUE OF THE ARGUMENT OF THE EXP FUNCTION.
 
       DUN1(U)=ALPHA*AL*I0*DEXP(AL*U)
       ALPHA=P3(1)
@@ -144,11 +144,11 @@ C     DEBUG SUBTRACE
       UOLD=UOLD+ZABS(VAL(I,1))
    10 UNEW=UNEW+ZABS(VAL(I,1)+DVAL(I,1))
    15 CONTINUE
-C                            $ MOצET HץצEH HE + A -
+C                            $ MAY NEED NOT + BUT -
       UOLD=UOLD+UOLD+DREAL(VAL(1,1))
       UNEW=UNEW+UNEW+DREAL(VAL(1,1)+DVAL(1,1))
       USTEP=    UNEW-UOLD
-C  MOצET TץT $ HץצHO נOCTABיTר ABS(     )
+C  MAYBE HERE $ NEEDS TO BE REPLACED WITH ABS(     )
 
       IF(UNEW.LE.UBOUND)RETURN
       IF(UOLD.LE.UBOUND)GO TO 20

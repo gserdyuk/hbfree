@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -166,7 +166,7 @@ C
       UOLD=UOLD+UOLD+DREAL(VAL(1,1))
       UNEW=UNEW+UNEW+DREAL(VAL(1,1)+DVAL(1,1))
       USTEP=    UNEW-UOLD
-C  MOöET TõT $ HõöHO ðOCTABéTø ABS(     )
+C  IT MAY BE NECESSARY TO USE ABS(     )
 
       IF(UNEW.LE.UBOUND)RETURN
       IF(UOLD.LE.UBOUND)GO TO 20

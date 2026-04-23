@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -12,28 +12,28 @@ c
 
       SUBROUTINE PACK1(NREC,Y,VJ,ISIZE_MAXNODE)
 C
-C     this routhine just stores Y(part) and VJ arrays and allows to get 
-C     them when necesary. most probably it should be rewritten - but 
+C     this routhine just stores Y(part) and VJ arrays and allows to get
+C     them when necesary. most probably it should be rewritten - but
 C     now I left it as is (just simplify it a bit)
 C     if stored via PACK1 - should be get via DPACK1 - same for PACK2/DPACK2
-C     
+C
 C***********************************************************************
 C
 C
-C    AAAAA  !!     BOúMOöHO õBEìéþEHéE YEL é NOY äO 900 HO TOçäA B XOäE
-C   A    A  !!     I/O âõäET ðPOéCXOäéTø OâMEH 2-Mñ úAðéCñMé
-C  A     A  !!     !!!-äìéHA úAðéCé<=äìéHE äOPOöKé=7040 âAêT
+C    AAAAA  !!     POSSIBLE INCREASE OF YEL AND NOY UP TO 900, BUT THEN
+C   A    A  !!     DURING I/O THERE WILL BE EXCHANGE IN 2 RECORDS
+C  A     A  !!     !!!-RECORD LENGTH <= TRACK LENGTH = 7040 BYTES
 C  AAAAAAA  !!
 C  A     A         ...'NREC...=>...'2*NREC-1...
 C  A     A  !!
 C
 C
-C        OðEPAãéé VY=CABS... é VJR=CABS... MOöHO éCKìàþéT
-C     Oâ'ñBéB : EQUIVALENCE((Y(1,1),RY(1,1,1)),(VJ(1),RJR(1,1))
-C               REAL RY(2,100,100),RJR(2,100)
+C        OPERATIONS VY = CABS... AND VJR = CABS... CAN BE EXCLUDED
+C     BY DECLARING: EQUIVALENCE((Y(1,1),RY(1,1,1)),(VJ(1),RJR(1,1))
+C                   REAL RY(2,100,100), RJR(2,100)
 C
-C    é B TEKCTE : IF(RJR(1,I).EQ.0.0.AND.RJR(2,I).EQ.0.0) GO TO 10
-C             IF(RY(1,II,I).EQ.0.0.AND.RY(2,II,I).EQ.0.0) GO TO 20
+C    AND IN CODE: IF(RJR(1,I).EQ.0.0 .AND. RJR(2,I).EQ.0.0) GO TO 10
+C                 IF(RY(1,II,I).EQ.0.0 .AND. RY(2,II,I).EQ.0.0) GO TO 20
 C
 c$LARGE: VJ,Y
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
@@ -81,7 +81,7 @@ C      write (6,*) 'Y matrix at ENTRY =1 '
 C*********************************************************************
       ENTRY PACK2(NREC,Y,VJ,ISIZE_MAXNODE)
 C
-C     BXOä äìñ õðAKOBKé é úAðéCé MATPéãù Y,BEKTOPA J âEú õðAKOBKé
+C     INPUT FOR PACKING AND WRITING MATRIX Y, VECTOR J WITHOUT PACKING
       ENTRY=2
       IF=KOL(1)+KOL(2)+1
       IE=KOL(1)+KOL(2)+KOL(3)
@@ -89,7 +89,7 @@ C     BXOä äìñ õðAKOBKé é úAðéCé MATPéãù Y,BEKTOPA J âEú õðAKOBKé
 C      write (6,*) 'Y matrix (ENTRY 2)'
 C      do ii=1,IE
 C            write (6,1220) (Y(ii,jj), jj=1,IE)
-C      enddo      
+C      enddo
 C1220   format (2x,'(',1x,e12.5,1x,e12.5,')')
 
 
@@ -108,11 +108,11 @@ C     IF(VY     .EQ.0.0 ) GO TO 20
       NOY(2,K)=I
       K=K+1
    20 CONTINUE
-   
+
       KPKY(ENTRY,NREC)=K-1
 C      print *,'WR: ENTRY, NREC, KPKY =',ENTRY, NREC, KPKY
-      
-C     COâCTBEHHO úAðéCø
+
+C     ACTUAL WRITE OPERATION
 
 C      print *,'YEL, NOY, NOY: WRITING'
 C      DO I=1,50
@@ -134,10 +134,10 @@ C     IF(ENTRY.EQ.2) WRITE(2'NREC)YEL,NOY,VJ  !! REC=20 !!
 C********************************************************************
       ENTRY DPACK1(NREC,Y,VJ,ISIZE_MAXNODE)
 C
-C     BXOä äìñ þTEHéñ é PACðAKOBKé VJ & Y
+C     ENTRY POINT FOR READING AND UNPACKING VJ & Y
 C
       ENTRY=1
-  121 CONTINUE    
+  121 CONTINUE
 C     READ(1,REC=NREC,ERR=120) YEL,NOY,VJ
 C 121 READ(1'NREC,ERR=120)YEL,NOY,VJ
       CALL GETDATA(1,NREC,YEL,NOY,VJ,ISIZE_MAXNODE,KYM)
@@ -147,7 +147,7 @@ C 121 READ(1'NREC,ERR=120)YEL,NOY,VJ
 C**********************************************************************
       ENTRY DPACK2(NREC,Y,VJ,ISIZE_MAXNODE)
 C
-C     þTEHéE Y é PACðAKOBKA
+C     READING Y AND UNPACKING
 C
       ENTRY=2
 C      print *, 'DPACK2: NREC: ', NREC
@@ -171,7 +171,7 @@ C      print *,'READ: ENTRY, NREC, KPKY =',ENTRY, NREC, KPKY
 C      write (6,*) 'Y matrix (UNPACKED)'
 C      do ii=1,4
 C            write (6,1220) (Y(ii,jj), jj=1,4)
-C      enddo      
+C      enddo
 
       RETURN
 
@@ -199,8 +199,8 @@ C     DEBUG SUBTRACE,INIT(NREC,YEL,NOY,VJ,IF,IE,ENTRY,K)
 
 
       SUBROUTINE SAVEDATA(IR,NREC,YEL,NOY,VJ,SIZE_VJ, SIZE_YEL)
-C TO SAVE DATA IN FILE. NOW - EMULATE BY STATIC ARRAYS TO SIMPLIFY      
-c      
+C TO SAVE DATA IN FILE. NOW - EMULATE BY STATIC ARRAYS TO SIMPLIFY
+c
 C IR - FIRST OR SECOND SET OF MATRICES AFTER FISRT OF SECOND REDUCTION
 C NREC- NUMBER OF FREQUENCY - SO FAR 1-20
 C YEL - ELEMENTS OF Y -MATRIX
@@ -211,17 +211,17 @@ C NOI - POSITIONS OF ELEMENTS IN Y-MATRIX
       DOUBLE COMPLEX VJ(SIZE_VJ)
       DOUBLE COMPLEX YEL(SIZE_YEL)
       INTEGER NOY(2,SIZE_YEL)
-      
-      
+
+
       DOUBLE COMPLEX YEL_SAVE(2,20,1000)
       DOUBLE COMPLEX VJ_SAVE(2,20,200)
       INTEGER NOY_SAVE(2,20,2000,2)
       COMMON /SAVEDATA_CB/ YEL_SAVE,VJ_SAVE,NOY_SAVE
-      
+
       DO I=1,SIZE_VJ
         VJ_SAVE(IR,NREC,I)=VJ(I)
       ENDDO
-      
+
       DO I=1,SIZE_YEL
         YEL_SAVE(IR,NREC,I)=YEL(I)
         NOY_SAVE(IR,NREC,I,1)=NOY(1,I)
@@ -235,13 +235,13 @@ C     +            NOY_SAVE(IR,NREC,I,2)
 c      ENDDO
 
 
-      
-      RETURN 
+
+      RETURN
       END
-      
+
       SUBROUTINE GETDATA(IR,NREC,YEL,NOY,VJ,SIZE_VJ, SIZE_YEL)
-C TO GET DATA IN FROM FILE. NOW - EMULATE BY STATIC ARRAYS TO SIMPLIFY  
-c          
+C TO GET DATA IN FROM FILE. NOW - EMULATE BY STATIC ARRAYS TO SIMPLIFY
+c
 C IR - FIRST OR SECOND SET OF MATRICES AFTER FISRT OF SECOND REDUCTION
 C NREC- NUMBER OF FREQUENCY - SO FAR 1-20
 C YEL - ELEMENTS OF Y -MATRIX
@@ -252,22 +252,22 @@ C NOI - POSITIONS OF ELEMENTS IN Y-MATRIX
       DOUBLE COMPLEX VJ(SIZE_VJ)
       DOUBLE COMPLEX YEL(SIZE_YEL)
       INTEGER NOY(2,SIZE_YEL)
-      
-      
+
+
       DOUBLE COMPLEX YEL_SAVE(2,20,1000)
       DOUBLE COMPLEX VJ_SAVE(2,20,200)
       INTEGER NOY_SAVE(2,20,2000,2)
       COMMON /SAVEDATA_CB/ YEL_SAVE,VJ_SAVE,NOY_SAVE
-      
+
       DO I=1,SIZE_VJ
         VJ(I)=VJ_SAVE(IR,NREC,I)
       ENDDO
-      
+
       DO I=1,SIZE_YEL
         YEL(I)=YEL_SAVE(IR,NREC,I)
         NOY(1,I)=NOY_SAVE(IR,NREC,I,1)
         NOY(2,I)=NOY_SAVE(IR,NREC,I,2)
       ENDDO
-      
-      RETURN 
+
+      RETURN
       END

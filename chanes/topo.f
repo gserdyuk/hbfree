@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -10,29 +10,28 @@ c
 
       SUBROUTINE TOPO(S,ND)
 C
-C     π/π πEPEKOδιPOBKι N υϊμOB ( CδBιη B CTOPOHυ S HA BEμιώιHυ
-C                      ND ιμι ND+1)
+C     SUBROUTINE FOR SHIFTING N NODES (MOVE FROM THE POSITION S TO
+C     THE VALUE ND OR ND+1)
 C
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       include 'circuit.i'
-C      COMMON/POINT/M(1)/NODEL/N(1)/POINTR/NMPNT,NOT,NP,LN,LP,NT,LT
       INTEGER M,N,S,END
       IF(ND.EQ.0) RETURN
       S=S
       ND=ND
       END=NMPNT*20
-C     DO πO TιπAM όμ-TOB
+C     LOOP OVER ELEMENT TYPES
       DO 10 I=1,END,20
       NFIR=MPOINT(I+9)
       NLEN=MPOINT(I+6)
       ITYP=MPOINT(I+5)
       IE=MPOINT(I+4)
-C     DO πO όμ-TAM BHυTPι TιπA
+C     LOOP OVER ELEMENT TYPES OF INTERNAL TYPE
       DO 10 II=1,IE
       NAT=NFIR+(II-1)*NLEN
       GO TO(20,30,40),ITYP
-C     υCTAHOBKA ηPAHιγ ιϊMEHEHιρ ιHδEKCOB όμ-TOB MACCιBA N,
-C     XPAHρύιX ϊHAώEHιρ υϊμOB ( B ϊAB-Tι OT TιπA )
+C     INITIALIZATION OF GRID CHANGES INDICES OF ELEMENTS VECTOR N,
+C     AND STORAGE OF NODE VALUES (FROM VARIABLE TYPE)
    20 NN=1
       NK=2
       GO TO 50
@@ -42,10 +41,10 @@ C     XPAHρύιX ϊHAώEHιρ υϊμOB ( B ϊAB-Tι OT TιπA )
    40 NN=1
       NK=MPOINT(I+7)
    50 DO 60 III=NN,NK
-C     Bωώ-E ϊH-ρ υϊμA
+C     CALCULATION OF NODE VALUE
       ITI=NODEEL(NAT+III)
       IF(ITI.EQ.0) GO TO 60
-C     CδBιη ϊHAώEHιρ υϊμA
+C     SHIFTING THE NODE VALUE
       IF(S.LT.0.AND.ITI.GT.ND)GOTO 70
       IF(S.LT.0.AND.ITI.LE.ND)GOTO 75
       IF(S.GT.0.AND.ITI.GT.0) GOTO 80

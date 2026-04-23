@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -10,7 +10,7 @@ c
 
         SUBROUTINE LENA
 C ***
-C *** πPOηPAMMA σοδεςφιτ νAσσιχ "A"
+C *** THE PROGRAM CONTAINS THE ARRAY "A"
 C ***
 C
 C
@@ -20,117 +20,115 @@ C
       CHARACTER*4 FNE1,FNE2
 C
 C
-C      MACCιB "A" ρBμ. ϊAηOTOBKOκ δμρ ζOPMιP. "MPOINT"
+C      ARRAY "A" IS A PREPARATION FOR THE FORM "MPOINT"
        INTEGER*4   A (20,50)
-C                         KA - MAKC. KOμ-BO TιπOB όμEMEHTOB
+C                         KA - MAX. NUMBER OF TYPES OF ELEMENTS
       DATA A/
-     +4HR   ,4H    ,4H    ,4H    ,0,1, 5,2,0,0,1,0, 1,0,0,0,0,0,0,0, 
+     +4HR   ,4H    ,4H    ,4H    ,0,1, 5,2,0,0,1,0, 1,0,0,0,0,0,0,0,
      +4HL   ,4H    ,4H    ,4H    ,0,1, 5,2,0,0,1,0, 1,0,0,0,0,0,0,0,
-     +4HC   ,4H    ,4H    ,4H    ,0,1, 5,2,0,0,1,0, 1,0,0,0,0,0,0,0, 
-     +4HE   ,4H    ,4H    ,4H    ,0,2,10,2,0,0,1,0, 4,0,0,0,0,0,0,2, 
-     +4HJ   ,4H    ,4H    ,4H    ,0,2,10,2,0,0,1,0, 4,0,0,0,0,0,0,2, 
-     +4HP2  ,4H    ,4H    ,4H    ,0,2,10,2,0,0,1,0, 7,0,0,0,0,0,0,2, 
-     +4HVD  ,4HSCHT,4H    ,4H    ,0,3,10,3,1,0,2,0, 8,0,0,0,0,1,1,0, 
-     +4HGN  ,4HLIN ,4H    ,4H    ,0,3, 9,2,0,0,1,0, 1,0,0,0,0,1,1,0, 
-     +4HGN  ,4HPOLY,4H    ,4H    ,0,3, 9,2,0,0,1,0, 7,0,0,0,0,1,1,0, 
-     +4HGN  ,4HJUNC,4H    ,4H    ,0,3, 9,2,0,0,1,0, 4,0,0,0,0,1,1,0, 
-     +4HFET ,4HCURT,4H    ,4H    ,0,3,13,6,3,0,1,0,17,0,0,0,0,2,2,0, 
-     +4HICU ,4HJUNC,4H    ,4H    ,0,3,11,4,0,0,1,0, 5,0,0,0,0,1,1,0, 
-     +4HICU ,4HPOLY,4H    ,4H    ,0,3,11,4,0,0,1,0, 7,0,0,0,0,1,1,0, 
-     +4HCN  ,4HDIFF,4H    ,4H    ,0,3, 9,2,0,0,1,0, 5,0,0,0,0,2,2,0, 
-     +4HCN  ,4HBARR,4H    ,4H    ,0,3, 9,2,0,0,1,0, 4,0,0,0,0,2,2,0, 
-     +4HCN  ,4HLIN ,4H    ,4H    ,0,3, 9,2,0,0,1,0, 1,0,0,0,0,2,2,0, 
-     +4HCN  ,4HPOLY,4H    ,4H    ,0,3, 9,2,0,0,1,0, 7,0,0,0,0,2,2,0, 
-     +4HLIB0,4HLL0 ,4H    ,4H    ,0,2,12,4,0,0,1,0, 2,0,0,0,0,0,0,0, 
-     +4HYTAB,4H    ,4H    ,4H    ,0,5, 0,0,0,0,1,0, 0,0,0,0,0,0,0,1, 
-     +4HSTAB,4H    ,4H    ,4H    ,0,5, 0,0,0,0,1,0, 0,0,0,0,0,0,0,1, 
-     +4HLIB ,4HMPL ,4H    ,4H    ,0,2,12,4,0,0,2,0, 7,0,0,0,0,0,0,0, 
-     +4HLIB ,4HLANG,4H    ,4H    ,0,2,12,4,0,0,2,0,12,0,0,0,0,0,0,0, 
-     +4HLIB ,4HSMPL,4H    ,4H    ,0,2,12,4,0,0,2,0,11,0,0,0,0,0,0,0, 
-     +4HBIP ,4HTR  ,4H    ,4H    ,0,3,14,7,4,0,1,0,23,0,0,0,0,2,2,0, 
-     +4HSHL ,4HKZ  ,4H    ,4H    ,0,2,10,2,0,0,2,0, 3,0,0,0,0,0,0,0, 
+     +4HC   ,4H    ,4H    ,4H    ,0,1, 5,2,0,0,1,0, 1,0,0,0,0,0,0,0,
+     +4HE   ,4H    ,4H    ,4H    ,0,2,10,2,0,0,1,0, 4,0,0,0,0,0,0,2,
+     +4HJ   ,4H    ,4H    ,4H    ,0,2,10,2,0,0,1,0, 4,0,0,0,0,0,0,2,
+     +4HP2  ,4H    ,4H    ,4H    ,0,2,10,2,0,0,1,0, 7,0,0,0,0,0,0,2,
+     +4HVD  ,4HSCHT,4H    ,4H    ,0,3,10,3,1,0,2,0, 8,0,0,0,0,1,1,0,
+     +4HGN  ,4HLIN ,4H    ,4H    ,0,3, 9,2,0,0,1,0, 1,0,0,0,0,1,1,0,
+     +4HGN  ,4HPOLY,4H    ,4H    ,0,3, 9,2,0,0,1,0, 7,0,0,0,0,1,1,0,
+     +4HGN  ,4HJUNC,4H    ,4H    ,0,3, 9,2,0,0,1,0, 4,0,0,0,0,1,1,0,
+     +4HFET ,4HCURT,4H    ,4H    ,0,3,13,6,3,0,1,0,17,0,0,0,0,2,2,0,
+     +4HICU ,4HJUNC,4H    ,4H    ,0,3,11,4,0,0,1,0, 5,0,0,0,0,1,1,0,
+     +4HICU ,4HPOLY,4H    ,4H    ,0,3,11,4,0,0,1,0, 7,0,0,0,0,1,1,0,
+     +4HCN  ,4HDIFF,4H    ,4H    ,0,3, 9,2,0,0,1,0, 5,0,0,0,0,2,2,0,
+     +4HCN  ,4HBARR,4H    ,4H    ,0,3, 9,2,0,0,1,0, 4,0,0,0,0,2,2,0,
+     +4HCN  ,4HLIN ,4H    ,4H    ,0,3, 9,2,0,0,1,0, 1,0,0,0,0,2,2,0,
+     +4HCN  ,4HPOLY,4H    ,4H    ,0,3, 9,2,0,0,1,0, 7,0,0,0,0,2,2,0,
+     +4HLIB0,4HLL0 ,4H    ,4H    ,0,2,12,4,0,0,1,0, 2,0,0,0,0,0,0,0,
+     +4HYTAB,4H    ,4H    ,4H    ,0,5, 0,0,0,0,1,0, 0,0,0,0,0,0,0,1,
+     +4HSTAB,4H    ,4H    ,4H    ,0,5, 0,0,0,0,1,0, 0,0,0,0,0,0,0,1,
+     +4HLIB ,4HMPL ,4H    ,4H    ,0,2,12,4,0,0,2,0, 7,0,0,0,0,0,0,0,
+     +4HLIB ,4HLANG,4H    ,4H    ,0,2,12,4,0,0,2,0,12,0,0,0,0,0,0,0,
+     +4HLIB ,4HSMPL,4H    ,4H    ,0,2,12,4,0,0,2,0,11,0,0,0,0,0,0,0,
+     +4HBIP ,4HTR  ,4H    ,4H    ,0,3,14,7,4,0,1,0,23,0,0,0,0,2,2,0,
+     +4HSHL ,4HKZ  ,4H    ,4H    ,0,2,10,2,0,0,2,0, 3,0,0,0,0,0,0,0,
      +4HSHL ,4HXX  ,4H    ,4H    ,0,2,10,2,0,0,2,0, 3,0,0,0,0,0,0,0,
      +4HDISC,4H    ,4H    ,4H    ,0,2,10,2,0,0,2,0, 3,0,0,0,0,0,0,0,
-     +4HINDS,4H    ,4H    ,4H    ,0,2,14,6,0,0,1,0,12,0,0,0,0,0,0,0, 
+     +4HINDS,4H    ,4H    ,4H    ,0,2,14,6,0,0,1,0,12,0,0,0,0,0,0,0,
      +440*0/
 C
-C      πςι χχεδεξιι ξοχοηο τιπA όμενεξτοχ ξεοβθοδινο χξεστι δοπομξεξιρ
-C      χ ιξστςυλγιΰ INSTIL.TXT ( ποδδιςελτοςικ YINSTR ) ι χ CHAPTER5.REP
-C      (ποδδιςελτοςικ REPORT)
+C      WHEN ENTERING A NEW TYPE OF ELEMENTS, IT IS NECESSARY TO MAKE
+C      ADDITIONS TO THE INSTRUCTION FILE INSTIL.TXT (SUBDIRECTORY YINSTR)
+C      AND TO CHAPTER5.REP (SUBDIRECTORY REPORT)
 C
-C      τιπω όμενεξτοχ ,4HBIP TR, 'SHL KZ, 'SHL XX'
-C      πολα ξε ισπομψϊυΰτσρ (ιμι υφε ξε ισπομψϊυΰτσρ).
+C      ELEMENT TYPES '4HBIP TR', 'SHL KZ', 'SHL XX'
+C      ARE NOT USED (OR NO LONGER USED).
 C
       KA=28
 C
-C   ϊαπομξεξιε νασσιχα 'A'
-C     A(1) ... A(4) - ξαϊχαξιε τιπα όμενεξτα;
-C     A(6) - πςιϊξαλ οπςεδεμρΰύικ τιπ όμενεξτα:
-C              μιξεκξωκ δχυθπομΰσξιλ -  1,
-C              μιξεκξωκ νξοηοπομΰσξιλ - 2,
-C              ξεμιξεκξωκ όμενεξτ - 3,
-C              Y-, S-νατςιγω - 5.
-C     A(7) - δμιξα στςολι οπισαξιρ οδξοηο όμενεξτα
-C            δαξξοηο τιπα χ "NODEEL":
-C              δμρ μιξεκξωθ δχυθπομΰσξιλοχ - 5,
-C              δμρ μιξεκξωθ νξοηοπομΰσξιλοχ - 8+λομιώεστχο χξεϋ. υϊμοχ,
-C              δμρ ξεμιξεκξωθ όμενεξτοχ - 7+λομιώεστχο χξεϋ. υϊμοχ
-C              δμρ Y-, S-νατςιγ - 0.
-C     A(8) - λομιώεστχο υϊμοχ χ νατενατιώεσλοκ νοδεμε
-C            (χξεϋξιε+χξυτςεξξιε):
-C              δμρ μιξεκξωθ δχυθπομΰσξιλοχ - 2,
-C              δμρ μιξεκξωθ νξοηοπομΰσξιλοχ - 0, τ.λ. ότο ϊξαώεξιε
-C              οπςεδεμρετσρ δμρ λαφδοηο μιξ. νξοηοπομΰσξιλα αχτονατιώεσλ
-c     ι,
-C              δμρ ξεμιξεκξωθ όμενεξτοχ - λομ-χο υϊμοχ,
-C              δμρ Y-, S-νατςιγ - 0.
-C    A(9) - λομιώεστχο χξυτςεξξιθ υϊμοχ, αχτονατιώεσλι ξυνεςυενωθ
-C           πςι οπισαξιι υϊμοχ χλμΰώεξιρ όμενεξτα.
-C    A(11) - λομιώεστχο παςανετςοχ οβύιθ δμρ δαξξοηο τιπα (εσμι παςανετς
-c     ω
-C            οτσυτσχυΰτ, το ξεοβθοδινο ϊαξεστι 1).
-C    A(13) - λομιώεστχο ιξδιχιδυαμψξωθ παςανετςοχ, οπισωχαΰύι
-C            νατενατιώεσλυΰ νοδεμψ όμενεξτα.
-C    A(18) - δμρ ξεμιξεκξωθ όμενεξτοχ ϊαξοσιτσρ ναλσιναμψξ
-C            λομιώεστχο χθοδξωθ χεμιώιξ πςι ςασώετε τολα.
-C    A(19) - δμρ ξεμιξεκξωθ όμενεξτοχ ϊαξοσιτσρ ναλσιναμψξ
-C            λομιώεστχο χωθοδξωθ χεμιώιξ πςι ςασώετε τολα.
+C   FILLING THE ARRAY 'A'
+C     A(1) ... A(4) - ELEMENT TYPE NAME;
+C     A(6) - FLAG THAT DEFINES THE ELEMENT TYPE:
+C              LINEAR BIPOLAR ELEMENT - 1,
+C              LINEAR MULTIPOLAR ELEMENT - 2,
+C              NONLINEAR ELEMENT - 3,
+C              Y-, S-MATRICES - 5.
+C     A(7) - DESCRIPTION LINE LENGTH OF ONE ELEMENT
+C            OF THIS TYPE IN "NODEEL":
+C              FOR LINEAR BIPOLAR ELEMENTS - 5,
+C              FOR LINEAR MULTIPOLAR ELEMENTS - 8 + NUMBER OF EXTERNAL NODES,
+C              FOR NONLINEAR ELEMENTS - 7 + NUMBER OF EXTERNAL NODES,
+C              FOR Y-, S-MATRICES - 0.
+C     A(8) - NUMBER OF NODES IN THE MATHEMATICAL MODEL
+C            (EXTERNAL + INTERNAL):
+C              FOR LINEAR BIPOLAR ELEMENTS - 2,
+C              FOR LINEAR MULTIPOLAR ELEMENTS - 0, AS THIS VALUE
+C              IS AUTOMATICALLY DETERMINED FOR EACH LINEAR MULTIPOLAR ELEMENT,
+C              FOR NONLINEAR ELEMENTS - NUMBER OF NODES,
+C              FOR Y-, S-MATRICES - 0.
+C    A(9) - NUMBER OF INTERNAL NODES, AUTOMATICALLY NUMBERED
+C           WHEN DESCRIBING NODES OF THE ELEMENT.
+C    A(11) - NUMBER OF PARAMETERS COMMON TO THIS TYPE (IF PARAMETERS
+C            ARE ABSENT, ENTER 1).
+C    A(13) - NUMBER OF INDIVIDUAL PARAMETERS DESCRIBING
+C            THE MATHEMATICAL MODEL OF THE ELEMENT.
+C    A(18) - FOR NONLINEAR ELEMENTS, ENTER THE MAXIMUM
+C            NUMBER OF INPUT VARIABLES IN THE CURRENT CALCULATION.
+C    A(19) - FOR NONLINEAR ELEMENTS, ENTER THE MAXIMUM
+C            NUMBER OF OUTPUT VARIABLES IN THE CURRENT CALCULATION.
 C
 C
-C  όμενεξτ τιπα "R"        ςεαμιϊοχαξ π/π LIN2P         (ΖΑΚΜ FORMER)
-C  όμενεξτ τιπα "L"        ςεαμιϊοχαξ π/π LIN2P         (ΖΑΚΜ FORMER)
-C  όμενεξτ τιπα "C"        ςεαμιϊοχαξ π/π LIN2P         (ΖΑΚΜ FORMER)
-C  όμενεξτ τιπα "E"        ςεαμιϊοχαξ π/π EMF           (ΖΑΚΜ LIBLIN)
-C  όμενεξτ τιπα "J"        ςεαμιϊοχαξ π/π JDRFE         (ΖΑΚΜ LIBLIN)
-C  όμενεξτ τιπα "P2"       ςεαμιϊοχαξ π/π RFFIPN        (ΖΑΚΜ LIBLIN)
-C  όμενεξτ τιπα "VD SCHT"  ςεαμιϊοχαξ π/π MDSCH1-MDSCH6 (ΖΑΚΜ MDSCH)
-C  όμενεξτ τιπα "GN LLIN"  ςεαμιϊοχαξ π/π LIN1-LIN5     (ΖΑΚΜ LIN)
-C  όμενεξτ τιπα "GN POLY"  ςεαμιϊοχαξ π/π POLY51-POLY55 (ΖΑΚΜ POLY5)
-C  όμενεξτ τιπα "GN JUNC"  ςεαμιϊοχαξ π/π JUNC1-JUNC6   (ΖΑΚΜ JUNC)
-C  όμενεξτ τιπα "FET CURT" ςεαμιϊοχαξ π/π CURT1-CURT6   (ΖΑΚΜ CURT)
-C  όμενεξτ τιπα "ICU JUNC" ςεαμιϊοχαξ π/π ICUJ1-ICUJ6   (ΖΑΚΜ ICUJUNC)
-C  όμενεξτ τιπα "ICU POLY" ςεαμιϊοχαξ π/π ICUPL1-ICUPL5 (ΖΑΚΜ ICUPOLY)
-C  όμενεξτ τιπα "CN DIFF"  ςεαμιϊοχαξ π/π CDIFF1-CDIFF6 (ΖΑΚΜ CDIFF)
-C  όμενεξτ τιπα "CN BARR"  ςεαμιϊοχαξ π/π CBARR1-CBARR5 (ΖΑΚΜ CBARR)
-C  όμενεξτ τιπα "CN LIN"   ςεαμιϊοχαξ π/π CLIN1-CLIN5   (ΖΑΚΜ CLIN)
-C  όμενεξτ τιπα "CN POLY"  ςεαμιϊοχαξ π/π CPOLY1-CPOLY5 (ΖΑΚΜ CPOLY)
-C  όμενεξτ τιπα "LIB0 LL0" ςεαμιϊοχαξ π/π LINE1,LINE2   (ΖΑΚΜ LIB0)
-C  όμενεξτ τιπα "YTAB"     ςεαμιϊοχαξ π/π YTAB          (ΖΑΚΜ YTAB)
-C  όμενεξτ τιπα "STAB"     ςεαμιϊοχαξ π/π STAB          (ΖΑΚΜ STAB)
-C  όμενεξτ τιπα "LIB MPL"  ςεαμιϊοχαξ π/π MP            (ΖΑΚΜ MPL)
-C  όμενεξτ τιπα "LIB LANG" ςεαμιϊοχαξ π/π LANG          (ΖΑΚΜ LANGE)
-C  όμενεξτ τιπα "LIB SMPL" ςεαμιϊοχαξ π/π SMPL          (ΖΑΚΜ SMPL)
-C  όμενεξτ τιπα "BIP TR"   ςεαμιϊοχαξ π/π BIPTR1-BIPTR5 (ΖΑΚΜ BIPTR)
-C  όμενεξτ τιπα "SHL KZ"   ςεαμιϊοχαξ π/π SHLEIF        (ΖΑΚΜ SHLEIF)
-C  όμενεξτ τιπα "SHL XX"   ςεαμιϊοχαξ π/π SHLEIF        (ΖΑΚΜ SHLEIF)
-C  όμενεξτ τιπα "DISC"     ςεαμιϊοχαξ π/π DISCONT       (ΖΑΚΜ DISCONT)
-C  όμενεξτ τιπα "INDS"     ςεαμιϊοχαξ π/π INDSV         (ΖΑΚΜ INDSV)
+C  ELEMENT TYPE "R"        SUBROUTINE LIN2P         (file FORMER)
+C  ELEMENT TYPE "L"        SUBROUTINE LIN2P         (file FORMER)
+C  ELEMENT TYPE "C"        SUBROUTINE LIN2P         (file FORMER)
+C  ELEMENT TYPE "E"        SUBROUTINE EMF           (file LIBLIN)
+C  ELEMENT TYPE "J"        SUBROUTINE JDRFE         (file LIBLIN)
+C  ELEMENT TYPE "P2"       SUBROUTINE RFFIPN        (file LIBLIN)
+C  ELEMENT TYPE "VD SCHT"  SUBROUTINE MDSCH1-MDSCH6 (file MDSCH)
+C  ELEMENT TYPE "GN LLIN"  SUBROUTINE LIN1-LIN5     (file LIN)
+C  ELEMENT TYPE "GN POLY"  SUBROUTINE POLY51-POLY55 (file POLY5)
+C  ELEMENT TYPE "GN JUNC"  SUBROUTINE JUNC1-JUNC6   (file JUNC)
+C  ELEMENT TYPE "FET CURT" SUBROUTINE CURT1-CURT6   (file CURT)
+C  ELEMENT TYPE "ICU JUNC" SUBROUTINE ICUJ1-ICUJ6   (file ICUJUNC)
+C  ELEMENT TYPE "ICU POLY" SUBROUTINE ICUPL1-ICUPL5 (file ICUPOLY)
+C  ELEMENT TYPE "CN DIFF"  SUBROUTINE CDIFF1-CDIFF6 (file CDIFF)
+C  ELEMENT TYPE "CN BARR"  SUBROUTINE CBARR1-CBARR5 (file CBARR)
+C  ELEMENT TYPE "CN LIN"   SUBROUTINE CLIN1-CLIN5   (file CLIN)
+C  ELEMENT TYPE "CN POLY"  SUBROUTINE CPOLY1-CPOLY5 (file CPOLY)
+C  ELEMENT TYPE "LIB0 LL0" SUBROUTINE LINE1,LINE2   (file LIB0)
+C  ELEMENT TYPE "YTAB"     SUBROUTINE YTAB          (file YTAB)
+C  ELEMENT TYPE "STAB"     SUBROUTINE STAB          (file STAB)
+C  ELEMENT TYPE "LIB MPL"  SUBROUTINE MP            (file MPL)
+C  ELEMENT TYPE "LIB LANG" SUBROUTINE LANG          (file LANGE)
+C  ELEMENT TYPE "LIB SMPL" SUBROUTINE SMPL          (file SMPL)
+C  ELEMENT TYPE "BIP TR"   SUBROUTINE BIPTR1-BIPTR5 (file BIPTR)
+C  ELEMENT TYPE "SHL KZ"   SUBROUTINE SHLEIF        (file SHLEIF)
+C  ELEMENT TYPE "SHL XX"   SUBROUTINE SHLEIF        (file SHLEIF)
+C  ELEMENT TYPE "DISC"     SUBROUTINE DISCONT       (file DISCONT)
+C  ELEMENT TYPE "INDS"     SUBROUTINE INDSV         (file INDSV)
 C
 C
       DATA IFF/
-     +4HP2  ,4H    ,4H    ,4H    ,2,0,0, 
-     +4HP2  ,4H    ,4H    ,4H    ,5,0,0, 
-     +4HE   ,4H    ,4H    ,4H    ,2,0,0, 
+     +4HP2  ,4H    ,4H    ,4H    ,2,0,0,
+     +4HP2  ,4H    ,4H    ,4H    ,5,0,0,
+     +4HE   ,4H    ,4H    ,4H    ,2,0,0,
      +4HJ   ,4H    ,4H    ,4H    ,2,0,0
      +/
 

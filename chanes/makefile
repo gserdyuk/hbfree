@@ -1,98 +1,109 @@
 
 CC	=	gcc
-F77	=	gfortran
 CPPC	=	c++
 LIBR	=	ar
 RANLIB	=	ranlib
 PROG	=	../hbl
 
-FFLAGS = 	-fautomatic \
-		-g \
-		-malign-double \
-		-O \
-		-fdefault-real-8 \
-		-fdefault-double-8 \
-		-freal-4-real-8 \
-		-std=legacy
-
-#-Wall
+#F77	=	g77
+#FFLAGS = -Wall -fautomatic \
+#		-g -fdebug-kludge \
+#		-fwritable-strings -malign-double \
+#		-O
 #-fbounds-check
-#-fdebug-kludge -fwritable-strings  
 
+ifeq ($(FC),intel)
+#ifx (prep.: source /opt/intel/oneapi/setvars.sh)
+	F77	=	ifx
+	#FFLAGS = -O2
+	FFLAGS = -warn all,noerrors,nointerfaces,noexternals,nointerfaces,nounused -O2
+	#FFLAGS = -g -check uninit
+	#LDLAGS = -g -check uninit
+else
+#gfortran
+	F77	=	gfortran
+	FFLAGS = -Wall -Wextra -Wuninitialized \
+			-O2 \
+			-malign-double \
+			-fdec-char-conversions \
+			-fallow-argument-mismatch
+#			-std=legacy \
+#		-g
+endif
 
 OBJ_DIR = obj
 
 
 F_SRC =  \
-	charint.f	\
-	decode.f 	\
-	detsyn.f 	\
-	former.f 	\
-	frequen.f 	\
-	ftmas2.f 	\
-	harm.f  	\
-	initi.f 	\
-	inkoor.f 	\
-	koord.f  	\
-	krdchk.f	\
-	lena.f  	\
-	len.f 		\
-	lineq1.f 	\
-	luback.f 	\
-	lucan.f 	\
-	lufrw.f 	\
-	luslv.f 	\
-	main.f  \
-	otchm.f \
-	packm.f \
-	regul.f \
-	restor.f	\
-	sort.f  \
-	sortuz.f	\
-	stback.f	\
-	stepfr.f	\
-	sumdif.f	\
-	suprim.f	\
-	topo.f	\
-	topoin.f	\
-	zgradie.f	\
-	ziny.f	\
-	zlserch.f	\
-	zmache.f	\
-	znef.f	\
-	zneinck.f	\
-	znejac.f	\
-	znewsol.f	\
-	zstop0.f	\
-	zstop.f 
+	SPAGged/charint.f	\
+	SPAGged/decode.f 	\
+	SPAGged/detsyn.f 	\
+	SPAGged/former.f 	\
+	SPAGged/frequen.f 	\
+	SPAGged/ftmas2.f 	\
+	SPAGged/harm.f  	\
+	SPAGged/initi.f 	\
+	SPAGged/inkoor.f 	\
+	SPAGged/koord.f  	\
+	SPAGged/krdchk.f	\
+	SPAGged/lena.f  	\
+	SPAGged/len.f 	\
+	SPAGged/lineq1.f 	\
+	SPAGged/luback.f 	\
+	SPAGged/lucan.f 	\
+	SPAGged/lufrw.f 	\
+	SPAGged/luslv.f 	\
+	SPAGged/main.f  \
+	SPAGged/otchm.f \
+	SPAGged/packm.f \
+	SPAGged/regul.f \
+	SPAGged/restor.f	\
+	SPAGged/sort.f  \
+	SPAGged/sortuz.f	\
+	SPAGged/stback.f	\
+	SPAGged/stepfr.f	\
+	SPAGged/sumdif.f	\
+	SPAGged/suprim.f	\
+	SPAGged/topo.f	\
+	SPAGged/topoin.f	\
+	SPAGged/zgradie.f	\
+	SPAGged/ziny.f	\
+	SPAGged/zlserch.f	\
+	SPAGged/zmache.f	\
+	SPAGged/znef.f	\
+	SPAGged/zneinck.f	\
+	SPAGged/znejac.f	\
+	SPAGged/znewsol.f	\
+	SPAGged/zstop0.f	\
+	SPAGged/zstop.f 
 
 LIB_DIR = ./libelem
 
 LIB_SRC = \
-	libelem/biptr.f \
-	libelem/cbarr.f \
-	libelem/cdiff.f \
-	libelem/clin.f \
-	libelem/cpoly.f \
-	libelem/curt.f \
-	libelem/cusd.f \
-	libelem/discont.f \
-	libelem/icujunc.f \
-	libelem/icupoly.f \
-	libelem/indsv.f \
-	libelem/junc.f \
-	libelem/lib0.f \
-	libelem/liblin.f \
-	libelem/libmod.f \
-	libelem/lin.f \
-	libelem/mdsch.f \
-	libelem/mpl.f \
-	libelem/poly5.f \
-	libelem/shleif.f \
-	libelem/stab.f \
-	libelem/svlutl.f \
-	libelem/test.f \
-	libelem/ytab.f 
+	SPAGged/biptr.f \
+	SPAGged/cbarr.f \
+	SPAGged/cdiff.f \
+	SPAGged/clin.f \
+	SPAGged/cpoly.f \
+	SPAGged/curt.f \
+	SPAGged/cusd.f \
+	SPAGged/discont.f \
+	SPAGged/icujunc.f \
+	SPAGged/icupoly.f \
+	SPAGged/indsv.f \
+	SPAGged/junc.f \
+	SPAGged/lib0.f \
+	SPAGged/liblin.f \
+	SPAGged/libmod.f \
+	SPAGged/lin.f \
+	SPAGged/mdsch.f \
+	SPAGged/mpl.f \
+	SPAGged/poly5.f \
+	SPAGged/shleif.f \
+	SPAGged/stab.f \
+	SPAGged/svlutl.f \
+	SPAGged/test.f \
+	SPAGged/ytab.f 
 
 F_OBJ = \
 	$(OBJ_DIR)/charint.o \
@@ -166,12 +177,12 @@ LIB_OBJ = \
 .all: $(PROG)
 
 $(PROG): $(F_OBJ) $(LIB_OBJ)
-		$(F77) -o $@ $^
+		$(F77) $(LDLAGS) -o $@ $^
 		
-$(F_OBJ): $(OBJ_DIR)/%.o: %.f	
+$(F_OBJ): $(OBJ_DIR)/%.o: SPAGged/%.f
 		$(F77) -c $(FFLAGS) -o $@ $< 
 
-$(LIB_OBJ): $(OBJ_DIR)/%.o: $(LIB_DIR)/%.f		
+$(LIB_OBJ): $(OBJ_DIR)/%.o: SPAGged/%.f
 		$(F77) -c $(FFLAGS) -o $@ $< 
 
 touch:

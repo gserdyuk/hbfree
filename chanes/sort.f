@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -10,7 +10,7 @@ c
 
       SUBROUTINE SORT (MN,KN)
 C
-C  *****  ıOPÒ‰O˛ÈBAHÈE MACCÈBA MN
+C  *****  SORTING OF THE MN ARRAY
 C
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       INTEGER MN(2,KN)

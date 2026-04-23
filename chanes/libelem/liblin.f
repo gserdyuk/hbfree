@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -25,41 +25,40 @@ C    *    11X,'NA2=',I5,' LE2=',I5,' NA3=',I5,' LE3=',I5,' NPOL=',I5)
 C
 C
       IF(NAME(1).NE.NAMES(3))GOTO 10
-      IF(NAME(2).EQ.NAMES(4))CALL LINE1(OM,PARAM(NA1),LE1,PARAM(NA2),   
+      IF(NAME(2).EQ.NAMES(4))CALL LINE1(OM,PARAM(NA1),LE1,PARAM(NA2),
      +                               LE2,PARAM(NA3),LE3)
    10 CONTINUE
-      IF(NAME(1).EQ.NAMES(1))CALL RFFIPN(OM,PARAM(NA1),LE1,PARAM(NA2),  
+      IF(NAME(1).EQ.NAMES(1))CALL RFFIPN(OM,PARAM(NA1),LE1,PARAM(NA2),
      +                                LE2,PARAM(NA3),LE3)
-      IF(NAME(1).EQ.NAMES(2))CALL EMF   (OM,PARAM(NA1),LE1,PARAM(NA2),  
+      IF(NAME(1).EQ.NAMES(2))CALL EMF   (OM,PARAM(NA1),LE1,PARAM(NA2),
      +                                LE2,PARAM(NA3),LE3)
-      IF(NAME(1).EQ.NAMES(5))CALL JDRIVE(OM,PARAM(NA1),LE1,PARAM(NA2),  
+      IF(NAME(1).EQ.NAMES(5))CALL JDRIVE(OM,PARAM(NA1),LE1,PARAM(NA2),
      +                                LE2,PARAM(NA3),LE3)
-      IF(NAME(1).EQ.NAMES(6))CALL YTAB(OM,PARAM(NA1),LE1,PARAM(NA2),    
+      IF(NAME(1).EQ.NAMES(6))CALL YTAB(OM,PARAM(NA1),LE1,PARAM(NA2),
      +                              LE2,PARAM(NA3),LE3,NPOL)
-      IF(NAME(1).EQ.NAMES(7))CALL STAB(OM,PARAM(NA1),LE1,PARAM(NA2),    
+      IF(NAME(1).EQ.NAMES(7))CALL STAB(OM,PARAM(NA1),LE1,PARAM(NA2),
      +                              LE2,PARAM(NA3),LE3,NPOL)
-      IF(NAME(1).EQ.NAMES(8).AND.NAME(2).EQ.NAMES(9)) CALL LANG(OM,     
-     +                               PARAM(NA1),LE1,PARAM(NA2),         
+      IF(NAME(1).EQ.NAMES(8).AND.NAME(2).EQ.NAMES(9)) CALL LANG(OM,
+     +                               PARAM(NA1),LE1,PARAM(NA2),
      +                           LE2,PARAM(NA3),LE3,NPOL)
-      IF(NAME(1).EQ.NAMES(8).AND.NAME(2).EQ.NAMES(13)) CALL SMPL(OM,    
-     +                                PARAM(NA1),LE1,PARAM(NA2),        
+      IF(NAME(1).EQ.NAMES(8).AND.NAME(2).EQ.NAMES(13)) CALL SMPL(OM,
+     +                                PARAM(NA1),LE1,PARAM(NA2),
      +                            LE2,PARAM(NA3),LE3,NPOL)
-      IF(NAME(1).EQ.NAMES(8).AND.NAME(2).EQ.NAMES(14)) CALL MP(OM,      
-     +                              PARAM(NA1),LE1,PARAM(NA2),          
+      IF(NAME(1).EQ.NAMES(8).AND.NAME(2).EQ.NAMES(14)) CALL MP(OM,
+     +                              PARAM(NA1),LE1,PARAM(NA2),
      +                          LE2,PARAM(NA3),LE3,NPOL)
 C      IF(NAME(1).EQ.NAMES(10).AND.NAME(2).EQ.NAMES(11)) CALL SHLEIF(OM,
-C     *                                    PARAM(NA1),LE1,PARAM(NA2),
-C     *                                    LE2,PARAM(NA3),LE3,NPOL,
-C     *                                    NAME(2))
+C     +                                    PARAM(NA1),LE1,PARAM(NA2),
+C     +                                    LE2,PARAM(NA3),LE3,NPOL,
+C     +                                    NAME(2))
 C      IF(NAME(1).EQ.NAMES(10).AND.NAME(2).EQ.NAMES(12)) CALL SHLEIF(OM,
-C     *                                    PARAM(NA1),LE1,PARAM(NA2),
-C     *                                    LE2,PARAM(NA3),LE3,NPOL,
-C     *                                    NAME(2))
-C      IF(NAME(1).EQ.NAMES(15))CALL DISCONT(OM,PARAM(NA1),LE1,PARAM(NA2)
-c     ,
-C     *                                     LE2,PARAM(NA3),LE3,NPOL)
-C
-      IF(NAME(1).EQ.NAMES(16)) CALL INDSV(OM,PARAM(NA1),LE1,PARAM(NA2), 
+C     +                                    PARAM(NA1),LE1,PARAM(NA2),
+C     +                                    LE2,PARAM(NA3),LE3,NPOL,
+C     +                                    NAME(2))
+C      IF(NAME(1).EQ.NAMES(15))CALL DISCONT(OM,PARAM(NA1),LE1,PARAM(NA2),
+C     +                                    LE2,PARAM(NA3),LE3,NPOL)
+
+      IF(NAME(1).EQ.NAMES(16)) CALL INDSV(OM,PARAM(NA1),LE1,PARAM(NA2),
      +                                     LE2,PARAM(NA3),LE3)
 C
       RETURN
@@ -70,7 +69,7 @@ C     DEBUG SUBTRACE
 
 
       SUBROUTINE RFFIPN(OM,P1    ,L1,P2    ,L2,P3    ,L3)
-C    OβPATιTψ BHιMAHιE HA EPSI / υMEHψϋιTψ δO 0.1E-05/
+C     CONVERT THE VALUE TO EPSI / REDUCE TO 0.1E-05 /
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       COMMON /SERV/EPSI, LIMERR,KITU
       DOUBLE PRECISION P1,P2,P3,         SQ1,SQ2
@@ -104,14 +103,13 @@ C    OβPATιTψ BHιMAHιE HA EPSI / υMEHψϋιTψ δO 0.1E-05/
       SQ1=DCOS(P3(IKA+1))*DSQRT(8.0D0*P3(IKA+2)/P3(1))
       SQ2=DSIN(P3(IKA+1))*DSQRT(8.0D0*P3(IKA+2)/P3(1))
 
-C  πο οπςεδεμεξιΰ ιστοώξιλ νούξοστψΰ ς οτδαετ χ ξαηςυϊλυ
-C  νούξοστψ ς πςι υσμοχιι ώτο εηο σοπςοτιχμεξιε ςαχξ
-C  σοπςοτιχμεξιΰ ξαηςυϊλι
-C  οτσΰδα πομυώαεν   J=2*SQRT(P/RΧΞΥΤp)
-C  δαμεε δμρ ώαστοτ F != 0 δονξοφιν ξα SQRT(2) ώτοβω
-C  πομυώιτψ νηξοχεξξοε ϊξαώεξι
+C  ACCORDING TO THE DEFINITION, A POWER SOURCE WITH P POWER DELIVERS P POWER TO THE LOAD
+C  UNDER THE CONDITION THAT ITS IMPEDANCE EQUALS THE LOAD IMPEDANCE
+C  FROM THIS, WE GET   J = 2 * SQRT(P / R_internal)
+C  NEXT, FOR FREQUENCIES F != 0, WE MULTIPLY BY SQRT(2) TO GET
+C  THE INSTANTANEOUS VALUE
 C
-C   νηξοχεξξωε ϊξαώεξιρ τολα δομφξω βωτψ χο χσεθ νοδεμρθ !!!
+C   INSTANTANEOUS CURRENT VALUES MUST BE PRESENT IN ALL MODELS !!!
 C
    30 CONTINUE
 
@@ -159,7 +157,7 @@ C     DEBUG                         SUBTRACE
 C
 C      WRITE(6, 40)  ((I,J,SUBY(I,J),J=1,2),I=1,2)
 C   40 FORMAT(2X,'LIBLIN EMF: '/
-C     *       2X,'   SUBY(',I3,',',I3,')=',E12.6,',',E12.6/)
+C     *       2X,'   SUBY(',I3,',',I3,')=',E13.6,',',E13.6/)
 
       RETURN
       END
@@ -174,8 +172,8 @@ C     *       2X,'   SUBY(',I3,',',I3,')=',E12.6,',',E12.6/)
       COMMON/SUBC/SUBY(15,15),SUBJ(15)
       DIMENSION P1(L1),P2(L2),P3(L3)
 
-C     πAPAMETPω: OβύιX-HET
-C                ιHδιBιδυAμψHωE:G,F,FI,J
+C     PARAMETERS: COMMON-NON
+C                INDIVIDUAL: G, F, FI, J
 C
 
       SQ12=DSQRT(2.D0)

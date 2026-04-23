@@ -1,4 +1,6 @@
-yyless(x)
+#include <stdint.h>
+extern int yyunput( int );
+void yyless(int x)
 {
 	extern char yytext[];
 	register char *lastch, *ptr;
@@ -9,7 +11,7 @@ yyless(x)
 	if (x>=0 && x <= yyleng)
 		ptr = x + yytext;
 	else
-		ptr = x;
+		ptr = (char*)(uintptr_t) x;
 	while (lastch > ptr)
 		yyunput(*--lastch);
 	*lastch = 0;

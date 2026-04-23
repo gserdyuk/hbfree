@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -10,7 +10,7 @@ c
 
       SUBROUTINE KOORD(MN,KR,KC,NNR,KNR,KN,KNC,IR1,IR2)
 C
-C  *****  ϊAπOμHEHιE KOOPδιHATHωX MACCιBOB
+C  *****  FILLING THE COORDINATE ARRAYS
 C
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
       INTEGER    KR(IR2),KC(IR1),NNR(IR1)
@@ -37,16 +37,16 @@ C
       MS=1
       M1=M
       J=1
-C ++++++++++++++++++++++++++++ ιϊνεξεξιε οτ 12.05.91
-C                             χσεηο 1 ϋτ.
-      IF (I.EQ.KN) then 
-		   GO TO 30
+C ++++++++++++++++++++++++++++ CHANGE FROM 12.05.91
+C                             TOTAL 1 PIECE.
+      IF (I.EQ.KN) then
+           GO TO 30
       else
                    GO TO 40
       endif
    20 continue
       IF (M.NE.M1.and.i.lt.kn) then
-			       GO TO 30
+                   GO TO 30
       elseif (.not.M.NE.M1.and.i.lt.kn)then
                                        ms=ms+1
                                        goto 40
@@ -67,12 +67,12 @@ C +++++++++++++++++++++++++++++++++++++++++++++++
       RETURN
       END
 C ++++++++++++++++++++++++++++++++++++++++++++++++
-C χοϊνοφεξ ταλοκ χαςιαξτ π/πςοηςαννω:
-C                       ( εσμι βυδετ χςενρ - ποπςοβοχατψ)
+C  A POSSIBLE VARIANT OF THE SUBROUTINE/PROGRAM:
+C                       (IF THERE IS TIME - TRY IT)
 C
 C      SUBROUTINE KOORD(MN,KR,KC,NNR,KNR,KN,KNC,IR1,IR2)
 CC
-CC  *****  ϊAπOμHEHιE KOOPδιHATHωX MACCιBOB
+CC  *****  FILLING THE COORDINATE ARRAYS
 CC
 C      INTEGER    KR(IR2),KC(IR1),NNR(IR1)
 C      INTEGER    MN(2,IR2)
@@ -108,5 +108,5 @@ C      RETURN
 C      END
 C
 C +++++++++++++++++++++++++++++++++++++++++++++++++++++++
-C                             CΕÒΔΐΛ η.χ.   12.05.91.
+C                             Serdyuk G.V.   12.05.91.
 C +++++++++++++++++++++++++++++++++++++++++++++++++++++++

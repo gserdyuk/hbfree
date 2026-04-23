@@ -1,7 +1,7 @@
 c
 c Copyright (c) 1996-2004 by Gennady Serdyuk.  All rights reserved.
 c gserdyuk@mail.ru
-c 
+c
 c Released under GPL v 2.0
 c
 
@@ -41,7 +41,7 @@ C     DEBUG SUBTRACE
 
       SUBROUTINE CDIFF3(NG,P1,L1,P2,L2,P3,L3,B1,KNC2,NR,*)
 C
-C      ð/ð MAT. MOäEìé AððPOKCéMAãéé äéææõúéOHHOê EMKOCTé
+C      SEMICONDUCTOR MATERIAL MODEL OF DIFFUSION CAPACITANCE APPROXIMATION
 C
 C
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
@@ -70,7 +70,7 @@ C     DEBUG SUBTRACE,INIT(P1,L1,P2,L2,P3,L3,KNC2,NR,I0,AL)
       SUBROUTINE CDIFF4(NG,P1,L1,P2,L2,P3,L3,B1,KNC2,NR,*)
 
 C
-C      CM. ð/ð CDIFF3
+C      SEE SEMICONDUCTOR CDIFF3
 C
 
       IMPLICIT DOUBLE PRECISION (A-H,O-Z)
@@ -79,7 +79,7 @@ C
       DOUBLE PRECISION B1
       DIMENSION  B1(KNC2,NR)
       DOUBLE PRECISION I0,AL,ARGMIN/-120.0D0/,ARGMAX/40.0D0/
-C                 $=MIN BEìéþéHA APçõMEHTA æ-ãéé EXP.
+C                 $=MIN VALUE OF ARGUMENT OF EXP FUNCTION
       C(U)=TAU*AL*I0*DEXP(AL*U)
       TAU=P3(1)
       I0=P3(2)
@@ -143,11 +143,11 @@ C     DEBUG SUBTRACE
       UOLD=UOLD+ZABS(VAL(I,1))
    10 UNEW=UNEW+ZABS(VAL(I,1)+DVAL(I,1))
    15 CONTINUE
-C                            $ MOöET HõöEH HE + A -
+C                            $ MAYBE NEED NOT + A -
       UOLD=UOLD+UOLD+DREAL(VAL(1,1))
       UNEW=UNEW+UNEW+DREAL(VAL(1,1)+DVAL(1,1))
       USTEP=    UNEW-UOLD
-C  MOöET TõT $ HõöHO ðOCTABéTø ABS(     )
+C  MAYBE HERE $ NEED TO WRITE ABS(     )
 
       IF(UNEW.LE.UBOUND)RETURN
       IF(UOLD.LE.UBOUND)GO TO 20

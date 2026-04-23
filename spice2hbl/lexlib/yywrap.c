@@ -1,4 +1,4 @@
-yywrap()
+int yywrap()
 {
 	return(1);
 }
