@@ -446,7 +446,7 @@ C      IF(KOLVAR.EQ.0)
             itab = index(line,achar(9))
             IF ( itab.GT.1 ) THEN
                READ (line(1:itab-1),*) hblnode
-               spicenode(nvar) = line(itab+1:itab+6)
+               spicenode(nvar) = line(itab+1:itab+6)  ! +6 because of spicenode char*6 
             ELSE
                READ (line,*) hblnode
                spicenode(nvar) = ' '
