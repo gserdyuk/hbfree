@@ -9,6 +9,7 @@ s2h
 hbl.exe
 s2h.exe
 *.log
+SPAGged
 
 spice2hbl/y.tab.h
 spice2hbl/obj/shpars.c
@@ -20,6 +21,7 @@ chanes/*.log
 chanes/*.mod
 chanes/*.f90
 chanes/*.out
+chanes/chanes_tree.txt
 chanes/*.htm
 chanes/_pf_data
 *.fig
