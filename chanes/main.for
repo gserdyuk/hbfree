@@ -443,10 +443,15 @@ C      IF(KOLVAR.EQ.0)
          READ (15,'(A20)',END=1500) line
          IF ( i.GT.5 ) THEN
             nvar = nvar + 1
-            READ (line,'(I1,TR1,A)') hblnode , spicenode(nvar)
+            READ (line,'(I3,TR1,A)') hblnode , spicenode(nvar)
 C              SKIP GND NODE
             IF ( hblnode.EQ.0 ) nvar = nvar - 1
          ENDIF
+      ENDDO
+C  ADD UNMAPPED S ENTRIES AS INTERNAL VARIABLES
+      DO i = nvar + 1 , K123
+         nvar = nvar + 1
+         WRITE (spicenode(nvar),'(A,I2.2)') '#int', i
       ENDDO
 
  1500 CALL date_and_time(b(1),b(2),b(3),dt)
