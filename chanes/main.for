@@ -407,7 +407,7 @@ C      IF(KOLVAR.EQ.0)
       DOUBLE PRECISION W(20) , wircpi , Pi
       DOUBLE COMPLEX S(Isize_maxnode,20)
       CHARACTER*64 Infile , line
-      INTEGER i , jrc , inend , ifend , hblnode , lenname , nvar
+      INTEGER i , jrc , inend , ifend , hblnode , lenname , nvar , itab
       CHARACTER*9 rawfile/'         '/
       CHARACTER*13 nodefile/'             '/
       CHARACTER*6 spicenode(20)
@@ -443,10 +443,22 @@ C      IF(KOLVAR.EQ.0)
          READ (15,'(A20)',END=1500) line
          IF ( i.GT.5 ) THEN
             nvar = nvar + 1
-            READ (line,'(I1,TR1,A)') hblnode , spicenode(nvar)
+            itab = index(line,achar(9))
+            IF ( itab.GT.1 ) THEN
+               READ (line(1:itab-1),*) hblnode
+               spicenode(nvar) = line(itab+1:itab+6)  ! +6 because of spicenode char*6 
+            ELSE
+               READ (line,*) hblnode
+               spicenode(nvar) = ' '
+            ENDIF
 C              SKIP GND NODE
             IF ( hblnode.EQ.0 ) nvar = nvar - 1
          ENDIF
+      ENDDO
+C  ADD UNMAPPED S ENTRIES AS INTERNAL VARIABLES
+      DO i = nvar + 1 , K123
+         nvar = nvar + 1
+         WRITE (spicenode(nvar),'(A,I2.2)') '#int', i
       ENDDO
 
  1500 CALL date_and_time(b(1),b(2),b(3),dt)
@@ -466,6 +478,7 @@ C              SKIP GND NODE
       WRITE (16,*) '     0    frequency    frequency'
       DO i = 1 , nvar
          lenname = index(spicenode(i),achar(9)) - 1
+         IF ( lenname.LT.1 ) lenname = len_trim(spicenode(i))
          WRITE (16,140) i , spicenode(i)(1:lenname)
  140     FORMAT (3X,I4,'    V(',A,')    voltage')
       ENDDO
