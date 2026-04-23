@@ -1,0 +1,8 @@
+C include file to describe circuit structore 
+      integer MPOINT, NODEEL,NMPNT,NNODE,NPARAM,LENNOD,LENPAR,NNETPR,
+     1        LENNTP
+      double precision PARAM
+      COMMON/POINT/    MPOINT(500)
+      COMMON/NODEL/    NODEEL(500)
+      COMMON/POINTR/   NMPNT,NNODE,NPARAM,LENNOD,LENPAR,NNETPR,LENNTP
+      COMMON/PARAMS/   PARAM(2000)

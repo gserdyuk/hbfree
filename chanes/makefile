@@ -26,7 +26,10 @@ else
 			-O2 \
 			-malign-double \
 			-fdec-char-conversions \
-			-fallow-argument-mismatch
+			-fallow-argument-mismatch \
+			-fdefault-real-8 \
+			-fdefault-double-8 \
+			-freal-4-real-8
 #			-std=legacy \
 #		-g
 endif
@@ -80,30 +83,30 @@ F_SRC =  \
 LIB_DIR = ./libelem
 
 LIB_SRC = \
-	SPAGged/biptr.f \
-	SPAGged/cbarr.f \
-	SPAGged/cdiff.f \
-	SPAGged/clin.f \
-	SPAGged/cpoly.f \
-	SPAGged/curt.f \
-	SPAGged/cusd.f \
-	SPAGged/discont.f \
-	SPAGged/icujunc.f \
-	SPAGged/icupoly.f \
-	SPAGged/indsv.f \
-	SPAGged/junc.f \
-	SPAGged/lib0.f \
-	SPAGged/liblin.f \
-	SPAGged/libmod.f \
-	SPAGged/lin.f \
-	SPAGged/mdsch.f \
-	SPAGged/mpl.f \
-	SPAGged/poly5.f \
-	SPAGged/shleif.f \
-	SPAGged/stab.f \
-	SPAGged/svlutl.f \
-	SPAGged/test.f \
-	SPAGged/ytab.f 
+	SPAGged/libelem/biptr.f \
+	SPAGged/libelem/cbarr.f \
+	SPAGged/libelem/cdiff.f \
+	SPAGged/libelem/clin.f \
+	SPAGged/libelem/cpoly.f \
+	SPAGged/libelem/curt.f \
+	SPAGged/libelem/cusd.f \
+	SPAGged/libelem/discont.f \
+	SPAGged/libelem/icujunc.f \
+	SPAGged/libelem/icupoly.f \
+	SPAGged/libelem/indsv.f \
+	SPAGged/libelem/junc.f \
+	SPAGged/libelem/lib0.f \
+	SPAGged/libelem/liblin.f \
+	SPAGged/libelem/libmod.f \
+	SPAGged/libelem/lin.f \
+	SPAGged/libelem/mdsch.f \
+	SPAGged/libelem/mpl.f \
+	SPAGged/libelem/poly5.f \
+	SPAGged/libelem/shleif.f \
+	SPAGged/libelem/stab.f \
+	SPAGged/libelem/svlutl.f \
+	SPAGged/libelem/test.f \
+	SPAGged/libelem/ytab.f 
 
 F_OBJ = \
 	$(OBJ_DIR)/charint.o \
@@ -182,7 +185,7 @@ $(PROG): $(F_OBJ) $(LIB_OBJ)
 $(F_OBJ): $(OBJ_DIR)/%.o: SPAGged/%.f
 		$(F77) -c $(FFLAGS) -o $@ $< 
 
-$(LIB_OBJ): $(OBJ_DIR)/%.o: SPAGged/%.f
+$(LIB_OBJ): $(OBJ_DIR)/%.o: SPAGged/$(LIB_DIR)/%.f
 		$(F77) -c $(FFLAGS) -o $@ $< 
 
 touch:

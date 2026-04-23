@@ -15,7 +15,7 @@ spice2hbl/obj/shpars.c
 
 
 *.bak
-chanes/SPAGged
+#chanes/SPAGged
 chanes/*.log
 chanes/*.mod
 chanes/*.f90
