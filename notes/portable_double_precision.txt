@@ -1,0 +1,106 @@
+iso_fortran_env and Portable KIND Usage in Fortran
+====================================================
+
+`iso_fortran_env` is an intrinsic module (built into every Fortran 2003+
+compiler -- gfortran, ifx, ifort, NAG, Cray, etc.) that gives you named
+constants for kind values, so you can write portable code instead of
+hardcoding compiler-specific numbers like REAL*8 or KIND=8.
+
+
+How KIND works
+--------------
+
+Every numeric type in Fortran has a *kind parameter* -- an integer that
+tells the compiler which variant to use. The kind numbers themselves are
+NOT portable: on gfortran KIND=8 means 64-bit real, but on some compilers
+(like older Cray or NAG) the kind values are 1, 2, 3 instead of 4, 8, 16.
+That's the whole reason iso_fortran_env exists.
+
+Basic syntax:
+
+    real(kind=8) :: x        ! works on gfortran/ifx but not portable
+    real(8)      :: y        ! same thing, shorthand
+
+
+The modern, portable way
+------------------------
+
+    use, intrinsic :: iso_fortran_env, only: real32, real64, real128, &
+                                             int8, int16, int32, int64
+
+    real(real64)   :: pi        ! guaranteed 64-bit float (double precision)
+    real(real32)   :: temp      ! guaranteed 32-bit float (single precision)
+    real(real128)  :: huge_num  ! quad precision (if the compiler supports it)
+    integer(int64) :: big       ! 64-bit integer
+    integer(int32) :: normal    ! 32-bit integer
+
+    pi = 3.141592653589793_real64   ! the _real64 suffix sets the literal's kind
+
+The _real64 suffix on the literal is important. Without it,
+3.141592653589793 is a default `real` (usually 32-bit) and you lose
+precision before assignment even happens.
+
+
+Common pattern for large codebases
+----------------------------------
+
+Most projects define their own kind parameter in one module and use it
+everywhere:
+
+    module precision_mod
+      use, intrinsic :: iso_fortran_env, only: real64
+      implicit none
+      integer, parameter :: dp = real64   ! "dp" = double precision
+    end module
+
+    ! Then in any other file:
+    use precision_mod
+    real(dp) :: x, y, z
+    x = 1.0_dp
+    y = sin(2.0_dp * x)
+
+This way if you ever need to switch the whole code to real32 or real128,
+you change one line.
+
+
+Other useful things in iso_fortran_env
+--------------------------------------
+
+    use, intrinsic :: iso_fortran_env
+    print *, compiler_version()   ! string: which compiler built this
+    print *, compiler_options()   ! string: flags used at compile time
+    print *, input_unit           ! stdin  unit number (usually 5)
+    print *, output_unit          ! stdout unit number (usually 6)
+    print *, error_unit           ! stderr unit number (usually 0)
+
+
+Why this beats -fdefault-real-8
+-------------------------------
+
+With the flag approach, the same source file means different things
+depending on how it's compiled -- a maintenance nightmare. With explicit
+kinds:
+
+  - the code is self-documenting (real(real64) tells the reader exactly
+    what's going on),
+  - it compiles identically on gfortran, ifx, ifort, NAG, LFortran, etc.,
+  - you can mix precisions in the same program (e.g., 32-bit for
+    graphics, 64-bit for physics),
+  - library interfaces and MPI calls don't silently break.
+
+
+Quick migration recipe for legacy g77 code
+------------------------------------------
+
+  1. Add `implicit none` to every procedure (catches typos).
+  2. Replace `real*8` / `double precision` with `real(dp)` where
+     dp = real64.
+  3. Put a `_dp` suffix on every real literal:
+         1.0   -> 1.0_dp
+         3.14d0 -> 3.14_dp
+  4. Replace integer promotions (integer*8) with integer(int64).
+  5. Drop the -fdefault-real-8 flag entirely once the conversion is done.
+
+The `_dp` suffix on literals is the step people forget most often --
+and it's the one that actually controls precision of the *computation*,
+not just storage.
