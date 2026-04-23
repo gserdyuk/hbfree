@@ -1,2 +1,8 @@
 28-apr-2004
 Preparing HBFREE to import to CVS at sourceforge
+23-apr-2026
+HBFree is mported to github some time ago
+it is tested on a few simple circuits
+now it s preparedd for further developent
+
+Tags April_2026 and OIGINAL_STATE are created.
