@@ -443,7 +443,7 @@ C      IF(KOLVAR.EQ.0)
          READ (15,'(A20)',END=1500) line
          IF ( i.GT.5 ) THEN
             nvar = nvar + 1
-            READ (line,'(I3,TR1,A)') hblnode , spicenode(nvar)
+            READ (line,'(I1,TR1,A)') hblnode , spicenode(nvar)
 C              SKIP GND NODE
             IF ( hblnode.EQ.0 ) nvar = nvar - 1
          ENDIF
