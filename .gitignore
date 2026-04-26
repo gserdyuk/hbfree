@@ -45,3 +45,5 @@ hbfree_exmpls/*.sp
 hbfree_exmpls/s2h.cfg
 hbfree_exmpls/hbfree
 hbfree_exmpls/mes1.*
+
+*.tran.npz

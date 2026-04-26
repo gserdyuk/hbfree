@@ -1,0 +1,21 @@
+di1 s2
+* Simple half-wave rectifier, no transmission line.
+* Isolates diode model from T-line model differences.
+* sin() = 2 * distof1  (HBFree V_peak = 2 * distof1)
+
+vs  1 0  ac 0.5v sin( 0 0.5 100Meg 0 0) distof1 0.25
+d1  1 2 sd
+rl  2 0  1k
+
+.model sd d is 1e-9 n=1
+
+.ac dec 5 10 10k
+.tran 50u 5m
+.options reltol=0.005
+
+.hb f1=100e6  f2=0
++ 0 0 1 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 9 0
++ 10 0 11 0 12 0 13 0 14 0 15 0
+.hb_options epsiw=1.e-6 epssol=1.e-12 epsdu=1.e-9 limit=50
+
+.end

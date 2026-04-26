@@ -1,0 +1,6 @@
+circuit: di3
+status: STEP_LIMIT
+iterations: 25
+max_step: 0.834590E-09
+final_error: 0.154661E-10
+final_norm: 0.157114E-20

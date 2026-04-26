@@ -1,0 +1,5 @@
+circuit: di8
+status: CONVERGED
+iterations: 17
+final_error: 0.346390E-13
+final_norm: 0.377490E-26

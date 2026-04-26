@@ -1,0 +1,5 @@
+circuit: di1_small
+status: CONVERGED
+iterations: 3
+final_error: 0.397637E-14
+final_norm: 0.970470E-28
