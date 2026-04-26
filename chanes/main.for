@@ -408,15 +408,17 @@ C      IF(KOLVAR.EQ.0)
       DOUBLE COMPLEX S(Isize_maxnode,20)
       CHARACTER*64 Infile , line
       INTEGER i , jrc , inend , ifend , hblnode , lenname , nvar , itab
-      CHARACTER*9 rawfile/'         '/
-      CHARACTER*13 nodefile/'             '/
+      CHARACTER*64 rawfile
+      CHARACTER*64 nodefile
       CHARACTER*6 spicenode(20)
       INTEGER dt(8)
       CHARACTER*10 b(3)
 
+      rawfile = ' '
+      nodefile = ' '
       inend = 0
       ifend = 0
-      DO i = 1 , 12
+      DO i = 1 , 60
          IF ( Infile(i:i).EQ.'.' ) THEN
             inend = i
             GOTO 100
@@ -424,13 +426,13 @@ C      IF(KOLVAR.EQ.0)
          IF ( Infile(i:i).NE.' ' ) ifend = i
       ENDDO
  100  IF ( inend.EQ.0 ) THEN
-         IF ( ifend.GT.8 ) STOP ' NAME TOO LONG'
+         IF ( ifend.GT.54 ) STOP ' NAME TOO LONG'
          rawfile(1:ifend) = Infile(1:ifend)
          rawfile(ifend+1:ifend+4) = '.raw'
          nodefile(1:ifend) = Infile(1:ifend)
          nodefile(ifend+1:ifend+10) = '.ckt.nodes'
       ELSE
-         IF ( inend.GT.9 ) STOP ' NAME TOO LONG'
+         IF ( inend.GT.54 ) STOP ' NAME TOO LONG'
          rawfile(1:inend-1) = Infile(1:inend-1)
          rawfile(inend:inend+4) = '.raw'
          nodefile(1:inend-1) = Infile(1:inend-1)

@@ -10,7 +10,8 @@ spice test
 
 
 
-vs  1 0  ac 1v sin (0 1 100Meg 0 0) distof1 15 distof2 0.2
+* distof1=15 → V_peak=2*15=30V; sin() amplitude updated to match
+vs  1 0  ac 1v sin (0 30 100Meg 0 0) distof1 15 distof2 0.2
 d1  1 2 sd
 t1  2 0 out 0 0 z0=50 f=100MEG nl=0.5 
 

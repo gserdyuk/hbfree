@@ -1,0 +1,23 @@
+di1 small
+* 1-diode circuit, 0.1V excitation
+* HBFree V_peak = 2 * distof1  (normalization of the jdrive source model)
+* ngspice uses sin() amplitude directly.
+* Rule: sin() = 2 * distof1   to keep both simulators at the same drive level.
+
+vs  1 0  ac 0.2v sin( 0 0.2 100Meg 0 0) distof1 0.1
+d1  1 2 sd
+t1  2 0 out 0 z0=50 f=100MEG nl=0.5
+
+rl  out 0  1k
+
+.model sd d is 1e-9 tt 0 m=0.5
+
+.ac dec 5 10 10k
+.tran 50u 5m
+.options reltol=0.005
+
+.hb f1=100e6  f2=0
++ 0 0 1 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 9 0
+.hb_options epsiw=1.e-6 epssol=1.e-12 epsdu=1.e-9 limit=50
+
+.end

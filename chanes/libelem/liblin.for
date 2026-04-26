@@ -136,7 +136,7 @@ C     DEBUG                         SUBTRACE
       COMMON /subc  / Suby(15,15) , Subj(15)
       DIMENSION P1(L1) , P2(L2) , P3(L3)
 
-      sq12 = dsqrt(2.D0)
+      sq12 = 2.D0
       pi = 4.D0*datan(1.D0)
 
       Suby(1,1) = dcmplx(1.D0/P3(1),0.0D0)
@@ -182,7 +182,7 @@ C     PARAMETERS: COMMON-NON
 C                INDIVIDUAL: G, F, FI, J
 C
 
-      sq12 = dsqrt(2.D0)
+      sq12 = 2.D0
       pi = 4.D0*datan(1.D0)
 
       Suby(1,1) = dcmplx(P3(1),0.D0)

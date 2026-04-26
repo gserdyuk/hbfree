@@ -8,8 +8,12 @@ spice test 4-diode bridge circuit + 1 diode
 *
 
 
-vs  1 0  ac 1v sin (0 21.21 100Meg 0 0) 
-+              distof1 15 
+* HBFree V_peak = 2 * distof1  (normalization of source model after fix)
+* ngspice uses sin() amplitude directly.
+* Rule: distof1 = sin_amplitude / 2   to keep both simulators at same drive level.
+* sin() peak = 21.21 V  →  distof1 = 21.21 / 2 = 10.606
+vs  1 0  ac 1v sin (0 21.21 100Meg 0 0)
++              distof1 10.606
 
 *t1  1 0 2 0 z0=50 f=100MEG nl=0.5 
 rr 1 2 2

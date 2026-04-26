@@ -1,0 +1,5 @@
+circuit: di1
+status: CONVERGED
+iterations: 13
+final_error: 0.227682E-17
+final_norm: 0.420633E-34

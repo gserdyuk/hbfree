@@ -6,3 +6,11 @@ it is tested on a few simple circuits
 now it s preparedd for further developent
 
 Tags April_2026 and OIGINAL_STATE are created.
+
+26-Apil
+- Normalization fix (validated, documented)                                                                                        - Two-tone pipeline in spice_sim.py (working, tested against di3/di2/di4)                                                          
+- di4/di5 amplitude corrections                                                                                                    
+- Full validation docs: model_validation_diode.md, model_validation_diode_2tone.md                                                 
+- stubs for bjt and fet validation
+- Two status documents just created  
+- all put in branch "feat/rms-fix" and merged into model_validation_diode
